@@ -5,9 +5,15 @@ export default {
   theme: {
     fontFamily: {
       oswald: "Oswald, serif",
-      fresh:"Fresh,serif",
+      fresh: "Fresh,serif",
     },
-    extend: {},
+    extend: {
+      colors: {
+        PrimaryColor: "#FFB116",
+        SecondaryColor: "#59815B",
+        ThirdColor: "#0F1325",
+      },
+    },
   },
   plugins: [daisyui],
 };

@@ -1,6 +1,9 @@
+import { Banner } from "../Components/Banner"
 
 export const HomePage = () => {
     return (
-        <div className="font-oswald"></div>
+        < >
+        <Banner/>
+        </>
     )
 }

@@ -9,7 +9,7 @@ export const Navbar = () => {
         <li><NavLink to="/about">About Us</NavLink></li>
     </>
     return (
-        <div className=" fixed w-full ">
+        <div className=" fixed w-full z-50 ">
             <div className="navbar px-4 md:px-6  bg-gray-300/30 py-3  backdrop-blur-lg max-w-6xl mx-auto rounded-md">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -50,7 +50,7 @@ export const Navbar = () => {
                             navOptions
                         }
                     </ul>
-                    <a className="btn h-10 font-normal  min-h-10 px-3 py-2 rounded-md  bg-[#59815B] hover:bg-[#466948] text-white w- h">Button</a>
+                    <a className="btn h-10 font-normal  min-h-10 px-3 py-2 rounded-md  bg-[#59815B] hover:bg-[#466948] text-white w- h">Login</a>
                 </div>
             </div>
         </div>
