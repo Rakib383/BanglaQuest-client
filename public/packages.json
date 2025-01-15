@@ -1,0 +1,33 @@
+
+[
+    {
+      "photo": "https://i.ibb.co/RhVwHhd/cox-s-Bazar.jpg",
+     "tourType": "Beach Escape",
+      "tripTitle": "Relaxing at Cox's Bazar",
+      "price": 5000,
+      "location": "Cox's Bazar, Bangladesh",
+      "duration": "4 Days, 3 Nights",
+      "shortDescription": "Enjoy the soothing waves and golden sands of the world's longest sea beach."
+    },
+    {
+      "photo": "https://i.ibb.co/RhyCRHb/sundarban2.jpg",
+      "tourType": "Jungle Expedition",
+      "tripTitle": "Sundarbans Mangrove Adventure",
+      "price": 7000,
+      "location": "Sundarbans, Bangladesh",
+      "duration": "3 Days, 2 Nights",
+      "shortDescription": "Discover the mesmerizing beauty of the Sundarbans and its wildlife."
+    },
+    {
+      "photo": "https://i.ibb.co/d5q5ZPt/sree-Mangal.jpg",
+      "tourType": "Tea Garden Retreat",
+      "tripTitle": "Tea Gardens and Serenity",
+      "price": 4000,
+      "location": "Srimangal, Bangladesh",
+      "duration": "3 Days, 2 Nights",
+      "shortDescription": "Explore the tranquil tea estates and indulge in nature's beauty."
+    }
+   
+   
+  ]
+  

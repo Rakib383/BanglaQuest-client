@@ -19,21 +19,21 @@ export const Banner = () => {
                 spaceBetween={30}
                 centeredSlides={true}
                 autoplay={{
-                    delay: 2500,
+                    delay: 2800,
                     disableOnInteraction: false,
                 }}
                 pagination={{
                     clickable: true,
                 }}
                 navigation={true}
-                modules={[Autoplay,Pagination, Navigation]}
+                modules={[Autoplay, Pagination, Navigation]}
                 className="w-full h-full"
             >
                 <SwiperSlide className='relative'>
                     <img className='w-full h-[460px] sm:h-[500px] md:h-[650px] lg:h-[720px]' src={saintMartin} alt="" />
                     <div className='   absolute right-16 top-60  px-6 py-4 z-20 '>
                         <h2 className='text-PrimaryColor text-3xl md:text-4xl lg:text-5xl font-fresh text-nowrap'>Saint Martins Island</h2>
-                        <div className='text-white text-xl '><motion.span initial={{ opacity: 0, x: -100, y: -200 }} whileInView={window.innerWidth >= 768 ? { x: 88, y: 0, opacity: 1 } : { x: 56, y: 0, opacity: 1 }} className='text-2xl' style={{ display: 'block' }} transition={{ type: "spring", stiffness: 50, damping: 6, delay: 0.5 }}>The Pearl</motion.span>
+                        <div className='text-white text-xl '><motion.span initial={{ opacity: 0, x: -100, y: -200 }} whileInView={window.innerWidth >= 768 ? { x: 88, y: 0, opacity: 1 } : { x: 56, y: 0, opacity: 1 }} className='text-2xl' style={{ display: 'block' }} transition={{ type: "spring", stiffness: 50, damping: 6, delay: 0.3 }}>The Pearl</motion.span>
                             <p className='ml-8'>of the Bay of Bengal</p>
                         </div>
                     </div>
