@@ -1,5 +1,6 @@
 import { Banner } from "../Components/Banner"
 import { Overview } from "../Components/Overview"
+import { Story } from "../Components/Story"
 import { Tourism } from "../Components/Tourism"
 
 export const HomePage = () => {
@@ -8,6 +9,7 @@ export const HomePage = () => {
         <Banner/>
         <Overview/>
         <Tourism/>
+        <Story/>
         </>
     )
 }
