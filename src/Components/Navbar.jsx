@@ -50,7 +50,7 @@ export const Navbar = () => {
                             navOptions
                         }
                     </ul>
-                    <a className="btn h-10 font-normal  min-h-10 px-3 py-2 rounded-md  bg-[#59815B] hover:bg-[#466948] text-white w- h">Login</a>
+                    <a className="btn h-10 font-normal  min-h-10 px-3 py-2 rounded-md  bg-SecondaryColor hover:bg-[#466948] text-white w- h">Login</a>
                 </div>
             </div>
         </div>
