@@ -73,7 +73,7 @@ export const Tourism = () => {
                         {
                             packages?.map(pack => (
                                 <div key={pack.location} className="card bg-base-100 w-80 shadow-xl relative py-3">
-                                    <figure className='relative h-[200px] w-full' >
+                                    <figure className='relative h-[180px] w-full' >
                                         <img
                                             src={pack.coverPhoto}
                                             alt="" className='h-full w-full' />
@@ -82,7 +82,7 @@ export const Tourism = () => {
                                             {pack.location}
                                         </div>
                                     </figure>
-                                    <div className="card-body text-start px-4 gap-1.5 text-gray-600">
+                                    <div className="card-body pb-3 text-start px-4 gap-1.5 text-gray-600">
                                         <h2 className="card-title text-ThirdColor">
                                             {pack.tripTitle}
 
@@ -90,8 +90,8 @@ export const Tourism = () => {
                                         <p className=''>Tour-Type:{pack.tourType}</p>
                                         <p className=''>Duration:{pack.duration}</p>
                                         <p>Description:{pack.shortDescription}</p>
-                                        <div className="bg-SecondaryColor text-white px-3 py-1.5 -rotate-[35deg] absolute -right-2 bottom-5">From   {pack.price}৳</div>
-                                        <Link to={`packages/${pack._id}`}className='text-start hover:cursor-pointer text-PrimaryColor text-lg hover:underline underline-offset-4'>View Details....</Link>
+                                        <div className="bg-SecondaryColor text-white px-3 py-1.5 -rotate-[37deg] absolute -right-5 top-40">From   {pack.price}৳</div>
+                                        <Link to={`allPackages/${pack._id}`}className='btn mt-3 text-start hover:cursor-pointer text-lg bg-SecondaryColor text-white font-semibold hover:bg-green-900 '>View Details....</Link>
                                     </div>
                                 </div>
 

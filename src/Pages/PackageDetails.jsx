@@ -1,7 +1,6 @@
 
-import { useQuery } from "@tanstack/react-query"
-import { Link, useParams } from "react-router-dom"
-import { useAxiosPublic } from "../hooks/useAxiosPublic"
+
+import { Link, useLoaderData } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Autoplay, Pagination } from "swiper/modules"
@@ -13,25 +12,20 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 export const PackageDetails = () => {
-    const { id } = useParams()
-    const axiosPublic = useAxiosPublic()
+
     const [guides, setGuides] = useState([])
     const [startDate, setStartDate] = useState(new Date());
+    const pack = useLoaderData()
 
+
+    const { photoGallery, shortDescription, timeline, tripTitle } = pack
     useEffect(() => {
         axios.get("/guides.json")
             .then(res => setGuides(res.data))
 
 
     }, [])
-    const { data: pack } = useQuery({
-        queryKey: ['pack'],
-        queryFn: async () => {
-            const res = await axiosPublic.get(`/packages/${id}`)
-            return res.data
-
-        }
-    })
+   
 
 
     return (
@@ -51,30 +45,31 @@ export const PackageDetails = () => {
             <div className=" mx-auto grid  grid-cols-2 grid-rows-2 md:grid-rows-4 md:grid-cols-3   px-8 py-5 gap-5 h-[340px] max-w-[550px] md:max-w-[760px] md:h-[550px] ">
 
                 <div className="md:col-span-2 md:row-span-2">
-                    <img src={pack?.photoGallery[0]} className="h-full w-full" alt="" />
+                    <img src={photoGallery[0]} className="h-full w-full" alt="" />
                 </div>
                 <div className="md:row-span-2" >
-                    <img src={pack?.photoGallery[1]} className="h-full w-full " alt="" />
+                    <img src={photoGallery[1]} className="h-full w-full " alt="" />
                 </div>
                 <div className="col-span-2 md:col-span-1 md:row-span-2 object-cover " >
-                    <img src={pack?.photoGallery[2]} className="h-full w-full" alt="" />
+                    <img src={photoGallery[2]} className="h-full w-full" alt="" />
                 </div>
                 <div className="hidden md:block md:col-span-2 md:row-span-2">
-                    <img src={pack?.photoGallery[3]} className="w-full h-full" alt="" />
+                    <img src={photoGallery[3]} className="w-full h-full" alt="" />
                 </div>
             </div>
 
-            <h3 className="text-xl mt-5 underline font-bold text-ThirdColor text-start ">About This <span className=" bg-gradient-to-br from-white to-PrimaryColor text-xl md:text-2xl  ">Tour</span></h3>
+            <h3 className="text-xl mt-5 underline font-bold text-ThirdColor text-start md:text-center md:text-2xl ">About This <span className=" bg-gradient-to-br from-white to-PrimaryColor text-xl md:text-3xl  ">Tour</span></h3>
 
-            <p className=" w-72 text-start mt-4">{pack?.shortDescription}</p>
+            <p className=" w-72 md:text-lg text-start mt-4 md:text-center md:mx-auto">{shortDescription}</p>
 
-            <h3 className="text-xl mt-5 underline font-bold text-ThirdColor text-start ">Tour Plan :</h3>
+            <h3 className="text-xl mt-5 md:mt-10 underline font-bold text-ThirdColor text-start sm:pl-10 max-w-4xl mx-auto md:mb-12 mb-8">Tour Plan :</h3>
 
             {/* tour plan */}
-            <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical text-start">
+            <ul className="timeline timeline-snap-icon max-md:timeline-compact   timeline-vertical mb-12 ">
                 {
-                    pack?.timeline.map((activity, idx) => (
+                    timeline.map((activity, idx) => (
                         <li key={idx}>
+                            {idx !== 0 && <hr/>}
                             <div className="timeline-middle">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +82,7 @@ export const PackageDetails = () => {
                                         clipRule="evenodd" />
                                 </svg>
                             </div>
-                            <div className="timeline-start mb-10 md:text-end">
+                            <div className={`${idx%2 == 1 ? "timeline-start md:text-end" :"timeline-end"} text-start mb-10`}>
                                 <time className="font-mono italic">Day-{activity.day}</time>
                                 <div className="text-lg font-black">{activity.title}
 
@@ -100,6 +95,8 @@ export const PackageDetails = () => {
                 }
 
             </ul>
+
+
 
             {/* Tour guides */}
 
@@ -165,7 +162,7 @@ export const PackageDetails = () => {
 
 
                 <form className="sm:max-w-xl max-w-sm mx-auto pt-10 shadow-lg  px-6 py-8 rounded-xl bg-gradient-to-tl from-white to-SecondaryColor mb-20 md:mb-24">
-                    <h3 className="text-ThirdColor font-bold text-lg">{pack.tripTitle}</h3>
+                    <h3 className="text-ThirdColor font-bold text-lg">{tripTitle}</h3>
                     <div className="grid gap-6 mb-6 sm:grid-cols-2">
                         <div>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -223,7 +220,7 @@ export const PackageDetails = () => {
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Tour Date
                             </label>
-                            <DatePicker  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-[332px] sm:w-[252px] " selected={startDate} onChange={(date) => setStartDate(date)} />
+                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-[332px] sm:w-[252px] " selected={startDate} onChange={(date) => setStartDate(date)} />
                         </div>
                         <div>
                             <label
@@ -233,12 +230,12 @@ export const PackageDetails = () => {
                                 Tour Guide
                             </label>
                             <select required name="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                
-                           
-                               {
-                                guides.map((guide,idx) =>  <option value={`${guide.name}`} key={idx}>{guide.name}</option>)
-                               }
-                             
+
+
+                                {
+                                    guides.map((guide, idx) => <option value={`${guide.name}`} key={idx}>{guide.name}</option>)
+                                }
+
                             </select>
                         </div>
 

@@ -4,7 +4,7 @@ import logo from "../assets/Images/BanglaQuest.png"
 export const Navbar = () => {
     const navOptions = <>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/trips">Trips</NavLink></li>
+        <li><NavLink to="/allTrips">Trips</NavLink></li>
         <li><NavLink to="/community">Community</NavLink></li>
         <li><NavLink to="/about">About Us</NavLink></li>
     </>
