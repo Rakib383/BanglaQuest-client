@@ -4,6 +4,7 @@ import { HomePage } from "../Pages/HomePage";
 import { PackageDetails } from "../Pages/PackageDetails";
 import { Community } from "../Pages/Community";
 import { AllTrips } from "../Pages/AllTrips";
+import { GuideProfile } from "../Pages/GuideProfile";
 
 
 export const router = createBrowserRouter([
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
             {
                 path: "allTrips",
                 element: <AllTrips />,
+            },
+            {
+                path: "guideProfiles/:id",
+                element: <GuideProfile />,
             },
         ]
     },

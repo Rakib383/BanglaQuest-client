@@ -1,8 +1,6 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { Typewriter } from 'react-simple-typewriter'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { FaLocationDot } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -17,15 +15,16 @@ import { useAxiosPublic } from './../hooks/useAxiosPublic';
 
 
 export const Tourism = () => {
-    const [guides, setGuides] = useState([])
+     
     const axiosPublic = useAxiosPublic()
-    useEffect(() => {
-        axios.get("/guides.json")
-            .then(res => setGuides(res.data))
-
-
-    }, [])
-
+    
+    const {data:guides = []} = useQuery({
+        queryKey:['guides'],
+        queryFn:async () => {
+            const res = await axiosPublic.get('/tourGuides')
+            return res.data
+        }
+    })
     const {data:packages = []} = useQuery({
         queryKey:['packages'],
         queryFn:async () => {
@@ -146,7 +145,7 @@ export const Tourism = () => {
                                             <h2 className="card-title">{guide.name}</h2>
                                            <p>{guide.expertise} </p>
                                            <p>Experience: {guide.experience} </p>
-                                            <Link className="card-actions justify-center mt-3">
+                                            <Link to={`guideProfiles/${guide._id}`} className="card-actions justify-center mt-3">
                                                 <button className="btn bg-SecondaryColor text-white hover:bg-ThirdColor ">See Details</button>
                                             </Link>
                                         </div>
