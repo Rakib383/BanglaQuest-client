@@ -9,22 +9,30 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-
+import { useQuery } from '@tanstack/react-query';
 
 // import required modules
 import { Autoplay, Pagination } from 'swiper/modules';
+import { useAxiosPublic } from './../hooks/useAxiosPublic';
+
 
 export const Tourism = () => {
-    const [packages, setPackages] = useState([])
     const [guides, setGuides] = useState([])
+    const axiosPublic = useAxiosPublic()
     useEffect(() => {
-        axios.get("packages.json")
-            .then(res => setPackages(res.data));
-        axios.get("guides.json")
+        axios.get("/guides.json")
             .then(res => setGuides(res.data))
 
 
     }, [])
+
+    const {data:packages = []} = useQuery({
+        queryKey:['packages'],
+        queryFn:async () => {
+            const res = await axiosPublic.get("/packages")
+            return res.data
+        }
+    })
     return (
         <div className="w-10/12 mx-auto text-center">
             <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center">
@@ -67,7 +75,7 @@ export const Tourism = () => {
                                 <div key={pack.location} className="card bg-base-100 w-80 shadow-xl relative py-3">
                                     <figure className='relative h-[200px] w-full' >
                                         <img
-                                            src={pack.photo}
+                                            src={pack.coverPhoto}
                                             alt="" className='h-full w-full' />
                                         <div className='absolute left-0 bottom-2 flex items-center text-PrimaryColor bg-gray-300/40 rounded-sm px-1 backdrop-blur-sm'>
                                             <FaLocationDot className='text-green-900' />
@@ -83,7 +91,7 @@ export const Tourism = () => {
                                         <p className=''>Duration:{pack.duration}</p>
                                         <p>Description:{pack.shortDescription}</p>
                                         <div className="bg-SecondaryColor text-white px-3 py-1.5 -rotate-[35deg] absolute -right-2 bottom-5">From   {pack.price}৳</div>
-                                        <Link className='text-start hover:cursor-pointer text-PrimaryColor text-lg '>See Details....</Link>
+                                        <Link to={`packages/${pack._id}`}className='text-start hover:cursor-pointer text-PrimaryColor text-lg hover:underline underline-offset-4'>View Details....</Link>
                                     </div>
                                 </div>
 
@@ -92,7 +100,7 @@ export const Tourism = () => {
                     </div>
                 </TabPanel>
                 <TabPanel >
-                    <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center">Meet Your Expert Tour Guides</h2>
+                    <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center">Meet Our Expert Tour Guides</h2>
                     <p className='mt-2'>Meet the passionate and experienced guides who will lead you on an unforgettable adventure, ensuring you make the most of your journey.</p>
 
                     <div className="my-10 w-80  sm:w-[560px] md:w-[760px] lg:w-[920px] xl:w-[1100px] mx-auto" >

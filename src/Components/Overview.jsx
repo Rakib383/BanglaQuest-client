@@ -18,7 +18,7 @@ export const Overview = () => {
                     Explore breathtaking beaches, majestic mountains, and vibrant culture with <span className=" bg-gradient-to-r from-white to-PrimaryColor text-xl md:text-2xl ">BanglaQuest.</span>
                 </p>
                 <motion.div initial={{ opacity: 0, scale: 0.5 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 1, ease: "easeOut" }} className="mt-8 w-full sm:w-[600px] md:w-[700px]  h-[300px] sm:h-[370px] md:h-[400px]">
-                    <iframe className="w-full h-full" src="https://www.youtube.com/embed/_e_hEWZP8mU?si=9RBZ8ptAc_CTEIkc" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe className="w-full h-full" src="https://www.youtube.com/embed/_e_hEWZP8mU?si=9RBZ8ptAc_CTEIkc" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                 </motion.div>
             </div>
         </section>

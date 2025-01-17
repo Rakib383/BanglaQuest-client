@@ -1,33 +1,104 @@
-
 [
-    {
-      "photo": "https://i.ibb.co/RhVwHhd/cox-s-Bazar.jpg",
-     "tourType": "Beach Escape",
-      "tripTitle": "Relaxing at Cox's Bazar",
-      "price": 5000,
-      "location": "Cox's Bazar, Bangladesh",
-      "duration": "4 Days, 3 Nights",
-      "shortDescription": "Enjoy the soothing waves and golden sands of the world's longest sea beach."
-    },
-    {
-      "photo": "https://i.ibb.co/RhyCRHb/sundarban2.jpg",
-      "tourType": "Jungle Expedition",
-      "tripTitle": "Sundarbans Mangrove Adventure",
-      "price": 7000,
-      "location": "Sundarbans, Bangladesh",
-      "duration": "3 Days, 2 Nights",
-      "shortDescription": "Discover the mesmerizing beauty of the Sundarbans and its wildlife."
-    },
-    {
-      "photo": "https://i.ibb.co/d5q5ZPt/sree-Mangal.jpg",
-      "tourType": "Tea Garden Retreat",
-      "tripTitle": "Tea Gardens and Serenity",
-      "price": 4000,
-      "location": "Srimangal, Bangladesh",
-      "duration": "3 Days, 2 Nights",
-      "shortDescription": "Explore the tranquil tea estates and indulge in nature's beauty."
-    }
-   
-   
-  ]
-  
+  {
+    "coverPhoto": "https://i.ibb.co/RhVwHhd/cox-s-Bazar.jpg", 
+    "tourType": "Beach Escape",
+    "tripTitle": "Relaxing at Cox's Bazar",
+    "price": 5000,
+    "location": "Cox's Bazar, Bangladesh",
+    "duration": "4 Days, 3 Nights",
+    "shortDescription": "Enjoy the soothing waves and golden sands of the world's longest sea beach.",
+    "photoGallery": [
+      "https://i.ibb.co/r0YFGTC/cox-Bazar3.jpg",
+      "https://i.ibb.co/FDqJQK7/cox-Bazar4.jpg",
+      "https://i.ibb.co/f9SgFnC/coxbazar5.webp",
+      "https://i.ibb.co/r4fbMpX/coxbazar6.jpg"
+    ],
+    "timeline": [
+      {
+        "day": 1,
+        "title": "Arrival and Beach Walk",
+        "activities": "Arrive at Cox's Bazar, check in to the hotel, and enjoy an evening stroll on the beach."
+      },
+      {
+        "day": 2,
+        "title": "Exploration and Sightseeing",
+        "activities": "Visit Himchari Waterfall and Inani Beach. Spend time relaxing and capturing scenic photos."
+      },
+      {
+        "day": 3,
+        "title": "Local Market and Moheshkhali Island",
+        "activities": "Explore local markets for souvenirs and take a boat ride to Moheshkhali Island."
+      },
+      {
+        "day": 4,
+        "title": "Beach and Departure",
+        "activities": "Enjoy a morning walk on the beach and prepare for departure."
+      }
+    ]
+  },
+  {
+    "coverPhoto": "https://i.ibb.co/RhyCRHb/sundarban2.jpg",
+    "tourType": "Jungle Expedition",
+    "tripTitle": "Sundarbans Mangrove Adventure",
+    "price": 7000,
+    "location": "Sundarbans, Bangladesh",
+    "duration": "3 Days, 2 Nights",
+    "shortDescription": "Discover the mesmerizing beauty of the Sundarbans and its wildlife.",
+    "photoGallery": [
+      "https://i.ibb.co/SsbyvxG/sundarban3.jpg",
+      "https://i.ibb.co/sj0NpsM/sundarban4.jpg",
+      "https://i.ibb.co/pyPdTwP/sundarban5.jpg",
+      "https://i.ibb.co/FqcHtt8/sundarban6.webp"
+    ],
+    "timeline": [
+      {
+        "day": 1,
+        "title": "Arrival and Boat Ride",
+        "activities": "Arrive at Sundarbans and take a boat ride through the mangrove forests. Spot wildlife such as deer and crocodiles."
+      },
+      {
+        "day": 2,
+        "title": "Wildlife Exploration",
+        "activities": "Visit Kotka Beach and Jamtola Watchtower. Enjoy birdwatching and trekking through the jungle trails."
+      },
+      {
+        "day": 3,
+        "title": "Local Villages and Departure",
+        "activities": "Explore local fishing villages, take a return boat ride, and prepare for departure."
+      }
+    ]
+  },
+  {
+    "coverPhoto": "https://i.ibb.co/d5q5ZPt/sree-Mangal.jpg",
+    "tourType": "Tea Garden Retreat",
+    "tripTitle": "Tea Gardens and Serenity",
+    "price": 4000,
+    "location": "Srimangal, Bangladesh",
+    "duration": "3 Days, 2 Nights",
+    "shortDescription": "Explore the tranquil tea estates and indulge in nature's beauty.",
+    "photoGallery": [
+      "https://i.ibb.co/ZXvXgV8/srimangal2.jpg",
+      "https://i.ibb.co/3phPGLC/srimangal3.jpg",
+      "https://i.ibb.co/crxt6Gq/srimangal4.jpg",
+      "https://i.ibb.co/bbMkX0Y/srimangal5.jpg",
+      "https://i.ibb.co/BtP4HTZ/srimangal6.jpg"
+    ],
+    "timeline": [
+      {
+        "day": 1,
+        "title": "Arrival and Tea Gardens",
+        "activities": "Arrive at Srimangal, visit the lush tea gardens, and explore Lawachara National Park."
+      },
+      {
+        "day": 2,
+        "title": "Madhabpur Lake and Seven Color Tea",
+        "activities": "Discover the serene Madhabpur Lake and enjoy the unique Seven Color Tea experience."
+      },
+      {
+        "day": 3,
+        "title": "Morning Walk and Departure",
+        "activities": "Take a peaceful morning walk through the tea estates and prepare for departure."
+      }
+    ]
+  }
+]
