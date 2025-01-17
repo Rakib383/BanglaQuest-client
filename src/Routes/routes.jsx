@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
             {
                 path:"community",
                 element:<Community/>,
-                loader:() => fetch("http://localhost:5000/stories")
+                loader:() => fetch("http://localhost:5000/allStories")
             },
         ]
     },
