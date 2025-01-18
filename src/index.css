@@ -8,4 +8,5 @@
 @tailwind utilities;
 .active {
     color:#FFB116;
+    font-weight: 800;
 }
