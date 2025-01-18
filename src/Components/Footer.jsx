@@ -1,4 +1,7 @@
 import logo from "../assets/Images/BanglaQuest.png"
+import { FaTwitterSquare } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 export const Footer = () => {
     return (
         <div className="pb-5 bg-gradient-to-t from-SecondaryColor to-white text-center ">
@@ -9,6 +12,8 @@ export const Footer = () => {
                     <div>
                         <p className=" text-3xl font-fresh text-[#FFB116] "><span className="text-[#0F1325] text-2xl">Bangla</span>Quest</p>
                         <span className="font-oswald text-base"> Unveiling Bangladesh&apos;s Wonders</span>
+                        <div className="flex gap-2 items-center justify-center ">Follow Us On: <a href="https://www.facebook.com/rakibhossen.sarkar/"><FaFacebook className="hover:text-PrimaryColor cursor-pointer text-lg md:text-xl"  /></a> <a href="https://www.linkedin.com/in/md-rakib-hossen-sarkar-81b126201/">
+                        <FaLinkedin  href="https://www.linkedin.com/in/md-rakib-hossen-sarkar-81b126201/" className="hover:text-PrimaryColor cursor-pointer text-lg md:text-xl" /></a> <a href="https://x.com/Rakibhossensar1"><FaTwitterSquare href="" className="hover:text-PrimaryColor cursor-pointer text-lg md:text-xl" /></a>  </div>
                     </div>
 
                 </aside>
