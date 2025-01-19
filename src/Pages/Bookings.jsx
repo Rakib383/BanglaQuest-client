@@ -11,7 +11,7 @@ export const Bookings = () => {
     const { data: bookings, isLoading } = useQuery({
         queryKey: ["bookings"],
         queryFn: async () => {
-            const res = await axiosSecure.get('/bookings');
+            const res = await axiosSecure.get(`/bookings/${user.email}`);
             return res.data;
         },
         enabled: !!user,

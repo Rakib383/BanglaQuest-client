@@ -15,6 +15,7 @@ import { Bookings } from "../Pages/Bookings";
 import { AddStories } from "../Pages/AddStories";
 import { MyStories } from "../Pages/MyStories";
 import { BecomeTourGuide } from "../Pages/BecomeTourGuide";
+import { MyAssignedTours } from "../Pages/MyAssignedTours";
 
 
 export const router = createBrowserRouter([
@@ -35,7 +36,6 @@ export const router = createBrowserRouter([
             {
                 path: "community",
                 element: <Community />,
-                loader: () => fetch("http://localhost:5000/allStories")
             },
             {
                 path: "allTrips",
@@ -82,6 +82,10 @@ export const router = createBrowserRouter([
             {
                 path:"apply",
                 element:<BecomeTourGuide/>
+            },
+            {
+                path:"assignedTours",
+                element:<MyAssignedTours/>
             },
 
         ]

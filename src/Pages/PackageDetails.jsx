@@ -14,11 +14,11 @@ import { FaArrowCircleRight } from "react-icons/fa";
 import { useForm, Controller } from "react-hook-form"
 import { AuthContext } from "../provider/AuthProvider";
 import { useAxiosSecure } from "../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 
 export const PackageDetails = () => {
 
-    const [guides, setGuides] = useState([])
     const pack = useLoaderData()
     const { user } = useContext(AuthContext);
     const {
@@ -29,17 +29,25 @@ export const PackageDetails = () => {
     const axiosSecure = useAxiosSecure()
 
     const { photoGallery, shortDescription, timeline, tripTitle, price } = pack
-    useEffect(() => {
-        axios.get("/guides.json")
-            .then(res => setGuides(res.data))
 
-    }, [])
+    const {data:guides} = useQuery({
+        queryKey:['guides'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/allTourGuides')
+            return res.data
+        }
+    })
+   
 
     const onSubmit = (data) => {
+        
         const formateDate = new Date(data.date).toLocaleDateString("en-GB")
         data.date = formateDate
         data.package = tripTitle     
         data.status = "pending"
+        
+        console.log(data)
+        
         axiosSecure.post("/bookings", data)
         .then(() => {
 
@@ -275,10 +283,10 @@ export const PackageDetails = () => {
                             >
                                 Tour Guide
                             </label>
-                            <select  {...register("tourGuide", { required: true })} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select  {...register("tourGuideID", { required: true })} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                 {
-                                    guides.map((guide, idx) => <option value={`${guide.name}`} key={idx}>{guide.name}</option>)
+                                    guides?.map((guide, idx) => <option value={guide._id} key={idx}>{guide.name}</option>)
                                 }
 
                             </select>

@@ -42,7 +42,7 @@ export const Profile = () => {
                     timer: 1000
                 })
             })
-       
+
 
 
     }
@@ -75,9 +75,11 @@ export const Profile = () => {
                         <button onClick={() => document.getElementById('my_modal_1').showModal()} className="bg-PrimaryColor text-ThirdColor rounded-md font-medium px-4 py-2">
                             Edit
                         </button>
-                        <Link to="/dashboard/apply" className="bg-PrimaryColor text-ThirdColor rounded-md font-medium px-4 py-2">
-                            Apply For Tour Guide
-                        </Link>
+                        {
+                            currentUser.Role === "Tourist" && <Link to="/dashboard/apply" className="bg-PrimaryColor text-ThirdColor rounded-md font-medium px-4 py-2">
+                                Apply For Tour Guide
+                            </Link>
+                        }
 
                     </div>
                 </div>

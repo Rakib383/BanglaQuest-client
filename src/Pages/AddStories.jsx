@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 export const AddStories = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const {
         register,
         handleSubmit,
@@ -17,14 +17,15 @@ export const AddStories = () => {
     const navigate = useNavigate()
 
     const onSubmit = (data) => {
-        data.sharedBy=user.displayName
+        data.sharedBy = user.displayName
+        data.email = user.email
         const urlsArray = data.images.split("\n").map((url) => url.trim());
         data.images = urlsArray
-         data.sharedOn= moment().format("MMMMD,YYYY");
+        data.sharedOn = moment().format("MMMMD,YYYY");
 
         axiosSecure.post("/allStories", data)
             .then((res) => {
-                
+
                 Swal.fire({
                     title: "Story Successfully Added!",
                     icon: "success",

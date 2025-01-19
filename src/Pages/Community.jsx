@@ -1,11 +1,25 @@
-import { useLoaderData } from "react-router-dom"
 
 import { Story } from "../Components/Story"
+import { useAxiosSecure } from "../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 
 export const Community = () => {
 
-    const stories = useLoaderData()
+    const axiosSecure = useAxiosSecure()
+
+    const { data: stories, isLoading } = useQuery({
+        queryKey: ["stories"],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/allStories');
+            return res.data;
+        },
+        
+    });
+
+    if (isLoading || !stories) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <div className="pt-28 px-5 max-w-4xl mx-auto text-center">
