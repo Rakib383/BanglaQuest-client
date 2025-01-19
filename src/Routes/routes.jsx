@@ -8,6 +8,7 @@ import { GuideProfile } from "../Pages/GuideProfile";
 import { Login } from "../Pages/Login";
 import { Register } from "../Pages/Register";
 import { Reset } from "../Pages/Reset";
+import { PrivateRoute } from "./PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -21,8 +22,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: "packages/:id",
-                element: <PackageDetails />,
-                loader: ({ params }) => fetch(`http://localhost:5000/packages/${params.id}`)
+                element: <PrivateRoute><PackageDetails /></PrivateRoute>,
+               loader: ({ params }) => fetch(`http://localhost:5000/allPackages/${params.id}`)
 
             },
             {

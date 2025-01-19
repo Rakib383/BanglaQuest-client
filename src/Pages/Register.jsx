@@ -6,6 +6,7 @@ import { useAxiosPublic } from "../hooks/useAxiosPublic"
 import { useContext } from "react"
 import { AuthContext } from "../provider/AuthProvider"
 import Swal from "sweetalert2"
+import { ToastContainer, toast } from 'react-toastify';
 
 export const Register = () => {
     const {
@@ -42,6 +43,20 @@ export const Register = () => {
                     })
 
             })
+            .catch(err => {
+                toast.error('Invalid Crediential!', {
+                    position: "top-center",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+
+                });
+
+            })
 
 
     }
@@ -73,7 +88,18 @@ export const Register = () => {
     }
     return (
         <div className="relative w-full   flex items-center justify-center gap-8 pt-28 md:pt-32 md:px-16">
-
+            <ToastContainer
+                position="top-center"
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <div className="hidden max-w-xl md:block flex-1">
                 <img src={registerPic} alt="" />
             </div>
@@ -144,7 +170,7 @@ export const Register = () => {
                     </label>
                     <input
                         type="password"
-                        {...register("password", { required: true,pattern:/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/ })}
+                        {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/ })}
                         id="password"
                         placeholder="Password"
                         className="w-full mt-2 h-12 bg-white/10 text-white text-sm font-light rounded-md px-3 focus:outline-none placeholder:text-white/50 border"

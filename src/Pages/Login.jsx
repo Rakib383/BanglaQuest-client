@@ -1,11 +1,13 @@
 import { FaGoogle } from "react-icons/fa"
 import loginPic from "../assets/Images/login.png"
 import { useForm } from "react-hook-form"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useContext } from "react"
 import { AuthContext } from "../provider/AuthProvider"
 import { useAxiosPublic } from "../hooks/useAxiosPublic"
 import Swal from "sweetalert2"
+import { ToastContainer, toast } from 'react-toastify';
+
 export const Login = () => {
     const {
         register,
@@ -15,6 +17,7 @@ export const Login = () => {
     const { signIn, signInWithGoogle, setUser, updateUserProfile } = useContext(AuthContext)
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
+    const location = useLocation()
 
     const onSubmit = (data) => {
         const { email, password } = data
@@ -29,6 +32,19 @@ export const Login = () => {
                     timer: 1000
                 })
                 location.state ? navigate(location.state) : navigate("/")
+            })
+            .catch(err => {
+                toast.error('Invalid Crediential!', {
+                    position: "top-center",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                   
+                });
             })
     }
 
@@ -49,6 +65,7 @@ export const Login = () => {
                                     showConfirmButton: false,
                                     timer: 1000
                                 })
+                                console.log(location)
                                 location.state ? navigate(location.state) : navigate("/")
                             })
                     })
@@ -59,7 +76,18 @@ export const Login = () => {
 
     return (
         <div className="relative w-full h-screen  flex items-center justify-center gap-10 pt-5 md:pt-10 md:px-16">
-
+            <ToastContainer
+                position="top-center"
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <div className="hidden max-w-96 md:block flex-1">
                 <img src={loginPic} alt="" />
             </div>

@@ -1,7 +1,7 @@
 
 
 import { Link, useLoaderData } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { Autoplay, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,23 +10,44 @@ import "react-datepicker/dist/react-datepicker.css";
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { FaArrowCircleRight } from "react-icons/fa";
+import { useForm, Controller } from "react-hook-form"
+import { AuthContext } from "../provider/AuthProvider";
+import { useAxiosSecure } from "../hooks/useAxiosSecure";
+
 
 export const PackageDetails = () => {
 
     const [guides, setGuides] = useState([])
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState();
     const pack = useLoaderData()
+    const { user } = useContext(AuthContext);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }, reset, control
+    } = useForm()
+    const  axiosSecure  = useAxiosSecure()
 
-
-    const { photoGallery, shortDescription, timeline, tripTitle } = pack
+    const { photoGallery, shortDescription, timeline, tripTitle, price } = pack
     useEffect(() => {
         axios.get("/guides.json")
             .then(res => setGuides(res.data))
 
-
     }, [])
-   
 
+    const onSubmit = (data) => {
+       
+        data.status = "pending"
+        axiosSecure.post("/bookings", data)
+        .then(() => {
+           
+            document.getElementById('confirm_modal').showModal()
+        })
+
+
+
+    }
 
     return (
         <div className=" pt-32  text-center text-gray-600 px-5">
@@ -69,7 +90,7 @@ export const PackageDetails = () => {
                 {
                     timeline.map((activity, idx) => (
                         <li key={idx}>
-                            {idx !== 0 && <hr/>}
+                            {idx !== 0 && <hr />}
                             <div className="timeline-middle">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +103,7 @@ export const PackageDetails = () => {
                                         clipRule="evenodd" />
                                 </svg>
                             </div>
-                            <div className={`${idx%2 == 1 ? "timeline-start md:text-end" :"timeline-end"} text-start mb-10`}>
+                            <div className={`${idx % 2 == 1 ? "timeline-start md:text-end" : "timeline-end"} text-start mb-10`}>
                                 <time className="font-mono italic">Day-{activity.day}</time>
                                 <div className="text-lg font-black">{activity.title}
 
@@ -161,7 +182,7 @@ export const PackageDetails = () => {
                 <p className="text-gray-600 font-semibold mb-5 md:text-[17px] px-3 w-80 sm:w-[420px] mx-auto text-center">Fill out the form below to confirm your booking and embark on an unforgettable journey.</p>
 
 
-                <form className="sm:max-w-xl max-w-sm mx-auto pt-10 shadow-lg  px-6 py-8 rounded-xl bg-gradient-to-tl from-white to-SecondaryColor mb-20 md:mb-24">
+                <form onSubmit={handleSubmit(onSubmit)} className="sm:max-w-xl max-w-sm mx-auto pt-10 shadow-lg  px-6 py-8 rounded-xl bg-gradient-to-tl from-white to-SecondaryColor mb-20 md:mb-24">
                     <h3 className="text-ThirdColor font-bold text-lg">{tripTitle}</h3>
                     <div className="grid gap-6 mb-6 sm:grid-cols-2">
                         <div>
@@ -169,13 +190,16 @@ export const PackageDetails = () => {
                                 Tourist Name
                             </label>
                             <input
+                                readOnly
                                 type="text"
                                 name="name"
-
+                                value={user.displayName}
+                                {...register("name", { required: true })}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="name"
                                 required
                             />
+
                         </div>
 
                         <div>
@@ -183,25 +207,30 @@ export const PackageDetails = () => {
                                 Tourist Email
                             </label>
                             <input
-                                type="text"
+                                {...register("email", { required: true })}
+                                type="email"
+                                value={user.email}
                                 name="email"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="email"
                                 required
                             />
+
                         </div>
                         <div>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Image
                             </label>
                             <input
-                                type="text"
-                                name="imageURL"
+                                {...register("photoURL", { required: true })}
+                                type="url"
+                                name="photoURL"
+                                value={user.photoURL}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="ImageURL"
                                 required
                             />
-
+                            {errors.photoURL && <span className="text-red-400 text-sm">This field is required</span>}
 
                         </div>
                         <div>
@@ -209,8 +238,10 @@ export const PackageDetails = () => {
                                 Price
                             </label>
                             <input
+                                {...register("price", { required: true })}
                                 type="number"
                                 name="price"
+                                value={price}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="price"
                                 required
@@ -220,7 +251,22 @@ export const PackageDetails = () => {
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Tour Date
                             </label>
-                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-[332px] sm:w-[252px] " selected={startDate} onChange={(date) => setStartDate(date)} />
+                            <Controller
+                                name="date"
+                                control={control}
+                                rules={{ required: "this field is required" }}
+                                render={({ field }) => (
+                                    <DatePicker
+                                        {...field}
+                                        selected={field.value}
+                                        onChange={(date) => field.onChange(date)}
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-[332px] sm:w-[252px]"
+                                    />
+                                )}
+
+                            />
+                            {errors.date && <span className="text-red-400 text-sm">{errors.date.message}</span>}
+
                         </div>
                         <div>
                             <label
@@ -229,14 +275,14 @@ export const PackageDetails = () => {
                             >
                                 Tour Guide
                             </label>
-                            <select required name="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-
+                            <select  {...register("tourGuide", { required: true })} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                 {
                                     guides.map((guide, idx) => <option value={`${guide.name}`} key={idx}>{guide.name}</option>)
                                 }
 
                             </select>
+                            {errors.tourGuide && <span className="text-red-400 text-sm">This field is required</span>}
                         </div>
 
                     </div>
@@ -253,6 +299,13 @@ export const PackageDetails = () => {
             </div>
 
 
+           
+            <dialog id="confirm_modal" className="modal">
+                <div className="modal-box w-[320px] sm:w-[500px] h-[300px] sm:h-[340px] items-center justify-center flex flex-col bg-gradient-to-tr from-SecondaryColor to-gray-300">
+                    <h3 className="font-bold text-PrimaryColor text-lg md:text-xl">Confirm Your Booking</h3>
+                    <div className="py-4 flex items-center gap-2 justify-center text-ThirdColor text-lg ">Go to : <Link to="/" className="underline font-bold flex items-center gap-1 text-xl flex-nowrap">My Booking <FaArrowCircleRight /></Link></div>
+                </div>
+            </dialog>
 
         </div>
     )

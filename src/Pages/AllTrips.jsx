@@ -41,7 +41,7 @@ export const AllTrips = () => {
                                 <p className=''>Duration:{pack.duration}</p>
                                 <p>Description:{pack.shortDescription}</p>
                                 <div className="bg-SecondaryColor text-white px-3 py-1.5 -rotate-[37deg] absolute -right-5 top-40">From   {pack.price}৳</div>
-                                <Link to={`allPackages/${pack._id}`} className='btn mt-3 text-start hover:cursor-pointer text-lg bg-SecondaryColor text-white font-semibold hover:bg-green-900 '>View Details....</Link>
+                                <Link to={`/packages/${pack._id}`} className='btn mt-3 text-start hover:cursor-pointer text-lg bg-SecondaryColor text-white font-semibold hover:bg-green-900 '>View Details....</Link>
                             </div>
                         </div>
 

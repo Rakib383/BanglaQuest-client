@@ -91,8 +91,8 @@ export const Navbar = () => {
                 >
                   <span className="sr-only">Open user menu</span>
                   <img
-                    className="w-10 h-10 me-2 rounded-full   "
-                    src="/docs/images/people/profile-picture-3.jpg"
+                    className="w-10 h-10 me-2 text-ThirdColor rounded-full   "
+                    src={user.photoURL}
                     alt="user photo"
                   />
 
