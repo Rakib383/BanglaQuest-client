@@ -19,7 +19,6 @@ import { useAxiosSecure } from "../hooks/useAxiosSecure";
 export const PackageDetails = () => {
 
     const [guides, setGuides] = useState([])
-    const [startDate, setStartDate] = useState();
     const pack = useLoaderData()
     const { user } = useContext(AuthContext);
     const {

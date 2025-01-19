@@ -28,7 +28,7 @@ export const Register = () => {
                     .then(() => {
 
                         setUser(res.user)
-                        const userInfo = { name, email, Role: "Tourist" }
+                        const userInfo = { name, email,photoURL, Role: "Tourist" }
                         axiosPublic.post('/users', userInfo)
                             .then(() => {
                                 reset()

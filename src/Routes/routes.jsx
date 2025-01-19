@@ -9,6 +9,8 @@ import { Login } from "../Pages/Login";
 import { Register } from "../Pages/Register";
 import { Reset } from "../Pages/Reset";
 import { PrivateRoute } from "./PrivateRoute";
+import { DashBoardLayout } from "../Layouts/DashBoardLayout";
+import { Profile } from "../Pages/Profile";
 
 
 export const router = createBrowserRouter([
@@ -23,7 +25,7 @@ export const router = createBrowserRouter([
             {
                 path: "packages/:id",
                 element: <PrivateRoute><PackageDetails /></PrivateRoute>,
-               loader: ({ params }) => fetch(`http://localhost:5000/allPackages/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/allPackages/${params.id}`)
 
             },
             {
@@ -53,4 +55,15 @@ export const router = createBrowserRouter([
             },
         ]
     },
+    {
+        path: "dashboard",
+        element: <DashBoardLayout />,
+        children: [
+            {
+                path:"profile",
+                element:<Profile/>
+            }
+
+        ]
+    }
 ]);
