@@ -11,6 +11,7 @@ import { Reset } from "../Pages/Reset";
 import { PrivateRoute } from "./PrivateRoute";
 import { DashBoardLayout } from "../Layouts/DashBoardLayout";
 import { Profile } from "../Pages/Profile";
+import { Bookings } from "../Pages/Bookings";
 
 
 export const router = createBrowserRouter([
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
             {
                 path:"profile",
                 element:<Profile/>
+            },
+            {
+                path:"bookings",
+                element:<Bookings/>
             }
 
         ]

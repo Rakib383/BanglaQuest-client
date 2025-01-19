@@ -26,7 +26,7 @@ export const PackageDetails = () => {
         handleSubmit,
         formState: { errors }, reset, control
     } = useForm()
-    const  axiosSecure  = useAxiosSecure()
+    const axiosSecure = useAxiosSecure()
 
     const { photoGallery, shortDescription, timeline, tripTitle, price } = pack
     useEffect(() => {
@@ -36,15 +36,15 @@ export const PackageDetails = () => {
     }, [])
 
     const onSubmit = (data) => {
-       
+        const formateDate = new Date(data.date).toLocaleDateString("en-GB")
+        data.date = formateDate
+        data.package = tripTitle     
         data.status = "pending"
         axiosSecure.post("/bookings", data)
         .then(() => {
-           
+
             document.getElementById('confirm_modal').showModal()
         })
-
-
 
     }
 
@@ -257,6 +257,7 @@ export const PackageDetails = () => {
                                 render={({ field }) => (
                                     <DatePicker
                                         {...field}
+                                        dateFormat="dd/MM/yyyy"
                                         selected={field.value}
                                         onChange={(date) => field.onChange(date)}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-[332px] sm:w-[252px]"
@@ -298,7 +299,7 @@ export const PackageDetails = () => {
             </div>
 
 
-           
+
             <dialog id="confirm_modal" className="modal">
                 <div className="modal-box w-[320px] sm:w-[500px] h-[300px] sm:h-[340px] items-center justify-center flex flex-col bg-gradient-to-tr from-SecondaryColor to-gray-300">
                     <h3 className="font-bold text-PrimaryColor text-lg md:text-xl">Confirm Your Booking</h3>
