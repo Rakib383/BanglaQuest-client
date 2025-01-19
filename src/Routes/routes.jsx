@@ -12,6 +12,9 @@ import { PrivateRoute } from "./PrivateRoute";
 import { DashBoardLayout } from "../Layouts/DashBoardLayout";
 import { Profile } from "../Pages/Profile";
 import { Bookings } from "../Pages/Bookings";
+import { AddStories } from "../Pages/AddStories";
+import { MyStories } from "../Pages/MyStories";
+import { BecomeTourGuide } from "../Pages/BecomeTourGuide";
 
 
 export const router = createBrowserRouter([
@@ -67,7 +70,19 @@ export const router = createBrowserRouter([
             {
                 path:"bookings",
                 element:<Bookings/>
-            }
+            },
+            {
+                path:"addStories",
+                element:<AddStories/>
+            },
+            {
+                path:"myStories",
+                element:<MyStories/>
+            },
+            {
+                path:"apply",
+                element:<BecomeTourGuide/>
+            },
 
         ]
     }
