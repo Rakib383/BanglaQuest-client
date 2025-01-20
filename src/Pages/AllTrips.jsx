@@ -21,8 +21,8 @@ export const AllTrips = () => {
             <p className='mt-2 px-4'>Explore all our trip options and embark on the journey of your dreams.</p>
             <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-8 md:mb-12 my-7'>
                 {
-                    packages?.map(pack => (
-                        <div key={pack.location} className="card bg-base-100 w-80 shadow-xl relative py-3">
+                    packages?.map((pack,id) => (
+                        <div key={id} className="card bg-base-100 w-80 shadow-xl relative py-3">
                             <figure className='relative h-[180px] w-full' >
                                 <img
                                     src={pack.coverPhoto}

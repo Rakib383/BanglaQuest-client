@@ -24,9 +24,7 @@ export const ManageUsers = () => {
 
     });
 
-    if (isLoading) {
-        return <p>Loading...</p>;
-    }
+    
     const options = [
         { value: 'Tourist', label: 'Tourist' },
         { value: 'Tour Guide', label: 'Tour Guide' },
@@ -63,7 +61,7 @@ export const ManageUsers = () => {
                     <tbody>
 
                         {
-                            currentUsers && currentUsers.map((user, idx) => <tr key={idx}>
+                          isLoading ? <div>Loading</div> : currentUsers && currentUsers.map((user, idx) => <tr key={idx}>
                                 <th>{idx + 1}</th>
                                 <td>
                                     <div className="flex items-center gap-3">

@@ -1,6 +1,6 @@
 
 import { Link, useLoaderData } from "react-router-dom"
-import { useContext, } from "react"
+import { useContext, useEffect, useState, } from "react"
 import { Autoplay, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import DatePicker from "react-datepicker";
@@ -13,8 +13,9 @@ import { useForm, Controller } from "react-hook-form"
 import { AuthContext } from "../provider/AuthProvider";
 import { useAxiosSecure } from "../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-
-
+import Confetti from 'react-confetti'
+import Swal from "sweetalert2";
+// import { useWindowSize } from 'react-use'
 export const PackageDetails = () => {
 
     const pack = useLoaderData()
@@ -25,37 +26,79 @@ export const PackageDetails = () => {
         formState: { errors }, reset, control
     } = useForm()
     const axiosSecure = useAxiosSecure()
-
+    const [bookedPackages, setBookedPackages] = useState(0)
+    const [showConfetti, setShowConfetti] = useState(false);
     const { photoGallery, shortDescription, timeline, tripTitle, price } = pack
-
-    const {data:guides} = useQuery({
-        queryKey:['guides'],
+    const [pageWidth, setPageWidth] = useState(window.innerWidth);
+    const { data: guides } = useQuery({
+        queryKey: ['guides'],
         queryFn: async () => {
             const res = await axiosSecure.get('/allTourGuides')
             return res.data
         }
     })
-   
+    useEffect(() => {
+        const savedBookedPackages = parseInt(localStorage.getItem("bookedPackages")) || 0
+        setBookedPackages(savedBookedPackages)
+    }, [])
+
 
     const onSubmit = (data) => {
-        
+
         const formateDate = new Date(data.date).toLocaleDateString("en-GB")
         data.date = formateDate
-        data.package = tripTitle     
+        data.package = tripTitle
         data.status = "pending"
-        
-        
+       
+      
         axiosSecure.post("/bookings", data)
         .then(() => {
+            const updateBookedPackages = bookedPackages + 1
+            setBookedPackages(updateBookedPackages)
+            localStorage.setItem("bookedPackages", updateBookedPackages)
+            if (bookedPackages >= 3) {
+                setShowConfetti(true)
+                setTimeout(() => setShowConfetti(false), 5000)
+                Swal.fire({
+                    title: "Congratulation.You Got Discount!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1100
+                })
 
+                return  setTimeout(() => document.getElementById('confirm_modal').showModal(),5000 )
+               
+            }
             document.getElementById('confirm_modal').showModal()
+           
         })
-
+       
     }
 
-    return (
-        <div className=" pt-32  text-center text-gray-600 px-5">
 
+    useEffect(() => {
+        const handleResize = () => setPageWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+
+    return (
+        <div className=" pt-32   text-center text-gray-600 px-5">
+            {showConfetti && (
+                <Confetti
+                    height={3000}
+                    width={pageWidth}
+                    confettiSource={{
+                        x: pageWidth / 2 - 50,
+                        y: 1800,
+                        w: 100,
+                        h: 100,
+                    }}
+                    numberOfPieces={400}
+                />
+            )}
             <div className="text-3xl md:text-5xl font-bold text-gray-800 justify-center flex flex-col sm:flex-row gap-2 items-center">
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-800 " >A Glimpse of The </h2>
                 <div className="rotate-6  z-20 relative pb-2">
@@ -160,7 +203,7 @@ export const PackageDetails = () => {
 
                 >
                     {
-                        guides?.map(guide => <SwiperSlide className='mb-8' key={guide.name}>
+                        guides?.map((guide, idx) => <SwiperSlide className='mb-8' key={idx}>
                             <div className="card rounded-md bg-base-100 w-80 shadow-xl ">
                                 <figure>
                                     <img
@@ -182,6 +225,7 @@ export const PackageDetails = () => {
 
             {/* Booking Form  */}
             <div>
+
                 <h2 className="font-black font-charm text-xl md:text-2xl text-primaryColor underline mb-3 sm:mb-6 text-center">Book Your Adventure</h2>
                 <p className="text-gray-600 font-semibold mb-5 md:text-[17px] px-3 w-80 sm:w-[420px] mx-auto text-center">Fill out the form below to confirm your booking and embark on an unforgettable journey.</p>
 
@@ -227,7 +271,7 @@ export const PackageDetails = () => {
                             </label>
                             <input
                                 {...register("photoURL", { required: true })}
-                                type="url"
+                                type="text"
                                 name="photoURL"
                                 value={user.photoURL}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

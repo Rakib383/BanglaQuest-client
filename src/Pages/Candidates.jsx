@@ -15,7 +15,6 @@ export const Candidates = () => {
 
             return result.data
         },
-
     });
 
     if (isLoading) {
