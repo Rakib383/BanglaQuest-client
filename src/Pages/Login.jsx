@@ -65,7 +65,7 @@ export const Login = () => {
                                     showConfirmButton: false,
                                     timer: 1000
                                 })
-                                console.log(location)
+                              
                                 location.state ? navigate(location.state) : navigate("/")
                             })
                     })

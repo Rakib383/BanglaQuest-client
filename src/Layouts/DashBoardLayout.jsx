@@ -1,11 +1,14 @@
 import { useContext } from "react"
 import { CgProfile } from "react-icons/cg"
-import { FaClipboardList, FaPen, FaPenNib, FaUserPlus } from "react-icons/fa"
+import { FaClipboardList, FaPen, FaPenNib, FaUserPlus, FaUserTie } from "react-icons/fa"
 import { IoHomeOutline } from "react-icons/io5"
 import { NavLink, Outlet } from "react-router-dom"
 import { AuthContext } from "../provider/AuthProvider"
 import { useQuery } from "@tanstack/react-query"
 import { useAxiosSecure } from "../hooks/useAxiosSecure"
+import { AiOutlinePlusSquare } from "react-icons/ai"
+import { FiUsers } from "react-icons/fi"
+import { HiOutlineMenu } from "react-icons/hi"
 
 export const DashBoardLayout = () => {
     const axiosSecure = useAxiosSecure()
@@ -25,12 +28,8 @@ export const DashBoardLayout = () => {
         return <p>Loading...</p>;
     }
 
-    return (
-        <div className="flex h-screen">
-            {/* dashboard side bar */}
-            <div className="w-64 h-full bg-ThirdColor dashboard text-white">
-                <ul className="menu gap-2 mt-5">
-                    <li className="lg:text-lg"><NavLink to="/"><IoHomeOutline size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Home</span></NavLink></li>
+    const navOptions = <>
+    <li className="lg:text-lg"><NavLink to="/"><IoHomeOutline size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Home</span></NavLink></li>
                     {
                         currentUser.Role === "Tourist" && <>
 
@@ -58,6 +57,45 @@ export const DashBoardLayout = () => {
 
                         </>
                     }
+                    {
+                        currentUser.Role === "Admin" && <>
+
+                            <li className="lg:text-lg"><NavLink to="/dashboard/adminProfile"><CgProfile size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Profile</span></NavLink></li>
+
+                            <li className="lg:text-lg"><NavLink to="/dashboard/addPackage"><AiOutlinePlusSquare size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Add Package</span> </NavLink></li>
+
+                            <li className="lg:text-lg"><NavLink to="/dashboard/manageUsers"><FiUsers size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Users</span></NavLink></li>
+
+                            <li className="lg:text-lg"><NavLink to="/dashboard/candidates"><FaUserTie size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Candidates</span></NavLink></li>
+
+                        </>
+                    }
+    
+    </>  
+
+    return (
+        <div className="flex h-screen mb-10">
+            {/* dashboard side bar */}
+            <div className="w-64 hidden md:block h-full bg-ThirdColor dashboard text-white">
+                <ul className="menu gap-2 mt-5">
+                   {
+                    navOptions
+                   }
+                </ul>
+
+            </div>
+            <div className="dropdown mt-4 ml-1">
+                <div tabIndex={0} role="button" className="btn btn-ghost md:hidden ">
+                    <HiOutlineMenu className="text-2xl" />
+                </div>
+                <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-base-100 gap-2 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    {
+                        navOptions
+                    }
+
+
                 </ul>
 
             </div>

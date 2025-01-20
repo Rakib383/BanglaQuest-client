@@ -1,8 +1,6 @@
 
-
 import { Link, useLoaderData } from "react-router-dom"
-import { useContext, useEffect, useState } from "react"
-import axios from "axios"
+import { useContext, } from "react"
 import { Autoplay, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import DatePicker from "react-datepicker";
@@ -46,7 +44,6 @@ export const PackageDetails = () => {
         data.package = tripTitle     
         data.status = "pending"
         
-        console.log(data)
         
         axiosSecure.post("/bookings", data)
         .then(() => {

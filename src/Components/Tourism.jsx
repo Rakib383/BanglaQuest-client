@@ -15,19 +15,19 @@ import { useAxiosPublic } from './../hooks/useAxiosPublic';
 
 
 export const Tourism = () => {
-     
+
     const axiosPublic = useAxiosPublic()
-    
-    const {data:guides = []} = useQuery({
-        queryKey:['guides'],
-        queryFn:async () => {
+
+    const { data: guides = [] } = useQuery({
+        queryKey: ['guides'],
+        queryFn: async () => {
             const res = await axiosPublic.get('/tourGuides')
             return res.data
         }
     })
-    const {data:packages = []} = useQuery({
-        queryKey:['packages'],
-        queryFn:async () => {
+    const { data: packages = [] } = useQuery({
+        queryKey: ['packages'],
+        queryFn: async () => {
             const res = await axiosPublic.get("/packages")
             return res.data
         }
@@ -70,31 +70,31 @@ export const Tourism = () => {
                     <p className='mt-2'>Choose from a variety of exciting travel packages designed for every type of explorer. Let us make your dream vacation a reality!</p>
                     <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-8 md:mb-12 my-7'>
                         {
-                            packages?.map(pack => (
-                                <div key={pack.location} className="card bg-base-100 w-80 shadow-xl relative py-3">
-                                    <figure className='relative h-[180px] w-full' >
-                                        <img
-                                            src={pack.coverPhoto}
-                                            alt="" className='h-full w-full' />
-                                        <div className='absolute left-0 bottom-2 flex items-center text-PrimaryColor bg-gray-300/40 rounded-sm px-1 backdrop-blur-sm'>
-                                            <FaLocationDot className='text-green-900' />
-                                            {pack.location}
-                                        </div>
-                                    </figure>
-                                    <div className="card-body pb-3 text-start px-4 gap-1.5 text-gray-600">
-                                        <h2 className="card-title text-ThirdColor">
-                                            {pack.tripTitle}
-
-                                        </h2>
-                                        <p className=''>Tour-Type:{pack.tourType}</p>
-                                        <p className=''>Duration:{pack.duration}</p>
-                                        <p>Description:{pack.shortDescription}</p>
-                                        <div className="bg-SecondaryColor text-white px-3 py-1.5 -rotate-[37deg] absolute -right-5 top-40">From   {pack.price}৳</div>
-                                        <Link to={`packages/${pack._id}`}className='btn mt-3 text-start hover:cursor-pointer text-lg bg-SecondaryColor text-white font-semibold hover:bg-green-900 '>View Details....</Link>
+                           packages?.map(pack => (
+                            <div key={pack._id} className="card bg-base-100 w-80 shadow-xl relative py-3">
+                                <figure className='relative h-[180px] w-full' >
+                                    <img
+                                        src={pack.coverPhoto}
+                                        alt="" className='h-full w-full' />
+                                    <div className='absolute left-0 bottom-2 flex items-center text-PrimaryColor bg-gray-300/40 rounded-sm px-1 backdrop-blur-sm'>
+                                        <FaLocationDot className='text-green-900' />
+                                        {pack.location}
                                     </div>
-                                </div>
+                                </figure>
+                                <div className="card-body pb-3 text-start px-4 gap-1.5 text-gray-600">
+                                    <h2 className="card-title text-ThirdColor">
+                                        {pack.tripTitle}
 
-                            ))
+                                    </h2>
+                                    <p className=''>Tour-Type:{pack.tourType}</p>
+                                    <p className=''>Duration:{pack.duration}</p>
+                                    <p>Description:{pack.shortDescription}</p>
+                                    <div className="bg-SecondaryColor text-white px-3 py-1.5 -rotate-[37deg] absolute -right-5 top-40">From   {pack.price}৳</div>
+                                    <Link to={`packages/${pack._id}`} className='btn mt-3 text-start hover:cursor-pointer text-lg bg-SecondaryColor text-white font-semibold hover:bg-green-900 '>View Details....</Link>
+                                </div>
+                            </div>
+
+                        ))
                         }
                     </div>
                 </TabPanel>
@@ -134,23 +134,23 @@ export const Tourism = () => {
 
                         >
                             {
-                                guides.map(guide => <SwiperSlide className='mb-8' key={guide.name}>
-                                    <div className="card rounded-md bg-base-100 w-80 shadow-xl ">
-                                        <figure>
-                                            <img
-                                                src={guide.photo}
-                                                alt="Shoes" />
-                                        </figure>
-                                        <div className="card-body gap-0.5 text-start text-gray-600">
-                                            <h2 className="card-title">{guide.name}</h2>
-                                           <p>{guide.expertise} </p>
-                                           <p>Experience: {guide.experience} </p>
-                                            <Link to={`guideProfiles/${guide._id}`} className="card-actions justify-center mt-3">
-                                                <button className="btn bg-SecondaryColor text-white hover:bg-ThirdColor ">See Details</button>
-                                            </Link>
-                                        </div>
+                              guides.map(guide => <SwiperSlide className='mb-8' key={guide._id}>
+                                <div className="card rounded-md bg-base-100 w-80 shadow-xl ">
+                                    <figure>
+                                        <img
+                                            src={guide.photo}
+                                            alt="Shoes" />
+                                    </figure>
+                                    <div className="card-body gap-0.5 text-start text-gray-600">
+                                        <h2 className="card-title">{guide.name}</h2>
+                                        <p>{guide.expertise} </p>
+                                        <p>Experience: {guide.experience} </p>
+                                        <Link to={`guideProfiles/${guide._id}`} className="card-actions justify-center mt-3">
+                                            <button className="btn bg-SecondaryColor text-white hover:bg-ThirdColor ">See Details</button>
+                                        </Link>
                                     </div>
-                                </SwiperSlide>)
+                                </div>
+                            </SwiperSlide>)  
                             }
                         </Swiper>
                     </div>

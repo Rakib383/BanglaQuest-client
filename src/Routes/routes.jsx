@@ -16,6 +16,8 @@ import { AddStories } from "../Pages/AddStories";
 import { MyStories } from "../Pages/MyStories";
 import { BecomeTourGuide } from "../Pages/BecomeTourGuide";
 import { MyAssignedTours } from "../Pages/MyAssignedTours";
+import { AdminProfile } from "../Pages/AdminProfile";
+import { AddPackage } from "../Pages/AddPackage";
 
 
 export const router = createBrowserRouter([
@@ -64,28 +66,36 @@ export const router = createBrowserRouter([
         element: <DashBoardLayout />,
         children: [
             {
-                path:"profile",
-                element:<Profile/>
+                path: "profile",
+                element: <Profile />
             },
             {
-                path:"bookings",
-                element:<Bookings/>
+                path: "bookings",
+                element: <Bookings />
             },
             {
-                path:"addStories",
-                element:<AddStories/>
+                path: "addStories",
+                element: <AddStories />
             },
             {
-                path:"myStories",
-                element:<MyStories/>
+                path: "myStories",
+                element: <MyStories />
             },
             {
-                path:"apply",
-                element:<BecomeTourGuide/>
+                path: "apply",
+                element: <BecomeTourGuide />
             },
             {
-                path:"assignedTours",
-                element:<MyAssignedTours/>
+                path: "assignedTours",
+                element: <MyAssignedTours />
+            },
+            {
+                path: "adminProfile",
+                element: <AdminProfile />
+            },
+            {
+                path: "addPackage",
+                element: <AddPackage />
             },
 
         ]

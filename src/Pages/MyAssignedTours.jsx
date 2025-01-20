@@ -25,16 +25,16 @@ export const MyAssignedTours = () => {
     }
 
     const handleAccept = (id) => {
-        axiosSecure.patch(`/bookings/${id}`,{status:"Accepted"})
-        .then(() => {
-           
-            Swal.fire({
-                title: "Accepted",
-                icon: "success"
-            });
-            refetch()
+        axiosSecure.patch(`/bookings/${id}`, { status: "Accepted" })
+            .then(() => {
 
-        })
+                Swal.fire({
+                    title: "Accepted",
+                    icon: "success"
+                });
+                refetch()
+
+            })
 
 
     }
@@ -49,9 +49,9 @@ export const MyAssignedTours = () => {
             confirmButtonText: "Yes, Reject"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.patch(`/bookings/${id}`,{status:"Rejected"})
+                axiosSecure.patch(`/bookings/${id}`, { status: "Rejected" })
                     .then(() => {
-                        
+
                         Swal.fire({
                             title: "Rejected!",
                             icon: "success"
