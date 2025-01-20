@@ -15,24 +15,28 @@ export const BecomeTourGuide = () => {
         formState: { errors }, reset
     } = useForm()
     const axiosSecure = useAxiosSecure()
+        
+    const onSubmit =  (data) => {
+            axiosSecure.get(`/users/${user.email}`)
+            .then(res => {
+                data.appliedDate = moment().format("MMMMD,YYYY");
+                data.applicant_email = res.data.email
+                data.applicant_name = res.data.name
+                data.Role=res.data.Role
 
-    const onSubmit = (data) => {
-        data.email = user.email
-        data.appliedDate= moment().format("MMMMD,YYYY");
-        axiosSecure.post("/guideApplications", data)
-            .then((res) => {
-
-                Swal.fire({
-                    title: "Application successful!",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timer: 1200
-                })
-                reset()
-                setIsDisable(true)
+                axiosSecure.post("/guideApplications", data)
+                    .then((res) => {
+        
+                        Swal.fire({
+                            title: "Application successful!",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
+                        reset()
+                        setIsDisable(true)
+                    })
             })
-
-
 
     }
 

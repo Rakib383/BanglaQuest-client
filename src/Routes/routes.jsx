@@ -18,6 +18,8 @@ import { BecomeTourGuide } from "../Pages/BecomeTourGuide";
 import { MyAssignedTours } from "../Pages/MyAssignedTours";
 import { AdminProfile } from "../Pages/AdminProfile";
 import { AddPackage } from "../Pages/AddPackage";
+import { ManageUsers } from "../Pages/ManageUsers";
+import { Candidates } from "../Pages/Candidates";
 
 
 export const router = createBrowserRouter([
@@ -96,6 +98,14 @@ export const router = createBrowserRouter([
             {
                 path: "addPackage",
                 element: <AddPackage />
+            },
+            {
+                path: "manageUsers",
+                element: <ManageUsers />
+            },
+            {
+                path: "candidates",
+                element: <Candidates/>
             },
 
         ]
