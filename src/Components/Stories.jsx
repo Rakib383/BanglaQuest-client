@@ -31,7 +31,7 @@ export const Stories = () => {
 
             <div className="space-x-5 mt-8 md:mt-12">
                 <Link to="/community" className="btn  mt-3 bg-SecondaryColor hover:bg-green-900 text-white px-3 py-1.5">All Stories</Link>
-                <Link to="/community" className="btn  mt-3 bg-SecondaryColor hover:bg-green-900 text-white px-3 py-1.5">Add Stories</Link>
+                <Link to="/dashboard/addStories" className="btn  mt-3 bg-SecondaryColor hover:bg-green-900 text-white px-3 py-1.5">Add Stories</Link>
             </div>
         </div>
     )

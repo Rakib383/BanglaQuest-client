@@ -16,7 +16,7 @@ export const Story = ({story,idx}) => {
             <div className="flex-1 flex flex-col items-center justify-center">
                 <p className="font-bold text-lg  hover:bg-gradient-to-r from-yellow-600  to-yellow-300 bg-clip-text hover:text-transparent hover:cursor-pointer">{title}</p>
                 <div className="flex gap-1 items-center justify-center "> <FaPencilAlt />By {sharedBy} </div>
-                <div className="flex gap-1 items-center justify-center "><SlCalender />{moment(sharedOn).format("MMMM D,YYYY")}</div>
+                <div className="flex gap-1 items-center justify-center "><SlCalender />{moment(new Date(sharedOn)).format("MMMM D, YYYY")}</div>
                 <FacebookShareButton url={"https://www.facebook.com/"} >
                     <div className="btn  mt-3 bg-SecondaryColor hover:bg-green-900 text-white px-3 py-1.5 ">
                         <FaShare /> Share</div>

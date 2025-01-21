@@ -20,6 +20,7 @@ import { AdminProfile } from "../Pages/AdminProfile";
 import { AddPackage } from "../Pages/AddPackage";
 import { ManageUsers } from "../Pages/ManageUsers";
 import { Candidates } from "../Pages/Candidates";
+import { AboutUs } from "../Pages/AboutUs";
 
 
 export const router = createBrowserRouter([
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
             {
                 path: "reset",
                 element: <Reset />,
+            },
+            {
+                path: "about",
+                element: <AboutUs />,
             },
         ]
     },
