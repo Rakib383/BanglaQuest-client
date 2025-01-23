@@ -21,6 +21,7 @@ import { AddPackage } from "../Pages/AddPackage";
 import { ManageUsers } from "../Pages/ManageUsers";
 import { Candidates } from "../Pages/Candidates";
 import { AboutUs } from "../Pages/AboutUs";
+import { Payment } from "../Components/Payment";
 
 
 export const router = createBrowserRouter([
@@ -111,6 +112,10 @@ export const router = createBrowserRouter([
             {
                 path: "candidates",
                 element: <Candidates/>
+            },
+            {
+                path: "payment/:id",
+                element: <Payment/>
             },
 
         ]

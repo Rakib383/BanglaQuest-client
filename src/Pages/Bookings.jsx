@@ -2,13 +2,15 @@ import { useContext } from "react"
 import { AuthContext } from "../provider/AuthProvider"
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosSecure } from "../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const Bookings = () => {
 
     const { user } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
 
-    const { data: bookings, isLoading } = useQuery({
+    const { data: bookings, isLoading, refetch } = useQuery({
         queryKey: ["bookings"],
         queryFn: async () => {
             const res = await axiosSecure.get(`/bookings/${user.email}`);
@@ -19,6 +21,31 @@ export const Bookings = () => {
 
     if (isLoading || !bookings) {
         return <p>Loading...</p>;
+    }
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Delete"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/bookings/${id}`)
+                    .then((res) => {
+                        Swal.fire({
+                            title: "Rejected!",
+                            icon: "success"
+                        });
+                        refetch()
+                    })
+            }
+        });
+
+
     }
 
     return (
@@ -53,10 +80,10 @@ export const Bookings = () => {
                                 {
                                     booking.status == "pending" ? <>
                                         <td>
-                                            <button className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Pay</button>
+                                            <Link to={`/dashboard/payment/${booking._id}`} className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Pay</Link>
                                         </td>
                                         <td>
-                                            <button className="btn bg-red-600 hover:bg-red-600 text-white">Cancel</button>
+                                            <button onClick={() => handleDelete(booking._id)} className="btn bg-red-600 hover:bg-red-600 text-white">Cancel</button>
                                         </td>
                                     </> : <td>
                                         <button className="btn bg-PrimaryColor hover:bg-PrimaryColor">Paid</button>
