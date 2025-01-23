@@ -12,9 +12,7 @@ export const MyAssignedTours = () => {
     const { data: assignedTours, isLoading, refetch } = useQuery({
         queryKey: ["assignedTours"],
         queryFn: async () => {
-            const result = await axiosSecure.get(`/allTourGuides/${user.email}`)
-            const tourGuideInfo = result.data
-            const res = await axiosSecure.get(`/assignedTours/${tourGuideInfo._id}`);
+            const res = await axiosSecure.get(`/assignTours/${user.email}`);
             return res.data;
         },
         enabled: !!user,
@@ -67,7 +65,7 @@ export const MyAssignedTours = () => {
 
     return (
         <div>
-            <h2 className="text-xl md:text-2xl font-bold text-ThirdColor text-center mb-5">My Booking History</h2>
+            <h2 className="text-xl md:text-2xl font-bold  text-center mb-5 text-PrimaryColor">Assigned Tours</h2>
 
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
@@ -96,21 +94,22 @@ export const MyAssignedTours = () => {
                                 <td className={` font-bold ${tours.status == "In Review" && "bg-blue-400"} ${tours.status == "Rejected" && "bg-red-500"} ${tours.status == "pending" && "bg-PrimaryColor"} ${tours.status == "Accepted" && "bg-SecondaryColor"}`}>{tours.status}</td>
                                 {
                                     tours.status == "pending" && <>
+                                        
                                         <td>
-                                            <button disabled className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Accept</button>
+                                            <button onClick={() => handleAccept(tours._id)} className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Accept</button>
                                         </td>
                                         <td>
-                                            <button disabled className="btn bg-red-600 hover:bg-red-600 text-white">Reject</button>
+                                            <button onClick={() => handleDelete(tours._id)} className="btn bg-red-600 hover:bg-red-600 text-white">Reject</button>
                                         </td>
                                     </>
                                 }
                                 {
                                     tours.status == "In Review" && <>
                                         <td>
-                                            <button onClick={() => handleAccept(tours._id)} className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Accept</button>
+                                            <button disabled className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Accept</button>
                                         </td>
                                         <td>
-                                            <button onClick={() => handleDelete(tours._id)} className="btn bg-red-600 hover:bg-red-600 text-white">Reject</button>
+                                            <button disabled className="btn bg-red-600 hover:bg-red-600 text-white">Reject</button>
                                         </td>
                                     </>
                                 }

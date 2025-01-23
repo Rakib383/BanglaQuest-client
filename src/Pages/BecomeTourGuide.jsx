@@ -15,18 +15,17 @@ export const BecomeTourGuide = () => {
         formState: { errors }, reset
     } = useForm()
     const axiosSecure = useAxiosSecure()
-        
-    const onSubmit =  (data) => {
-            axiosSecure.get(`/users/${user.email}`)
-            .then(res => {
-                data.appliedDate = moment().format("MMMMD,YYYY");
-                data.applicant_email = res.data.email
-                data.applicant_name = res.data.name
-                data.Role=res.data.Role
 
+    const onSubmit = (data) => {
+        data.appliedDate = moment().format("MMMMD,YYYY");
+        data.email = user.email
+        axiosSecure.get(`/users/${user.email}`)
+            .then(res => {
+                data.name = res.data.name
+                data.Role = res.data.Role
                 axiosSecure.post("/guideApplications", data)
                     .then((res) => {
-        
+
                         Swal.fire({
                             title: "Application successful!",
                             icon: "success",
@@ -53,7 +52,7 @@ export const BecomeTourGuide = () => {
                     <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">
                         Why You Want to become a Tour Guide?
                     </label>
-                    <textarea rows={5} type="text"
+                    <textarea rows={3} type="text"
 
 
                         {...register("description", { required: true })}
@@ -64,9 +63,33 @@ export const BecomeTourGuide = () => {
                 </div>
                 <div>
                     <label className="block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">
+                        Expertise Field
+                    </label>
+                    <textarea rows={1} type="text"
+
+                        {...register("expertise", { required: true })}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Write Where You are Good At? "
+                        required></textarea>
+
+                </div>
+                <div>
+                    <label className="block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">
+                        Experience(Years)
+                    </label>
+                    <input rows={1} type="number"
+
+                        {...register("experience", { required: true })}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder=""
+                        required></input>
+
+                </div>
+                <div>
+                    <label className="block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">
                         Drop Your CVLink
                     </label>
-                    <textarea rows={2} type="url"
+                    <textarea rows={1} type="url"
 
                         {...register("CV_Link", { required: true })}
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

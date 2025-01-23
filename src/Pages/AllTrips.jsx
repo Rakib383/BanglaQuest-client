@@ -18,8 +18,9 @@ export const AllTrips = () => {
 
         <div className="pt-32 text-center md:pb-5">
             <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center">Trips for Every Traveler</h2>
-            <p className='mt-2 px-4'>Explore all our trip options and embark on the journey of your dreams.</p>
-            <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-8 md:mb-12 my-7'>
+            <p className='mt-2 px-4'>Explore all our trip options and embark on the journey of your dreams.</p> 
+            {/* package container */}
+            <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-8 md:mb-12 my-7 px-4'>
                 {
                     packages?.map((pack,id) => (
                         <div key={id} className="card bg-base-100 w-80 shadow-xl relative py-3">

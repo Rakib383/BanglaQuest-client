@@ -22,24 +22,24 @@ export const Candidates = () => {
     }
 
     const handleAccept = (email, applicant) => {
-        axiosSecure.patch(`/allUsers/${email}`, { Role: "Tour Guide" })
+        const updateInfo = {
+            Role: "Tour Guide",
+            description: applicant.description,
+            expertise: applicant.expertise,
+            experience: applicant.experience,
+            CV_Link: applicant.CV_Link
+        }
+        axiosSecure.patch(`/allUsers/${email}`, updateInfo)
             .then(() => {
-                axiosSecure.post('/tourGuides', applicant)
+                axiosSecure.delete(`/guideApplications/${email}`)
                     .then(() => {
-                        axiosSecure.delete(`/guideApplications/${email}`)
-                            .then(() => {
+                        Swal.fire({
+                            title: "Successfully Done",
+                            icon: "success"
+                        });
+                        refetch()
 
-                                Swal.fire({
-                                    title: "Successfully Done",
-                                    icon: "success"
-                                });
-                                refetch()
-
-                            })
                     })
-
-
-
             })
 
 
@@ -65,7 +65,6 @@ export const Candidates = () => {
                         refetch()
 
                     })
-
             }
         });
 
@@ -95,16 +94,16 @@ export const Candidates = () => {
                         {
                             guideApplications.map((applicant, idx) => <tr key={idx}>
                                 <th>{idx + 1}</th>
-                                <td>{applicant.applicant_name}</td>
-                                <td>{applicant.applicant_email}</td>
+                                <td>{applicant.name}</td>
+                                <td>{applicant.email}</td>
                                 <td>{applicant.appliedDate}</td>
                                 <td>{applicant.CV_Link}</td>
                                 <td>{applicant.Role}</td>
                                 <td>
-                                    <button onClick={() => handleAccept(applicant.applicant_email, applicant)} className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Accept</button>
+                                    <button onClick={() => handleAccept(applicant.email, applicant)} className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Accept</button>
                                 </td>
                                 <td>
-                                    <button onClick={() => handleDelete(applicant.applicant_email)} className="btn bg-red-600 hover:bg-red-600 text-white">Reject</button>
+                                    <button onClick={() => handleDelete(applicant.email)} className="btn bg-red-600 hover:bg-red-600 text-white">Reject</button>
                                 </td>
 
                             </tr>)

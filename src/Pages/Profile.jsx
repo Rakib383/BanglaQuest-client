@@ -1,5 +1,4 @@
 
-
 import { useQuery } from "@tanstack/react-query"
 import { useContext, } from "react"
 import { AuthContext } from "../provider/AuthProvider"
@@ -7,9 +6,15 @@ import { useAxiosSecure } from "../hooks/useAxiosSecure"
 import { useForm } from "react-hook-form"
 import Swal from "sweetalert2"
 import { Link } from "react-router-dom"
+import moment from "moment"
+import { FaPencilAlt } from "react-icons/fa"
+import { FaLocationDot } from "react-icons/fa6"
+import { SlCalender } from "react-icons/sl"
+
+
 export const Profile = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user,updateUserProfile } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
     const {
         register,
@@ -17,7 +22,7 @@ export const Profile = () => {
         formState: { errors }
     } = useForm()
 
-    const { data: currentUser, isLoading } = useQuery({
+    const { data: currentUser, isLoading,refetch } = useQuery({
         queryKey: ["userProfile", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/${user?.email}`);
@@ -25,14 +30,25 @@ export const Profile = () => {
         },
         enabled: !!user,
     });
+    const { data: stories } = useQuery({
+        queryKey: ['myStories'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/allStories/${user.email}`)
+            return res.data
+        },
+        enabled: !!user
 
-    if (isLoading || !currentUser) {
+    })
+
+
+    if (isLoading || !currentUser || !stories) {
         return <p>Loading...</p>;
     }
 
     const onSubmit = (data) => {
 
         document.getElementById('my_modal_1').close()
+        updateUserProfile(data.name,data.photoURL)
         axiosSecure.patch(`/users/${currentUser._id}`, data)
             .then(() => {
                 Swal.fire({
@@ -41,6 +57,7 @@ export const Profile = () => {
                     showConfirmButton: false,
                     timer: 1000
                 })
+                refetch()
             })
 
 
@@ -56,13 +73,13 @@ export const Profile = () => {
                     currentUser.name
                 }
             </h2>
-            <div className="pt-32 place-items-center">
+            <div className="pt-10 place-items-center">
 
                 <div className="bg-ThirdColor rounded-lg shadow-lg  p-6 w-80 max-w-full text-gray-400 text-center relative">
 
                     <img
                         className="w-24 h-24 mx-auto border-2 border-PrimaryColor   object-cover rounded-full p-1"
-                        src={user.photoURL}
+                        src={currentUser.photoURL}
                         alt="currentUser"
                     />
                     <h3 className="text-lg text-white font-medium mt-4">{currentUser.name}</h3>
@@ -173,6 +190,35 @@ export const Profile = () => {
                     </div>
                 </div>
             </dialog>
+
+            {/* stories  */}
+            <div>
+                <h2 className="text-center font-bold text-2xl mt-16 text-PrimaryColor underline">My  Stories</h2>
+
+                {/* container */}
+                <div className="mt-8 flex gap-6 flex-col  flex-wrap justify-center items-center ">
+
+                    {
+                        stories.map((story, idx) => <div className={`flex flex-col  my-4 gap-4 items-center justify-center ${idx % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"} `} key={idx}>
+                            <div className="sm:flex-1 h-52 w-9/12 sm:w-auto  sm:h-auto md:h-64">
+                                <img src={story.images[0]} className="h-full w-full" alt="" />
+                            </div>
+                            <div className="flex-1 flex flex-col items-center justify-center">
+                                <p className="font-bold text-lg  hover:bg-gradient-to-r from-yellow-600  to-yellow-300 bg-clip-text hover:text-transparent hover:cursor-pointer">{story.title}</p>
+
+                                <div className="flex gap-1 items-center justify-center "><SlCalender />{moment(new Date(story.sharedOn)).format("MMMM D, YYYY")}</div>
+                                <div className="flex items-center gap-1">
+                                    <FaLocationDot />{story.location}
+                                </div>
+
+                            </div>
+                        </div>)
+                    }
+
+                </div>
+            </div>
+
+
         </div>
     )
 }

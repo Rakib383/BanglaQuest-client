@@ -49,30 +49,28 @@ export const PackageDetails = () => {
         data.date = formateDate
         data.package = tripTitle
         data.status = "pending"
-       
-      
-        axiosSecure.post("/bookings", data)
-        .then(() => {
-            const updateBookedPackages = bookedPackages + 1
-            setBookedPackages(updateBookedPackages)
-            localStorage.setItem("bookedPackages", updateBookedPackages)
-            if (bookedPackages >= 3) {
-                setShowConfetti(true)
-                setTimeout(() => setShowConfetti(false), 5000)
-                Swal.fire({
-                    title: "Congratulation.You Got Discount!",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timer: 1100
-                })
 
-                return  setTimeout(() => document.getElementById('confirm_modal').showModal(),5000 )
-               
-            }
-            document.getElementById('confirm_modal').showModal()
-           
-        })
-       
+        axiosSecure.post("/bookings", data)
+            .then(() => {
+                const updateBookedPackages = bookedPackages + 1
+                setBookedPackages(updateBookedPackages)
+                localStorage.setItem("bookedPackages", updateBookedPackages)
+                if (bookedPackages >= 3) {
+                    setShowConfetti(true)
+                    setTimeout(() => setShowConfetti(false), 5000)
+                    Swal.fire({
+                        title: "Congratulation.You Got Discount!",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 1100
+                    })
+
+                    return setTimeout(() => document.getElementById('confirm_modal').showModal(), 4000)
+
+                }
+                document.getElementById('confirm_modal').showModal()
+            })
+
     }
 
 
@@ -207,13 +205,13 @@ export const PackageDetails = () => {
                             <div className="card rounded-md bg-base-100 w-80 shadow-xl ">
                                 <figure>
                                     <img
-                                        src={guide.photo}
+                                        src={guide.photoURL}
                                         alt="Shoes" />
                                 </figure>
                                 <div className="card-body gap-0.5 text-start text-gray-600">
                                     <h2 className="card-title">{guide.name}</h2>
-                                    <p>{guide.expertise} </p>
-                                    <p>Experience: {guide.experience} </p>
+                                    <p className="truncate">Expertise: {guide.expertise} </p>
+                                    <p>Experience: {guide.experience} years+ </p>
                                     <Link className="btn bg-SecondaryColor text-white hover:bg-ThirdColor hover:cursor-pointer mt-3 ">See Details</Link>
                                 </div>
                             </div>
@@ -223,13 +221,13 @@ export const PackageDetails = () => {
             </div>
 
 
-            {/* Booking Form  */}
+            {/* Booking Section  */}
             <div>
 
                 <h2 className="font-black font-charm text-xl md:text-2xl text-primaryColor underline mb-3 sm:mb-6 text-center">Book Your Adventure</h2>
                 <p className="text-gray-600 font-semibold mb-5 md:text-[17px] px-3 w-80 sm:w-[420px] mx-auto text-center">Fill out the form below to confirm your booking and embark on an unforgettable journey.</p>
 
-
+                {/* Booking Form */}
                 <form onSubmit={handleSubmit(onSubmit)} className="sm:max-w-xl max-w-sm mx-auto pt-10 shadow-lg  px-6 py-8 rounded-xl bg-gradient-to-tl from-white to-SecondaryColor mb-20 md:mb-24">
                     <h3 className="text-ThirdColor font-bold text-lg">{tripTitle}</h3>
                     <div className="grid gap-6 mb-6 sm:grid-cols-2">
@@ -324,10 +322,10 @@ export const PackageDetails = () => {
                             >
                                 Tour Guide
                             </label>
-                            <select  {...register("tourGuideID", { required: true })} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select  {...register("tourGuideEmail", { required: true })} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                 {
-                                    guides?.map((guide, idx) => <option value={guide._id} key={idx}>{guide.name}</option>)
+                                    guides?.map((guide, idx) => <option value={guide.email} key={idx}>{guide.name}</option>)
                                 }
 
                             </select>
@@ -352,7 +350,7 @@ export const PackageDetails = () => {
             <dialog id="confirm_modal" className="modal">
                 <div className="modal-box w-[320px] sm:w-[500px] h-[300px] sm:h-[340px] items-center justify-center flex flex-col bg-gradient-to-tr from-SecondaryColor to-gray-300">
                     <h3 className="font-bold text-PrimaryColor text-lg md:text-xl">Confirm Your Booking</h3>
-                    <div className="py-4 flex items-center gap-2 justify-center text-ThirdColor text-lg ">Go to : <Link to="/" className="underline font-bold flex items-center gap-1 text-xl flex-nowrap">My Booking <FaArrowCircleRight /></Link></div>
+                    <div className="py-4 flex items-center gap-2 justify-center text-ThirdColor text-lg ">Go to : <Link to="/dashboard/bookings" className="underline font-bold flex items-center gap-1 text-xl flex-nowrap">My Booking <FaArrowCircleRight /></Link></div>
                 </div>
             </dialog>
 

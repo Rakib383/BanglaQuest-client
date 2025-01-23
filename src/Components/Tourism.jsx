@@ -138,13 +138,13 @@ export const Tourism = () => {
                                 <div className="card rounded-md bg-base-100 w-80 shadow-xl ">
                                     <figure>
                                         <img
-                                            src={guide.photo}
+                                            src={guide.photoURL}
                                             alt="Shoes" />
                                     </figure>
                                     <div className="card-body gap-0.5 text-start text-gray-600">
                                         <h2 className="card-title">{guide.name}</h2>
-                                        <p>{guide.expertise} </p>
-                                        <p>Experience: {guide.experience} </p>
+                                        <p className='truncate'>Expertise: {guide.expertise} </p>
+                                        <p>Experience: {guide.experience} years+ </p>
                                         <Link to={`guideProfiles/${guide._id}`} className="card-actions justify-center mt-3">
                                             <button className="btn bg-SecondaryColor text-white hover:bg-ThirdColor ">See Details</button>
                                         </Link>
