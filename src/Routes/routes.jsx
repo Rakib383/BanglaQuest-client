@@ -22,6 +22,7 @@ import { ManageUsers } from "../Pages/ManageUsers";
 import { Candidates } from "../Pages/Candidates";
 import { AboutUs } from "../Pages/AboutUs";
 import { Payment } from "../Components/Payment";
+import { EditStories } from "../Pages/EditStories";
 
 
 export const router = createBrowserRouter([
@@ -67,6 +68,11 @@ export const router = createBrowserRouter([
                 path: "about",
                 element: <AboutUs />,
             },
+            {
+                path: "stories/edit/:id",
+                element: <EditStories/>
+            },
+
         ]
     },
     {
@@ -117,6 +123,7 @@ export const router = createBrowserRouter([
                 path: "payment/:id",
                 element: <Payment/>
             },
+           
 
         ]
     }

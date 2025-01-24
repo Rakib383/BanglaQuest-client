@@ -4,6 +4,7 @@ import { useContext } from "react"
 import { AuthContext } from "../provider/AuthProvider"
 import { SlCalender } from "react-icons/sl"
 import Swal from "sweetalert2"
+import { Link } from "react-router-dom"
 
 export const MyStories = () => {
     const axiosSecure = useAxiosSecure()
@@ -64,7 +65,7 @@ export const MyStories = () => {
 
                         <div className="flex gap-1 items-center justify-center "><SlCalender />Published On: {story.sharedOn}</div>
                         <div className="space-x-2 mt-3">
-                            <button className="bg-SecondaryColor text-white rounded-md font-medium px-4 py-2">Edit</button>
+                            <Link to={`/stories/edit/${story._id}`} className="bg-SecondaryColor text-white rounded-md font-medium px-4 py-2">Edit</Link>
                             <button onClick={() => handleDelete(story._id)} className="bg-red-500 text-white rounded-md font-medium px-4 py-2">Delete</button>
                         </div>
 

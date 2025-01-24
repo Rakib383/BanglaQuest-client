@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react"
 import { useAxiosSecure } from "../hooks/useAxiosSecure"
 import { AuthContext } from "../provider/AuthProvider"
 import { useQuery } from "@tanstack/react-query"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import Swal from "sweetalert2"
 
 export const CheckoutForm = () => {
 
@@ -15,6 +16,7 @@ export const CheckoutForm = () => {
     const axiosSecure = useAxiosSecure()
     const { user } = useContext(AuthContext);
     const { id } = useParams()
+    const navigate = useNavigate()
 
     const { data: bookingItem, refetch, isLoading } = useQuery({
         queryKey: ['bookingItem'],
@@ -53,7 +55,7 @@ export const CheckoutForm = () => {
             setError(error.message)
         }
         else {
-            console.log('payment method', paymentMethod)
+            // console.log('payment method', paymentMethod)
             setError("")
         }
         // confirm payment
@@ -70,16 +72,23 @@ export const CheckoutForm = () => {
             console.log('confirm error')
         }
         else {
-            console.log('payment intent', paymentIntent)
+            // console.log('payment intent', paymentIntent)
             if (paymentIntent.status === "succeeded") {
                 setTransactionId(paymentIntent.id)
                 const payment = {
                     transactionId: paymentIntent.id,
                     status: "In Review"
                 }
-               
+
                 const res = await axiosSecure.patch(`/bookings/${id}`, payment)
                 refetch()
+                Swal.fire({
+                    title: "Payment SuccessFull!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+                navigate("/dashboard/bookings")
 
             }
         }
@@ -107,9 +116,7 @@ export const CheckoutForm = () => {
                     error
                 }
             </p>
-            {
-                transactionId && <p className="text-green-600">Your transactionId :{transactionId}</p>
-            }
+
 
         </form>
     )
