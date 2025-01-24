@@ -49,7 +49,9 @@ export const PackageDetails = () => {
         data.date = formateDate
         data.package = tripTitle
         data.status = "pending"
+        data.price = parseFloat(data.price)
 
+        console.log(data)
         axiosSecure.post("/bookings", data)
             .then(() => {
                 const updateBookedPackages = bookedPackages + 1

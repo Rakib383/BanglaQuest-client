@@ -75,12 +75,17 @@ export const CheckoutForm = () => {
             // console.log('payment intent', paymentIntent)
             if (paymentIntent.status === "succeeded") {
                 setTransactionId(paymentIntent.id)
-                const payment = {
+                const paymentInfo = {
                     transactionId: paymentIntent.id,
-                    status: "In Review"
+                    status: "Success",
+                    bookingId:bookingItem._id,
+                    amount:bookingItem.price,
+                    timestamp:new Date().toISOString(),
+                    userEmail:bookingItem.email
                 }
 
-                const res = await axiosSecure.patch(`/bookings/${id}`, payment)
+                const res = await axiosSecure.patch(`/bookings/${id}`, {status:"In Review"})
+                const result = await axiosSecure.post('/payments',paymentInfo)
                 refetch()
                 Swal.fire({
                     title: "Payment SuccessFull!",
@@ -110,7 +115,7 @@ export const CheckoutForm = () => {
                     },
                 },
             }} />
-            <button className="btn btn-sm bg-SecondaryColor my-2" type="submit" disabled={!stripe || !clientSecret}>Pay</button>
+            <button className="btn btn-md bg-SecondaryColor my-2 mt-3" type="submit" disabled={!stripe || !clientSecret}>Pay</button>
             <p className="text-red-500">
                 {
                     error

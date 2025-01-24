@@ -7,43 +7,52 @@ import { useForm } from "react-hook-form"
 import Swal from "sweetalert2"
 import { Link } from "react-router-dom"
 export const AdminProfile = () => {
-     const { user } = useContext(AuthContext)
-        const axiosSecure = useAxiosSecure()
-        const {
-            register,
-            handleSubmit,
-            formState: { errors }
-        } = useForm()
-    
-        const { data: currentUser, isLoading } = useQuery({
-            queryKey: ["userProfile", user?.email],
-            queryFn: async () => {
-                const res = await axiosSecure.get(`/users/${user?.email}`);
-                return res.data;
-            },
-            enabled: !!user,
-        });
-    
-        if (isLoading || !currentUser) {
-            return <p>Loading...</p>;
+    const { user } = useContext(AuthContext)
+    const axiosSecure = useAxiosSecure()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm()
+
+    const { data: currentUser, isLoading } = useQuery({
+        queryKey: ["userProfile", user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/users/${user?.email}`);
+            return res.data;
+        },
+        enabled: !!user,
+    });
+
+    const { data: adminStats } = useQuery({
+        queryKey: ["adminStats"],
+        queryFn: async () => {
+            const res = await axiosSecure.get("/adminStats");
+            return res.data;
         }
-    
-        const onSubmit = (data) => {
-    
-            document.getElementById('my_modal_1').close()
-            axiosSecure.patch(`/users/${currentUser._id}`, data)
-                .then(() => {
-                    Swal.fire({
-                        title: "Update successful!",
-                        icon: "success",
-                        showConfirmButton: false,
-                        timer: 1000
-                    })
+        
+    });
+
+    if (isLoading || !currentUser) {
+        return <p>Loading...</p>;
+    }
+
+    const onSubmit = (data) => {
+
+        document.getElementById('my_modal_1').close()
+        axiosSecure.patch(`/users/${currentUser._id}`, data)
+            .then(() => {
+                Swal.fire({
+                    title: "Update successful!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1000
                 })
-    
-    
-    
-        }
+            })
+
+    }
+
+    console.log(adminStats)
     return (
         <div>
             <h2 className="text-xl">
@@ -81,6 +90,39 @@ export const AdminProfile = () => {
                 </div>
 
 
+            </div>
+
+            {/* stats */}
+
+            <h2 className="mt-7 md:mt-9 text-xl md:text-2xl font-bold text-PrimaryColor">Admin Dashboard Overview</h2>
+            <div className="stats stats-vertical lg:stats-horizontal shadow mt-5">
+                <div className="stat">
+                    <div className="stat-title">Total Payment</div>
+                    <div className="stat-value">{adminStats?.payment}$</div>
+                   
+                </div>
+
+                <div className="stat">
+                    <div className="stat-title">Total Tour Guides</div>
+                    <div className="stat-value">{adminStats?.totalTourGuides}</div>
+                  
+                </div>
+
+                <div className="stat">
+                    <div className="stat-title">Total Packages</div>
+                    <div className="stat-value">{adminStats?.totalPackages}</div>
+                   
+                </div>
+                <div className="stat">
+                    <div className="stat-title">Total Clients</div>
+                    <div className="stat-value">{adminStats?.totalClient}</div>
+                    
+                </div>
+                <div className="stat">
+                    <div className="stat-title">Total Stories</div>
+                    <div className="stat-value">{adminStats?.totalStories}</div>
+                   
+                </div>
             </div>
 
             {/* modal box */}
