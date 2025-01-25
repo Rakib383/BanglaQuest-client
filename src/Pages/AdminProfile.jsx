@@ -52,7 +52,7 @@ export const AdminProfile = () => {
 
     }
 
-    console.log(adminStats)
+   
     return (
         <div>
             <h2 className="text-xl">
@@ -94,8 +94,8 @@ export const AdminProfile = () => {
 
             {/* stats */}
 
-            <h2 className="mt-7 md:mt-9 text-xl md:text-2xl font-bold text-PrimaryColor">Admin Dashboard Overview</h2>
-            <div className="stats stats-vertical lg:stats-horizontal shadow mt-5">
+            <h2 className="mt-9 md:mt-16 text-xl md:text-2xl font-bold text-PrimaryColor text-center">Admin Dashboard Overview</h2>
+            <div className="stats stats-vertical lg:stats-horizontal w-full justify-center items-center shadow mt-5">
                 <div className="stat">
                     <div className="stat-title">Total Payment</div>
                     <div className="stat-value">{adminStats?.payment}$</div>

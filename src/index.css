@@ -10,3 +10,7 @@
     color:#FFB116;
     font-weight: 800;
 }
+.selected {
+    background-color: #59815b;
+    color:white;
+}

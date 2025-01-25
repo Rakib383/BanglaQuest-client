@@ -3,19 +3,34 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosSecure } from "../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
 
 export const Candidates = () => {
 
     const axiosSecure = useAxiosSecure()
+    // const [currentUsers, setCurrentUsers] = useState([])
+    const [count, setCount] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0)
+
+
+
+    const numberOfPages = Math.ceil(count / 10)
+
+    const pages = [...Array(numberOfPages).keys()];
 
     const { data: guideApplications, isLoading, refetch } = useQuery({
-        queryKey: ["guideApplications"],
+        queryKey: ["guideApplications", currentPage],
         queryFn: async () => {
-            const result = await axiosSecure.get('/guideApplications')
+            const result = await axiosSecure.get(`/guideApplications?page=${currentPage}`)
 
             return result.data
         },
     });
+
+    useEffect(() => {
+        axiosSecure.get("/countCandidate")
+            .then(res => setCount(res.data.count))
+    }, [])
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -112,6 +127,20 @@ export const Candidates = () => {
 
                     </tbody>
                 </table>
+            </div>
+
+            <div className="pagination flex justify-center space-x-2 mt-7">
+
+                <button disabled={currentPage == 0} onClick={() => { setCurrentPage(currentPage - 1) }} className="btn bg-PrimaryColor ">Prev</button>
+                <div className="join">
+                    {
+                        pages.map(page => <button onClick={() => {
+                            setCurrentPage(page);
+                        }} key={page} className={`join-item btn hover:bg-ThirdColor hover:text-white ${currentPage == page && "selected"}`}>{page + 1}</button>)
+                    }
+
+                </div>
+                <button disabled={currentPage == pages.length-1} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor ">Next</button>
             </div>
 
         </div>
