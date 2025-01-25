@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 export const Candidates = () => {
 
     const axiosSecure = useAxiosSecure()
-    // const [currentUsers, setCurrentUsers] = useState([])
     const [count, setCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
 

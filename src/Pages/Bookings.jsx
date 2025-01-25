@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../provider/AuthProvider"
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosSecure } from "../hooks/useAxiosSecure";
@@ -9,6 +9,18 @@ export const Bookings = () => {
 
     const { user } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
+    const [count, setCount] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0)
+
+    useEffect(() => {
+        axiosSecure.get(`/countBookings/${user?.email}`)
+            .then(res => setCount(res.data.count))
+    }, [currentPage])
+
+
+    const numberOfPages = Math.ceil(count / 10)
+
+    const pages = [...Array(numberOfPages).keys()];
 
     const { data: bookings, isLoading, refetch } = useQuery({
         queryKey: ["bookings"],
@@ -99,6 +111,20 @@ export const Bookings = () => {
 
                     </tbody>
                 </table>
+            </div>
+
+            <div className="pagination flex justify-center space-x-2 mt-12 md:mt-16">
+
+                <button disabled={currentPage == 0} onClick={() => { setCurrentPage(currentPage - 1) }} className="btn bg-PrimaryColor ">Prev</button>
+                <div className="join">
+                    {
+                        pages.map(page => <button onClick={() => {
+                            setCurrentPage(page);
+                        }} key={page} className={`join-item btn hover:bg-ThirdColor hover:text-white ${currentPage == page && "selected"}`}>{page + 1}</button>)
+                    }
+
+                </div>
+                <button disabled={currentPage == pages.length - 1} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor ">Next</button>
             </div>
 
         </div>

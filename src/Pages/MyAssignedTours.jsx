@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../provider/AuthProvider"
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosSecure } from "../hooks/useAxiosSecure";
@@ -8,6 +8,19 @@ export const MyAssignedTours = () => {
 
     const { user } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
+
+    const [count, setCount] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0)
+
+    useEffect(() => {
+        axiosSecure.get(`/countAssignTours/${user?.email}`)
+            .then(res => setCount(res.data.count))
+    }, [currentPage])
+
+
+    const numberOfPages = Math.ceil(count / 10)
+
+    const pages = [...Array(numberOfPages).keys()];
 
     const { data: assignedTours, isLoading, refetch } = useQuery({
         queryKey: ["assignedTours"],
@@ -94,7 +107,7 @@ export const MyAssignedTours = () => {
                                 <td className={` font-bold ${tours.status == "In Review" && "bg-blue-400"} ${tours.status == "Rejected" && "bg-red-500"} ${tours.status == "pending" && "bg-PrimaryColor"} ${tours.status == "Accepted" && "bg-SecondaryColor"}`}>{tours.status}</td>
                                 {
                                     tours.status == "pending" && <>
-                                        
+
                                         <td>
                                             <button onClick={() => handleAccept(tours._id)} className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Accept</button>
                                         </td>
@@ -122,6 +135,20 @@ export const MyAssignedTours = () => {
 
                     </tbody>
                 </table>
+            </div>
+
+            <div className="pagination flex justify-center space-x-2 mt-12 md:mt-16">
+
+                <button disabled={currentPage == 0} onClick={() => { setCurrentPage(currentPage - 1) }} className="btn bg-PrimaryColor ">Prev</button>
+                <div className="join">
+                    {
+                        pages.map(page => <button onClick={() => {
+                            setCurrentPage(page);
+                        }} key={page} className={`join-item btn hover:bg-ThirdColor hover:text-white ${currentPage == page && "selected"}`}>{page + 1}</button>)
+                    }
+
+                </div>
+                <button disabled={currentPage == pages.length - 1} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor ">Next</button>
             </div>
 
         </div>
