@@ -1,6 +1,6 @@
 
 
-# :star: BanglaQuest
+# :star: BanglaQuest(client)
 ![Project Banner](https://i.ibb.co/KLkrZXC/bangla-Quest2.png)   
 ___
 
@@ -24,7 +24,7 @@ plan their trips effectively.With its rich content and user-friendly interface, 
 - Tour Guide Applications Management: Admins can review, approve, or reject applications from candidates aspiring to become tour guides, ensuring only qualified individuals are selected.
 - Mobile-Friendly Design: Ensures accessibility and ease of use on any device, making it a reliable resource for travelers on the go.
 
-## technology
+## technologies used
 
 - React 
 - React Router

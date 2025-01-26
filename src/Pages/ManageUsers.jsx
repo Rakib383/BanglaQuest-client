@@ -56,7 +56,7 @@ export const ManageUsers = () => {
     }
 
     return (
-        <div>
+        <div className="mx-5">
             <h2 className="text-xl md:text-2xl font-bold text-ThirdColor text-center mb-5">All Users</h2>
 
             <div className="flex items-center gap-4  justify-center mb-5">

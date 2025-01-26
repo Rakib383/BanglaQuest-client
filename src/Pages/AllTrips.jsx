@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query"
-import { useAxiosPublic } from "../hooks/useAxiosPublic"
 import { Link } from "react-router-dom"
 import { FaLocationDot } from "react-icons/fa6"
+import { useAxiosSecure } from "../hooks/useAxiosSecure"
 
 export const AllTrips = () => {
 
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure =useAxiosSecure()
     const { data: packages = [] } = useQuery({
         queryKey: ['packages'],
         queryFn: async () => {
-            const res = await axiosPublic.get('/allPackages')
+            const res = await axiosSecure.get('/allPackages')
             return res.data
         }
     })

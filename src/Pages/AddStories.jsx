@@ -37,10 +37,10 @@ export const AddStories = () => {
 
 
     return (
-        <div className="max-w-2xl mx-auto mt-5">
-            <h2 className="font-black font-charm text-xl md:text-2xl text-primaryColor underline mb-3 sm:mb-4 text-center">Add Stories</h2>
+        <div className=" mt-5  px-5 md:px-8 max-w-2xl mx-auto ">
+            <h2 className="font-black  text-xl md:text-2xl text-primaryColor underline mb-3 sm:mb-4 text-center">Add Stories</h2>
 
-            <form onSubmit={handleSubmit(onSubmit)} className=" mx-auto pt-6 shadow-lg  px-6 py-8 rounded-xl bg-gradient-to-tl from-white to-SecondaryColor">
+            <form onSubmit={handleSubmit(onSubmit)} className="  pt-6 shadow-lg  px-6 py-8 rounded-xl bg-gradient-to-tl from-white to-SecondaryColor">
 
                 <div className="grid gap-6 mb-3 sm:grid-cols-2">
                     <div>

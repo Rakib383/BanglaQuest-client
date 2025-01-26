@@ -63,7 +63,7 @@ export const EditStories = () => {
     }
 
     const onSubmit = (data) => {
-      console.log(data)
+    //   console.log(data)
       
       
         axiosSecure.patch(`/allStories/${id}`, data)
@@ -74,7 +74,7 @@ export const EditStories = () => {
                     showConfirmButton: false,
                     timer: 1000
                 })
-                console.log(res.data)
+                // console.log(res.data)
                 navigate("/dashboard/myStories")
             })
     }

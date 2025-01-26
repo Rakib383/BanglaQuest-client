@@ -124,7 +124,7 @@ export const Bookings = () => {
                     }
 
                 </div>
-                <button disabled={currentPage == pages.length - 1} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor ">Next</button>
+                <button disabled={currentPage == pages.length - 1 || currentPage == 0} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor ">Next</button>
             </div>
 
         </div>

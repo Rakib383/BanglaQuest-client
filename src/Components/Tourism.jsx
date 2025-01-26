@@ -33,7 +33,7 @@ export const Tourism = () => {
         }
     })
     return (
-        <div className="w-10/12 mx-auto text-center">
+        <div className="px-3 mx-auto text-center">
             <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center">
                 <span className="text-PrimaryColor">
                     <Typewriter
@@ -57,7 +57,7 @@ export const Tourism = () => {
                         </div>
                     </div>
                 </div>
-                <p>packages and meet expert guides to make your dream trip come true.</p>
+                <p className='px-2'>packages and meet expert guides to make your dream trip come true.</p>
             </div>
             <Tabs className="mt-8" >
                 <TabList>

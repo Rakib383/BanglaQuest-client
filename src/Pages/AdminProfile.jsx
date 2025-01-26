@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import Swal from "sweetalert2"
 import { Link } from "react-router-dom"
 export const AdminProfile = () => {
-    const { user } = useContext(AuthContext)
+    const { user,updateUserProfile } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
     const {
         register,
@@ -15,7 +15,7 @@ export const AdminProfile = () => {
         formState: { errors }
     } = useForm()
 
-    const { data: currentUser, isLoading } = useQuery({
+    const { data: currentUser, isLoading,refetch } = useQuery({
         queryKey: ["userProfile", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/${user?.email}`);
@@ -40,6 +40,7 @@ export const AdminProfile = () => {
     const onSubmit = (data) => {
 
         document.getElementById('my_modal_1').close()
+        updateUserProfile(data.name,data.photoURL)
         axiosSecure.patch(`/users/${currentUser._id}`, data)
             .then(() => {
                 Swal.fire({
@@ -48,13 +49,14 @@ export const AdminProfile = () => {
                     showConfirmButton: false,
                     timer: 1000
                 })
+                refetch()
             })
 
     }
 
    
     return (
-        <div>
+        <div className="text-center  ">
             <h2 className="text-xl">
                 <span>Hi,welcome </span>
                 {
@@ -63,7 +65,7 @@ export const AdminProfile = () => {
             </h2>
             <div className="pt-7 ">
 
-                <div className="bg-ThirdColor rounded-lg shadow-lg  p-6 w-80 max-w-full text-gray-400 text-center relative">
+                <div className="bg-ThirdColor rounded-lg shadow-lg  p-6 w-80 mx-auto text-gray-400 text-center relative">
 
                     <img
                         className="w-24 h-24 mx-auto border-2 border-PrimaryColor   object-cover rounded-full p-1"

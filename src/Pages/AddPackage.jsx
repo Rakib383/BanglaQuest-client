@@ -29,7 +29,13 @@ export const AddPackage = () => {
                 reset()
             })
             .catch(err => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Data Format isn't valid",
+                  });
                 console.log(err)
+
             })
 
     }

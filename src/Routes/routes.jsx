@@ -23,6 +23,8 @@ import { Candidates } from "../Pages/Candidates";
 import { AboutUs } from "../Pages/AboutUs";
 import { Payment } from "../Components/Payment";
 import { EditStories } from "../Pages/EditStories";
+import { AdminRoute } from "./AdminRoute";
+import { Error } from "../Pages/Error";
 
 
 export const router = createBrowserRouter([
@@ -42,15 +44,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: "community",
-                element: <Community />,
+                element:<PrivateRoute> <Community /></PrivateRoute>,
             },
             {
                 path: "allTrips",
-                element: <AllTrips />,
+                element: <PrivateRoute><AllTrips /></PrivateRoute>,
             },
             {
                 path: "guideProfiles/:id",
-                element: <GuideProfile />,
+                element: <PrivateRoute><GuideProfile /></PrivateRoute>,
             },
             {
                 path: "login",
@@ -72,36 +74,40 @@ export const router = createBrowserRouter([
                 path: "stories/edit/:id",
                 element: <EditStories/>
             },
+            {
+                path:"*",
+                element:<Error/>
+            }
 
         ]
     },
     {
         path: "dashboard",
-        element: <DashBoardLayout />,
+        element: <PrivateRoute><DashBoardLayout /></PrivateRoute>,
         children: [
             {
                 path: "profile",
-                element: <Profile />
+                element: <PrivateRoute><Profile /></PrivateRoute>
             },
             {
                 path: "bookings",
-                element: <Bookings />
+                element: <PrivateRoute><Bookings /></PrivateRoute>
             },
             {
                 path: "addStories",
-                element: <AddStories />
+                element: <PrivateRoute><AddStories /></PrivateRoute>
             },
             {
                 path: "myStories",
-                element: <MyStories />
+                element:<PrivateRoute> <MyStories /></PrivateRoute>
             },
             {
                 path: "apply",
-                element: <BecomeTourGuide />
+                element: <PrivateRoute><BecomeTourGuide /></PrivateRoute>
             },
             {
                 path: "assignedTours",
-                element: <MyAssignedTours />
+                element: <PrivateRoute><MyAssignedTours /></PrivateRoute>
             },
             {
                 path: "adminProfile",
@@ -109,20 +115,24 @@ export const router = createBrowserRouter([
             },
             {
                 path: "addPackage",
-                element: <AddPackage />
+                element: <AdminRoute><AddPackage /></AdminRoute>
             },
             {
                 path: "manageUsers",
-                element: <ManageUsers />
+                element: <AdminRoute><ManageUsers /></AdminRoute>
             },
             {
                 path: "candidates",
-                element: <Candidates/>
+                element: <AdminRoute><Candidates/></AdminRoute>
             },
             {
                 path: "payment/:id",
-                element: <Payment/>
+                element: <AdminRoute><Payment/></AdminRoute>
             },
+            {
+                path:"*",
+                element:<Error/>
+            }
            
 
         ]

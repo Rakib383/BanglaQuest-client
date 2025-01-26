@@ -67,7 +67,7 @@ export const Profile = () => {
 
     return (
         <div>
-            <h2 className="text-xl">
+            <h2 className="text-xl text-center">
                 <span>Hi,welcome </span>
                 {
                     currentUser.name

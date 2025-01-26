@@ -74,10 +74,11 @@ export const DashBoardLayout = () => {
     </>
 
     return (
-        <div className="flex  mb-10">
+        <div className="flex flex-col md:flex-row  mb-10 ">
             {/* dashboard side bar */}
-            <div >
-                <div className="w-64 min-h-screen hidden md:block h-full bg-ThirdColor dashboard text-white">
+            
+                <div className="w-64 min-h-screen
+                 h-full bg-ThirdColor dashboard hidden md:block text-white">
                     <ul className="menu gap-2 pt-7">
                         {
                             navOptions
@@ -85,7 +86,7 @@ export const DashBoardLayout = () => {
                     </ul>
 
                 </div>
-                <div className="dropdown mt-4 ml-1">
+                <div className="dropdown  mt-4 ml-1">
                     <div tabIndex={0} role="button" className="btn btn-ghost md:hidden ">
                         <HiOutlineMenu className="text-2xl" />
                     </div>
@@ -100,9 +101,9 @@ export const DashBoardLayout = () => {
                     </ul>
 
                 </div>
-            </div>
+            
             {/* dashboard content */}
-            <div className="flex-1 p-8">
+            <div className=" flex-1 p-2 md:p-8">
                 <Outlet />
             </div>
 
