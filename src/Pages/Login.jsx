@@ -43,7 +43,7 @@ export const Login = () => {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
-                   
+
                 });
             })
     }
@@ -52,22 +52,20 @@ export const Login = () => {
         signInWithGoogle()
             .then((res) => {
                 const { displaName: name, email, photoURL } = res.user
-                updateUserProfile(name, photoURL)
+
+                const userInfo = { name, email, Role: "Tourist", photoURL }
+                axiosPublic.post('/users', userInfo)
                     .then(() => {
                         setUser(res.user)
-                        const userInfo = { name, email, Role: "Tourist" }
-                        axiosPublic.post('/users', userInfo)
-                            .then(() => {
-                                reset()
-                                Swal.fire({
-                                    title: "Signup successful!",
-                                    icon: "success",
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                })
-                              
-                                location.state ? navigate(location.state) : navigate("/")
-                            })
+                        reset()
+                        Swal.fire({
+                            title: "Signup successful!",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+
+                        location.state ? navigate(location.state) : navigate("/")
                     })
 
             })

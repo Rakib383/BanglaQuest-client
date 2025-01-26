@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "community",
-                element:<PrivateRoute> <Community /></PrivateRoute>,
+                element: <PrivateRoute> <Community /></PrivateRoute>,
             },
             {
                 path: "allTrips",
@@ -72,11 +72,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "stories/edit/:id",
-                element: <EditStories/>
+                element: <EditStories />
             },
             {
-                path:"*",
-                element:<Error/>
+                path: "*",
+                element: <Error />
             }
 
         ]
@@ -99,7 +99,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "myStories",
-                element:<PrivateRoute> <MyStories /></PrivateRoute>
+                element: <PrivateRoute> <MyStories /></PrivateRoute>
             },
             {
                 path: "apply",
@@ -111,7 +111,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "adminProfile",
-                element: <AdminProfile />
+                element: <AdminRoute><AdminProfile /></AdminRoute>
             },
             {
                 path: "addPackage",
@@ -123,17 +123,17 @@ export const router = createBrowserRouter([
             },
             {
                 path: "candidates",
-                element: <AdminRoute><Candidates/></AdminRoute>
+                element: <AdminRoute><Candidates /></AdminRoute>
             },
             {
                 path: "payment/:id",
-                element: <AdminRoute><Payment/></AdminRoute>
+                element: <PrivateRoute><Payment /></PrivateRoute>
             },
             {
-                path:"*",
-                element:<Error/>
+                path: "*",
+                element: <Error />
             }
-           
+
 
         ]
     }

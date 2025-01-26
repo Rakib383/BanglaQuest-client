@@ -26,11 +26,11 @@ export const Register = () => {
             .then((res) => {
                 updateUserProfile(name, photoURL)
                     .then(() => {
-
                         setUser(res.user)
-                        const userInfo = { name, email,photoURL, Role: "Tourist" }
+                        const userInfo = { name, email, photoURL, Role: "Tourist" }
                         axiosPublic.post('/users', userInfo)
                             .then(() => {
+
                                 reset()
                                 Swal.fire({
                                     title: "Signup successful!",
@@ -65,22 +65,18 @@ export const Register = () => {
         signInWithGoogle()
             .then((res) => {
                 const { displaName: name, email, photoURL } = res.user
-                updateUserProfile(name, photoURL)
+                setUser(res.user)
+                const userInfo = { name, email, Role: "Tourist",photoURL }
+                axiosPublic.post('/users', userInfo)
                     .then(() => {
-
-                        setUser(res.user)
-                        const userInfo = { name, email, Role: "Tourist" }
-                        axiosPublic.post('/users', userInfo)
-                            .then(() => {
-                                reset()
-                                Swal.fire({
-                                    title: "Signup successful!",
-                                    icon: "success",
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                })
-                                location.state ? navigate(location.state) : navigate("/")
-                            })
+                        reset()
+                        Swal.fire({
+                            title: "Signup successful!",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                        location.state ? navigate(location.state) : navigate("/")
                     })
 
             })

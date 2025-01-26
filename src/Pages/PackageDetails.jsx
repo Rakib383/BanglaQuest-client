@@ -51,7 +51,7 @@ export const PackageDetails = () => {
         data.status = "pending"
         data.price = parseFloat(data.price)
 
-        console.log(data)
+        // console.log(data)
         axiosSecure.post("/bookings", data)
             .then(() => {
                 const updateBookedPackages = bookedPackages + 1
@@ -214,7 +214,7 @@ export const PackageDetails = () => {
                                     <h2 className="card-title">{guide.name}</h2>
                                     <p className="truncate">Expertise: {guide.expertise} </p>
                                     <p>Experience: {guide.experience} years+ </p>
-                                    <Link className="btn bg-SecondaryColor text-white hover:bg-ThirdColor hover:cursor-pointer mt-3 ">See Details</Link>
+                                    <Link to={`/guideProfiles/${guide._id}`} className="btn bg-SecondaryColor text-white hover:bg-ThirdColor hover:cursor-pointer mt-3 ">See Details</Link>
                                 </div>
                             </div>
                         </SwiperSlide>)

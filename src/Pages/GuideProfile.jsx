@@ -41,12 +41,6 @@ export const GuideProfile = () => {
                     </div>
 
                 </div>
-                <div className="flex justify-center gap-4 mt-4">
-                    <button className="bg-PrimaryColor text-ThirdColor rounded-md font-medium px-4 py-2">
-                        Update
-                    </button>
-
-                </div>
             </div>
 
 

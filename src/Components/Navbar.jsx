@@ -5,19 +5,19 @@ import { useContext } from "react";
 import { useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-import { useAxiosSecure } from "../hooks/useAxiosSecure";
+import { useAxiosPublic } from "../hooks/useAxiosPublic";
 export const Navbar = () => {
   const { user, logOut } = useContext(AuthContext)
-  
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const axiosSecure = useAxiosSecure()
-  const {data:currentUser} = useQuery({
-    queryKey:["currentUser"],
-    queryFn:async () => {
-      const res=await axiosSecure.get(`/users/${user.email}`)
+  const axiosPublic = useAxiosPublic()
+  const { data: currentUser } = useQuery({
+    queryKey: ["currentUser"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/users/role/${user.email}`)
       return res.data
     },
-    enabled: !!user
+    enabled: !!user,
   })
 
   const navOptions = <>
@@ -107,7 +107,7 @@ export const Navbar = () => {
                         aria-labelledby="dropdownAvatarNameButton"
                       >
                         <li>
-                          <Link to={`/dashboard/${currentUser.Role == "Admin" ? "adminProfile" : "profile"}`}
+                          <Link to={`/dashboard/${currentUser?.Role == "Admin" ? "adminProfile" : "profile"}`}
                             href="#"
 
                             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"

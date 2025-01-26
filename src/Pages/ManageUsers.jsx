@@ -10,6 +10,7 @@ export const ManageUsers = () => {
     const axiosSecure = useAxiosSecure()
     const [search, setSearch] = useState("")
     const [currentUsers, setCurrentUsers] = useState([])
+    const [allUsers, setAllUsers] = useState([])
     const [count, setCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
 
@@ -26,12 +27,13 @@ export const ManageUsers = () => {
     useEffect(() => {
         axiosSecure.get(`/allUsers?page=${currentPage}`)
             .then(res => {
+                setAllUsers(res.data)
                 setCurrentUsers(res.data)
             })
     }, [currentPage, !search])
 
 
-    const { data: users, isLoading } = useQuery({
+    const { data: users } = useQuery({
         queryKey: ["users", search],
         queryFn: async () => {
             const url = `/users?email=${search}`
@@ -51,8 +53,15 @@ export const ManageUsers = () => {
     ]
     const handleRole = (e) => {
         const value = e.value
-        const filteredUser = users.filter(user => user.Role == value)
-        setCurrentUsers(filteredUser)
+        if (users) {
+
+            const filteredUser = users.filter(user => user.Role == value)
+            setCurrentUsers(filteredUser)
+        }
+        else {
+            const filteredUser = allUsers.filter(user => user.Role == value)
+            setCurrentUsers(filteredUser)
+        }
     }
 
     return (
@@ -125,7 +134,7 @@ export const ManageUsers = () => {
                     }
 
                 </div>
-                <button disabled={currentPage == pages.length-1} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor ">Next</button>
+                <button disabled={currentPage == pages.length - 1} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor ">Next</button>
             </div>
 
 
