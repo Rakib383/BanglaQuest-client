@@ -56,7 +56,7 @@ Ensure you have **Node.js** and **npm** installed on your system.
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/yourusername/tourist-guide.git
+git clone https://github.com/Rakib383/BanglaQuest-client.git
 cd tourist-guide
 ```
 
@@ -93,13 +93,3 @@ This will start the application in development mode.
 ```sh
 npm run build
 ```
-
-### Preview Production Build
-
-```sh
-npm run preview
-```
-
-## License
-
-This project is licensed under the **MIT License**.
