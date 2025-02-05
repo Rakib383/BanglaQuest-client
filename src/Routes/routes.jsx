@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
             {
                 path: "packages/:id",
                 element: <PrivateRoute><PackageDetails /></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/allPackages/${params.id}`)
+                loader: ({ params }) => fetch(`https://bangla-quest-server.vercel.app/allPackages/${params.id}`)
 
             },
             {
