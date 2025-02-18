@@ -38,7 +38,8 @@ export const Register = () => {
                                     showConfirmButton: false,
                                     timer: 1000
                                 })
-                                location.state ? navigate(location.state) : navigate("/")
+
+                                navigate("/")
                             })
                     })
 
@@ -66,7 +67,7 @@ export const Register = () => {
             .then((res) => {
                 const { displaName: name, email, photoURL } = res.user
                 setUser(res.user)
-                const userInfo = { name, email, Role: "Tourist",photoURL }
+                const userInfo = { name, email, Role: "Tourist", photoURL }
                 axiosPublic.post('/users', userInfo)
                     .then(() => {
                         reset()
@@ -76,7 +77,7 @@ export const Register = () => {
                             showConfirmButton: false,
                             timer: 1000
                         })
-                        location.state ? navigate(location.state) : navigate("/")
+                        navigate("/")
                     })
 
             })

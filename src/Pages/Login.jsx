@@ -31,6 +31,7 @@ export const Login = () => {
                     showConfirmButton: false,
                     timer: 1000
                 })
+
                 location.state ? navigate(location.state) : navigate("/")
             })
             .catch(err => {
