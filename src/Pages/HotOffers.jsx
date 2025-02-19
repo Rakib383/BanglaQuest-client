@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import offers from "../assets/Images/offers2.png"
+
 import { useAxiosPublic } from "../hooks/useAxiosPublic"
 import { FaLocationDot } from "react-icons/fa6"
 import { Link } from "react-router-dom"
@@ -9,7 +9,7 @@ import { useState } from "react"
 const HotOffers = () => {
 
     const axiosPublic = useAxiosPublic()
-    const [showPopup, setShowPopup] = useState(true)
+   
 
     const { data: hotPackages = [] } = useQuery({
         queryKey: ['hotPackages'],
@@ -21,32 +21,7 @@ const HotOffers = () => {
 
     return (
         <div className="pt-20 md:pt-28">
-          {
-              showPopup && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="bg-SecondaryColor rounded-lg  shadow-lg text-center relative  w-4/5 max-w-md">
-                        {/* Close Button */}
-                        <button
-                            className="absolute top-2 right-2 bg-gray-200 hover:bg-gray-300 text-black rounded-full w-6 h-6 flex items-center justify-center"
-                            onClick={() => setShowPopup(false)}
-                        >
-                            ✖
-                        </button>
-    
-                        {/* Popup Content */}
-                        <img
-                            src={offers}
-                            alt="Discount Offer"
-                            className="w-full rounded-md "
-                        />
-                        <h2 className="text-xl font-bold text-PrimaryColor">Limited Time Offer!</h2>
-                        <p className="text-white mt-2">Get Up to <span className="font-bold text-lg"> 30% OFF</span> on your first booking.</p>
-                        <button onClick={() => setShowPopup(false)} className=" bg-PrimaryColor my-2 mb-4 hover:bg-yellow-500  text-white font-semibold py-2 px-4 rounded">
-                            Grab the Deal
-                        </button>
-                    </div>
-                </div>)
-          }
+        
             <h2 className="text-xl mt-6  font-bold text-ThirdColor text-center items-center justify-center md:text-2xl flex gap-1 ">Discover Unbeatable Travel <p className="bg-SecondaryColor px-2 py-2 rounded-full text-white rotate-12 w-fit">Deals</p></h2>
             <p className=" md:text-lg text-center   ">Experience the thrill of new destinations with our exclusive offers.</p>
 
