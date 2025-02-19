@@ -2,11 +2,13 @@ import { useQuery } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
 import { FaLocationDot } from "react-icons/fa6"
 import { useAxiosSecure } from "../hooks/useAxiosSecure"
+import { useEffect, useState } from "react"
 
 export const AllTrips = () => {
 
-    const axiosSecure =useAxiosSecure()
-    const { data: packages = [] } = useQuery({
+    const axiosSecure = useAxiosSecure()
+    const [sortedPackages, setSortedPackages] = useState([])
+    const { data: packages,isLoading } = useQuery({
         queryKey: ['packages'],
         queryFn: async () => {
             const res = await axiosSecure.get('/allPackages')
@@ -14,15 +16,42 @@ export const AllTrips = () => {
         }
     })
 
+    useEffect(() => {
+        setSortedPackages(packages)
+    }, [packages])
+
+    const handleSorting = (e) => {
+        const sortBy = e.target.value;
+        let sorted = [...packages]
+        if (sortBy === "Price (Low to High)") {
+            sorted.sort((a, b) => a.price - b.price)
+        } else {
+            sorted.sort((a, b) => b.price - a.price)
+        }
+
+        setSortedPackages(sorted)
+
+    }
+
     return (
 
-        <div className="pt-32 text-center md:pb-5">
+        <div className="pt-32 text-center md:pb-5 min-h-screen">
             <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center">Trips for Every Traveler</h2>
-            <p className='mt-2 px-4'>Explore all our trip options and embark on the journey of your dreams.</p> 
-            {/* package container */}
-            <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-8 md:mb-12 my-7 px-4'>
+            <p className='mt-2 px-4'>Explore all our trip options and embark on the journey of your dreams.</p>
+            {/* sort by price */}
+            <select onChange={handleSorting} defaultValue="Sort By" className="select border text-center w-40 h-10 min-h-10 border-black mt-4">
+                <option disabled={true}>Sort By </option>
+                <option className="text-start">Price (Low to High)</option>
+                <option className="text-start ">Price (High to Low)</option>
+
+            </select>
+
+            {
+                isLoading ?   <div className="h-44 flex justify-center items-center ">
+               <span className="loading loading-bars loading-xl"></span>
+            </div> : <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-8 md:mb-12 my-7 md:px-8 max-w-6xl mx-auto px-4'>
                 {
-                    packages?.map((pack,id) => (
+                    sortedPackages?.map((pack, id) => (
                         <div key={id} className="card bg-base-100 w-80 shadow-xl relative py-3">
                             <figure className='relative h-[180px] w-full' >
                                 <img
@@ -49,6 +78,9 @@ export const AllTrips = () => {
                     ))
                 }
             </div>
+            }
+           
+            
         </div>
     )
 }
