@@ -25,6 +25,7 @@ import { Payment } from "../Components/Payment";
 import { EditStories } from "../Pages/EditStories";
 import { AdminRoute } from "./AdminRoute";
 import { Error } from "../Pages/Error";
+import HotOffers from "../Pages/hotOffers";
 
 
 export const router = createBrowserRouter([
@@ -39,7 +40,7 @@ export const router = createBrowserRouter([
             {
                 path: "packages/:id",
                 element: <PrivateRoute><PackageDetails /></PrivateRoute>,
-                loader: ({ params }) => fetch(`https://bangla-quest-server.vercel.app/allPackages/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/allPackages/${params.id}`)
 
             },
             {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
             {
                 path: "stories/edit/:id",
                 element: <EditStories />
+            },
+            {
+                path: "hot-offers",
+                element: <HotOffers />
             },
             {
                 path: "*",

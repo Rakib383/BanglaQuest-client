@@ -8,7 +8,7 @@
 @tailwind utilities;
 .active {
     color:#FFB116;
-    font-weight: 800;
+    font-weight: 600;
 }
 .selected {
     background-color: #59815b;

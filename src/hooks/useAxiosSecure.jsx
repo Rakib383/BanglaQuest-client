@@ -5,7 +5,7 @@ import axios from "axios"
 
 
 const axiosSecure = axios.create({
-    baseURL: "https://bangla-quest-server.vercel.app/"
+    baseURL: "http://localhost:5000/"
 })
 export const useAxiosSecure = () => {
     const { logOut } = useContext(AuthContext)

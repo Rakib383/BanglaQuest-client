@@ -26,7 +26,7 @@ export const Navbar = () => {
     <li><NavLink to="/">Home</NavLink></li>
     <li><NavLink to="/allTrips">Trips</NavLink></li>
     <li><NavLink to="/community">Community</NavLink></li>
-    <li><NavLink to="/hot-offers">Hot Offers</NavLink></li>
+    <li className="text-nowrap"><NavLink to="/hot-offers">Hot Offers</NavLink></li>
     <li className="text-nowrap"><NavLink to="/about">About Us</NavLink></li>
   </>
 
