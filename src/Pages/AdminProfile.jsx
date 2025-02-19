@@ -6,6 +6,7 @@ import { useAxiosSecure } from "../hooks/useAxiosSecure"
 import { useForm } from "react-hook-form"
 import Swal from "sweetalert2"
 import { Link } from "react-router-dom"
+
 export const AdminProfile = () => {
     const { user,updateUserProfile } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
@@ -33,9 +34,6 @@ export const AdminProfile = () => {
         
     });
 
-    if (isLoading || !currentUser) {
-        return <p>Loading...</p>;
-    }
 
     const onSubmit = (data) => {
 
@@ -60,7 +58,7 @@ export const AdminProfile = () => {
             <h2 className="text-xl">
                 <span>Hi,welcome </span>
                 {
-                    currentUser.name
+                    currentUser?.name
                 }
             </h2>
             <div className="pt-7 ">
@@ -69,13 +67,13 @@ export const AdminProfile = () => {
 
                     <img
                         className="w-24 h-24 mx-auto border-2 border-PrimaryColor   object-cover rounded-full p-1"
-                        src={user.photoURL}
+                        src={user?.photoURL}
                         alt="currentUser"
                     />
-                    <h3 className="text-lg text-white font-medium mt-4">{currentUser.name}</h3>
-                    <h6 className="text-sm text-gray-400 capitalize">Email: {currentUser.email}</h6>
+                    <h3 className="text-lg text-white font-medium mt-4">{currentUser?.name}</h3>
+                    <h6 className="text-sm text-gray-400 capitalize">Email: {currentUser?.email}</h6>
                     <p className="text-sm mt-2 leading-2">
-                        Role:{currentUser.Role}
+                        Role:{currentUser?.Role}
                     </p>
 
                     <div className="flex justify-center gap-4 mt-4">
@@ -83,7 +81,7 @@ export const AdminProfile = () => {
                             Edit
                         </button>
                         {
-                            currentUser.Role === "Tourist" && <Link to="/dashboard/apply" className="bg-PrimaryColor text-ThirdColor rounded-md font-medium px-4 py-2">
+                            currentUser?.Role === "Tourist" && <Link to="/dashboard/apply" className="bg-PrimaryColor text-ThirdColor rounded-md font-medium px-4 py-2">
                                 Apply For Tour Guide
                             </Link>
                         }
@@ -94,38 +92,7 @@ export const AdminProfile = () => {
 
             </div>
 
-            {/* stats */}
-
-            <h2 className="mt-9 md:mt-16 text-xl md:text-2xl font-bold text-PrimaryColor text-center">Admin Dashboard Overview</h2>
-            <div className="stats stats-vertical lg:stats-horizontal w-full justify-center items-center shadow mt-5">
-                <div className="stat">
-                    <div className="stat-title">Total Payment</div>
-                    <div className="stat-value">{adminStats?.payment}$</div>
-                   
-                </div>
-
-                <div className="stat">
-                    <div className="stat-title">Total Tour Guides</div>
-                    <div className="stat-value">{adminStats?.totalTourGuides}</div>
-                  
-                </div>
-
-                <div className="stat">
-                    <div className="stat-title">Total Packages</div>
-                    <div className="stat-value">{adminStats?.totalPackages}</div>
-                   
-                </div>
-                <div className="stat">
-                    <div className="stat-title">Total Clients</div>
-                    <div className="stat-value">{adminStats?.totalClient}</div>
-                    
-                </div>
-                <div className="stat">
-                    <div className="stat-title">Total Stories</div>
-                    <div className="stat-value">{adminStats?.totalStories}</div>
-                   
-                </div>
-            </div>
+            
 
             {/* modal box */}
             <dialog id="my_modal_1" className="modal ">
@@ -144,7 +111,7 @@ export const AdminProfile = () => {
 
                                         type="text"
                                         name="name"
-                                        defaultValue={currentUser.name}
+                                        defaultValue={currentUser?.name}
                                         {...register("name", { required: true })}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="name"
@@ -160,7 +127,7 @@ export const AdminProfile = () => {
                                     <input
                                         {...register("email", { required: true })}
                                         type="email"
-                                        value={currentUser.email}
+                                        value={currentUser?.email}
                                         name="email"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="email"
@@ -176,7 +143,7 @@ export const AdminProfile = () => {
                                         {...register("photoURL", { required: true })}
                                         type="url"
                                         name="photoURL"
-                                        defaultValue={currentUser.photoURL}
+                                        defaultValue={currentUser?.photoURL}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="ImageURL"
                                         required
@@ -191,7 +158,7 @@ export const AdminProfile = () => {
                                     <input
                                         {...register("Role", { required: true })}
                                         type="text"
-                                        value={currentUser.Role}
+                                        value={currentUser?.Role}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="Role"
                                         required

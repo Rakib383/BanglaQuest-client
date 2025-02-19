@@ -9,6 +9,8 @@ import { useAxiosSecure } from "../hooks/useAxiosSecure"
 import { AiOutlinePlusSquare } from "react-icons/ai"
 import { FiUsers } from "react-icons/fi"
 import { HiOutlineMenu } from "react-icons/hi"
+import { Loading } from "../Components/Loding"
+import { FcStatistics } from "react-icons/fc";
 
 export const DashBoardLayout = () => {
     const axiosSecure = useAxiosSecure()
@@ -25,48 +27,52 @@ export const DashBoardLayout = () => {
     })
 
     if (isLoading || !user) {
-        return <p>Loading...</p>;
+        return <Loading/>
     }
 
     const navOptions = <>
-        <li className="lg:text-lg"><NavLink to="/"><IoHomeOutline size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Home</span></NavLink></li>
+        <li className="lg:text-base"><NavLink to="/"><IoHomeOutline size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Home</span></NavLink></li>
         {
             currentUser.Role === "Tourist" && <>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/profile"><CgProfile size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Profile</span></NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/profile"><CgProfile size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Profile</span></NavLink></li>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/bookings"><FaClipboardList size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">My Bookings</span> </NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/bookings"><FaClipboardList size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">My Bookings</span> </NavLink></li>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/myStories"><FaPenNib size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Stories</span></NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/myStories"><FaPenNib size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Stories</span></NavLink></li>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/addStories"><FaPen size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Add Stories</span></NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/addStories"><FaPen size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Add Stories</span></NavLink></li>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/apply"><FaUserPlus size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Join as tour guide</span></NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/apply"><FaUserPlus size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Join as tour guide</span></NavLink></li>
             </>
         }
         {
             currentUser.Role === "Tour Guide" && <>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/profile"><CgProfile size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Profile</span></NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/profile"><CgProfile size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Profile</span></NavLink></li>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/assignedTours"><FaClipboardList size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">My Assigned Tours</span> </NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/assignedTours"><FaClipboardList size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">My Assigned Tours</span> </NavLink></li>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/addStories"><FaPenNib size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Add Stories</span></NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/addStories"><FaPenNib size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Add Stories</span></NavLink></li>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/myStories"><FaPen size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Stories</span></NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/myStories"><FaPen size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Stories</span></NavLink></li>
 
             </>
         }
         {
             currentUser.Role === "Admin" && <>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/adminProfile"><CgProfile size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Profile</span></NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/adminProfile"><CgProfile size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Profile</span></NavLink></li>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/addPackage"><AiOutlinePlusSquare size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Add Package</span> </NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/statistics"><FcStatistics size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Statistics</span></NavLink></li>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/manageUsers"><FiUsers size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Users</span></NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/addPackage"><AiOutlinePlusSquare size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Add Package</span> </NavLink></li>
 
-                <li className="lg:text-lg"><NavLink to="/dashboard/candidates"><FaUserTie size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Candidates</span></NavLink></li>
+                <li className="lg:text-base"><NavLink to="/dashboard/addStories"><FaPen size={18} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Add Stories</span></NavLink></li>
+
+                <li className="lg:text-base"><NavLink to="/dashboard/manageUsers"><FiUsers size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Users</span></NavLink></li>
+
+                <li className="lg:text-base"><NavLink to="/dashboard/candidates"><FaUserTie size={20} className="text-SecondaryColor" /><span className="hover:text-PrimaryColor ">Manage Candidates</span></NavLink></li>
 
             </>
         }
@@ -78,7 +84,7 @@ export const DashBoardLayout = () => {
             {/* dashboard side bar */}
             
                 <div className="w-64 min-h-screen
-                 h-full bg-ThirdColor dashboard hidden md:block text-white">
+                 h-full bg-ThirdColor dashboard hidden md:block text-white fixed left-0 top-0 ">
                     <ul className="menu gap-2 pt-7">
                         {
                             navOptions
@@ -103,7 +109,7 @@ export const DashBoardLayout = () => {
                 </div>
             
             {/* dashboard content */}
-            <div className=" flex-1 p-2 md:p-8">
+            <div className=" flex-1 p-2 md:p-8 md:ml-64">
                 <Outlet />
             </div>
 

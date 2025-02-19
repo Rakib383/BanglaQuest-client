@@ -79,7 +79,7 @@ export const Navbar = () => {
           </ul>
           {
             user ?
-              <div className="relative" >
+              <div className="relative shrink-0 " >
                 <button
 
                   onClick={() => toggleDropdown()}
@@ -112,7 +112,7 @@ export const Navbar = () => {
 
                   >
                     <li>
-                      <Link to={`/dashboard/${currentUser?.Role == "Admin" ? "adminProfile" : "profile"}`}
+                      <Link to={`/dashboard/${currentUser?.Role == "Admin" ? "statistics" : "profile"}`}
                         href="#"
 
                         className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"

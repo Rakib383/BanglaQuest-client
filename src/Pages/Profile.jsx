@@ -7,9 +7,9 @@ import { useForm } from "react-hook-form"
 import Swal from "sweetalert2"
 import { Link } from "react-router-dom"
 import moment from "moment"
-import { FaPencilAlt } from "react-icons/fa"
 import { FaLocationDot } from "react-icons/fa6"
 import { SlCalender } from "react-icons/sl"
+import emptyIcon from "../assets/Images/emptyContent.png"
 
 
 export const Profile = () => {
@@ -197,6 +197,13 @@ export const Profile = () => {
 
                 {/* container */}
                 <div className="mt-8 flex gap-6 flex-col  flex-wrap justify-center items-center ">
+
+                    {
+                        stories.length === 0 && <div className="flex flex-col items-center justify-center" >
+                            <img className="w-28 md:w-36" src={emptyIcon} alt="" />
+                            <h4 className="mt-4">You haven't  added any stories yet.</h4>
+                             </div>
+                    }
 
                     {
                         stories.map((story, idx) => <div className={`flex flex-col  my-4 gap-4 items-center justify-center ${idx % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"} `} key={idx}>

@@ -26,6 +26,7 @@ import { EditStories } from "../Pages/EditStories";
 import { AdminRoute } from "./AdminRoute";
 import { Error } from "../Pages/Error";
 import HotOffers from "../Pages/hotOffers";
+import Statistics from "../Pages/Statistics";
 
 
 export const router = createBrowserRouter([
@@ -117,6 +118,10 @@ export const router = createBrowserRouter([
             {
                 path: "adminProfile",
                 element: <AdminRoute><AdminProfile /></AdminRoute>
+            },
+            {
+                path: "statistics",
+                element: <AdminRoute><Statistics/></AdminRoute>
             },
             {
                 path: "addPackage",
