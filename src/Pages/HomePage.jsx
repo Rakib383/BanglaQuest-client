@@ -7,6 +7,7 @@ import { Stories } from "../Components/Stories"
 import { Tourism } from "../Components/Tourism"
 import offers from "../assets/Images/offers2.png"
 import { Link } from "react-router-dom"
+import Reviews from "../Components/Reviews"
 
 export const HomePage = () => {
     const [showPopup, setShowPopup] = useState(false)
@@ -52,6 +53,7 @@ export const HomePage = () => {
             <Tourism />
             <Info />
             <Stories />
+            <Reviews/>
             <NewsLetter />
 
         </>
