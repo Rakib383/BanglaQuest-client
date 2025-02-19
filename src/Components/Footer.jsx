@@ -2,6 +2,7 @@ import logo from "../assets/Images/BanglaQuest.png"
 import { FaTwitterSquare } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 export const Footer = () => {
     return (
         <div className="pb-5 bg-gradient-to-t from-SecondaryColor to-white text-center ">
@@ -19,18 +20,18 @@ export const Footer = () => {
                 </aside>
                 <nav className="flex justify-around gap-8  sm:w-3/5">
                     <div className="flex flex-col">
-                        <h6 className="footer-title">Services</h6>
-                        <a className="link link-hover">Tour Packages</a>
-                        <a className="link link-hover">Tour Guide</a>
-                        <a className="link link-hover">Travel Planning</a>
-                        <a className="link link-hover">Customer Support</a>
+                        <h6 className="footer-title">Quick Links</h6>
+                        <Link to="/allTrips" className="link link-hover">All Packages</Link>
+                        <Link to="/community" className="link link-hover">Community</Link>
+                        <Link to="/hot-offers" className="link link-hover">Hot Offers</Link>
+                        <Link to="/about" className="link link-hover">About Us</Link>
                     </div>
                     <div className="flex flex-col">
-                        <h6 className="footer-title">Company</h6>
-                        <a className="link link-hover">About us</a>
-                        <a className="link link-hover">Contact</a>
-                        <a className="link link-hover">Our Team</a>
-                        <a className="link link-hover">FAQs</a>
+                        <h6 className="footer-title">Services</h6>
+                        <Link to="/dashboard/bookings" className="link link-hover">My Bookings</Link>
+                        <Link to="/dashboard/myStories" className="link link-hover">Manage Stories</Link>
+                        <Link to="/dashboard/addStories" className="link link-hover">Add Stories</Link>
+                        <Link to="/dashboard/apply" className="link link-hover">Join as Tour Guide</Link>
                     </div>
                 </nav>
 
