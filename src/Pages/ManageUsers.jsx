@@ -65,18 +65,18 @@ export const ManageUsers = () => {
     }
 
     return (
-        <div className="mx-5">
-            <h2 className="text-xl md:text-2xl font-bold text-ThirdColor text-center mb-5">All Users</h2>
+        <div className="mx-5 dark:text-gray-300">
+            <h2 className="text-xl md:text-2xl font-bold text-ThirdColor dark:text-white text-center mb-5">All Users</h2>
 
             <div className="flex items-center gap-4  justify-center mb-5">
-                <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search By Email" className="input input-bordered sm:w-full h-10  max-w-xs" />
-                <Select onChange={handleRole} placeholder="Search By Role" options={options} />
+                <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search By Email" className="input input-bordered sm:w-full h-10 bg-white dark:bg-gray-600 dark:text-white outline-1 outline  max-w-xs" />
+                <Select className=" dark:text-black " onChange={handleRole} placeholder="Search By Role" options={options} />
             </div>
 
             <div className="overflow-x-auto">
-                <table className="table table-zebra">
+                <table className="table dark:table-zebra">
                     {/* head */}
-                    <thead>
+                    <thead className="dark:text-white">
                         <tr>
                             <th>#</th>
 
@@ -124,7 +124,7 @@ export const ManageUsers = () => {
 
             <div className="pagination flex justify-center space-x-2 mt-7">
 
-                <button disabled={currentPage == 0} onClick={() => { setCurrentPage(currentPage - 1) }} className="btn bg-PrimaryColor ">Prev</button>
+                <button disabled={currentPage == 0} onClick={() => { setCurrentPage(currentPage - 1) }} className="btn bg-PrimaryColor dark:text-black text-white  disabled:text-gray-500 ">Prev</button>
                 <div className="join">
                     {
                         pages.map(page => <button onClick={() => {
@@ -134,7 +134,7 @@ export const ManageUsers = () => {
                     }
 
                 </div>
-                <button disabled={currentPage == pages.length - 1} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor ">Next</button>
+                <button disabled={currentPage == pages.length - 1} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor dark:hover:bg-white text-white  dark:text-black ">Next</button>
             </div>
 
 

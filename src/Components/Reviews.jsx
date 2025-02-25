@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Rating } from 'react-simple-star-rating'
+// import { Rating } from 'react-simple-star-rating'
 // import required modules
 import { Autoplay } from 'swiper/modules';
 
@@ -29,7 +29,7 @@ const demoData = [
         "userName": "Mehide Hasan",
         "userPhoto": "https://i.ibb.co/7JwM0xC1/review3.jpg",
         "rating": 5,
-        "reviewText": "Everything about this experience was perfect! From the first day to the last, I felt completely taken care of. The team was incredibly professional, and they went above and beyond to ensure we had a great time. The destinations were breathtaking, and I truly enjoyed every moment. I will definitely be recommending this to all my friends!"
+        "reviewText": "Everything about this experience was perfect! From the first day to the last, I felt completely taken care of. The team was incredibly professional, and they went above and beyond to ensure we had a great time. The destinations were breathtaking, and I truly enjoyed every moment.Can’t wait for the next one! I will definitely be recommending this to all my friends!"
     },
     {
         "userName": "Samia chowdhury ",
@@ -43,8 +43,8 @@ const Reviews = () => {
 
 
     return (
-        <div className="text-center mt-10">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center" >Customer Reviews & Experiences</h2>
+        <div className="text-center mt-10 dark:text-gray-300">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center dark:text-white" >Customer Reviews & Experiences</h2>
             <p className='mt-2 px-3'>Hear from our happy customers! See what they have to say about our services and exclusive offers.</p>
 
 
@@ -80,19 +80,19 @@ const Reviews = () => {
                 >
                     {
                         demoData.map((review, idx) => <SwiperSlide className='mb-10' key={idx}>
-                            <div className="card rounded-md bg-base-100 w-80  relative">
-                                <div className="card-body gap-0.5  text-gray-600 text-center shadow-lg">
+                            <div className="card rounded-md bg-gray-200 w-80 dark:bg-gray-100 relative ">
+                                <div className="card-body gap-0.5  text-gray-600 text-center shadow-lg mb-1">
 
                                     <p>{review.reviewText}</p>
-                                    <Rating
+                                    {/* <Rating
                                         initialValue={review.rating}
                                         readonly={true}
                                        
                                         size={20}
                                         allowFraction={true}
-                                    />
+                                    /> */}
                                     <h3 className='text-lg font-bold'>{review.userName}</h3>
-                                    <p>Traveller</p>
+                                    <p >Traveller</p>
 
                                 </div>
                                 

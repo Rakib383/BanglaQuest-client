@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query"
-
 import { useAxiosPublic } from "../hooks/useAxiosPublic"
 import { FaLocationDot } from "react-icons/fa6"
 import { Link } from "react-router-dom"
-import { useState } from "react"
+
 
 
 const HotOffers = () => {
@@ -20,9 +19,9 @@ const HotOffers = () => {
     })
 
     return (
-        <div className="pt-20 md:pt-28">
+        <div className="pt-20 md:pt-28 dark:text-gray-300">
         
-            <h2 className="text-xl mt-6  font-bold text-ThirdColor text-center items-center justify-center md:text-2xl flex gap-1 ">Discover Unbeatable Travel <p className="bg-SecondaryColor px-2 py-2 rounded-full text-white rotate-12 w-fit">Deals</p></h2>
+            <h2 className="text-xl mt-6  font-bold text-ThirdColor text-center items-center justify-center md:text-2xl flex gap-1 dark:text-white">Discover Unbeatable Travel <p className="bg-SecondaryColor px-2 py-2 rounded-full text-white rotate-12 w-fit">Deals</p></h2>
             <p className=" md:text-lg text-center   ">Experience the thrill of new destinations with our exclusive offers.</p>
 
             <div>
@@ -31,8 +30,8 @@ const HotOffers = () => {
                 <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-12 md:mb-12 my-7 px-4'>
                     {
                         hotPackages?.map((pack, id) => (
-                            <div key={id} className="card bg-base-100 w-80 shadow-xl relative py-3">
-                                <figure className='relative h-[180px] w-full' >
+                            <div key={id} className="card  w-80 shadow-xl bg-white relative pb-3">
+                                <figure className='relative h-[190px] w-full' >
                                     <img
                                         src={pack.coverPhoto}
                                         alt="" className='h-full w-full' />

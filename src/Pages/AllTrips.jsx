@@ -35,11 +35,11 @@ export const AllTrips = () => {
 
     return (
 
-        <div className="pt-32 text-center md:pb-5 min-h-screen">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center">Trips for Every Traveler</h2>
+        <div className="pt-32 text-center md:pb-5 min-h-screen dark:text-gray-300">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center dark:text-white">Trips for Every Traveler</h2>
             <p className='mt-2 px-4'>Explore all our trip options and embark on the journey of your dreams.</p>
             {/* sort by price */}
-            <select onChange={handleSorting} defaultValue="Sort By" className="select border text-center w-40 h-10 min-h-10 border-black mt-4">
+            <select onChange={handleSorting} defaultValue="Sort By" className="select border text-center w-40 h-10 min-h-10 border-black focus:outline-black dark:focus:outline-white dark:border-white bg-white dark:bg-black mt-4">
                 <option disabled={true}>Sort By </option>
                 <option className="text-start">Price (Low to High)</option>
                 <option className="text-start ">Price (High to Low)</option>
@@ -49,11 +49,11 @@ export const AllTrips = () => {
             {
                 isLoading ?   <div className="h-44 flex justify-center items-center ">
                <span className="loading loading-bars loading-xl"></span>
-            </div> : <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-8 md:mb-12 my-7 md:px-8 max-w-6xl mx-auto px-4'>
+            </div> : <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-12 md:mb-12 my-7 md:px-8 max-w-6xl mx-auto px-4'>
                 {
                     sortedPackages?.map((pack, id) => (
-                        <div key={id} className="card bg-base-100 w-80 shadow-xl relative py-3">
-                            <figure className='relative h-[180px] w-full' >
+                        <div key={id} className="card  dark:bg-white w-80 shadow-xl relative pb-3">
+                            <figure className='relative h-[190px] w-full' >
                                 <img
                                     src={pack.coverPhoto}
                                     alt="" className='h-full w-full' />

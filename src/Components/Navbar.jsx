@@ -1,15 +1,18 @@
 import { Link, NavLink } from "react-router-dom"
 import { HiOutlineMenu } from "react-icons/hi";
 import logo from "../assets/Images/BanglaQuest.png"
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosPublic } from "../hooks/useAxiosPublic";
 import { RxCross1 } from "react-icons/rx";
+import { Tooltip } from 'react-tooltip'
+import { CiLight } from "react-icons/ci";
+import { MdDarkMode } from "react-icons/md";
 export const Navbar = () => {
   const { user, logOut } = useContext(AuthContext)
-
+  const [isLight, setIsLight] = useState(true)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const axiosPublic = useAxiosPublic()
   const { data: currentUser } = useQuery({
@@ -20,7 +23,7 @@ export const Navbar = () => {
     },
     enabled: !!user,
   })
-
+// console.log(isLight);
 
   const navOptions = <>
     <li><NavLink to="/">Home</NavLink></li>
@@ -34,8 +37,42 @@ export const Navbar = () => {
     setIsDropdownOpen(!isDropdownOpen);
 
   };
+
+  const htmlTag = document.documentElement
+  
+  useEffect(() => {
+    let getIsLight =sessionStorage.getItem("isLight")
+    // console.log(isLight);
+    if(getIsLight) {
+      getIsLight = JSON.parse(getIsLight)
+       setIsLight(getIsLight)
+       if (!getIsLight) {
+        sessionStorage.setItem("isLight","false")
+      return htmlTag.classList.add('dark')
+         
+      }
+      
+      sessionStorage.setItem("isLight","true")
+      return htmlTag.classList.remove('dark')
+       
+    }
+
+  },[])
+
+  const handleDarkMode = () => {
+    setIsLight(!isLight)
+    
+    if (!isLight) {
+      sessionStorage.setItem("isLight","true")
+        return htmlTag.classList.remove('dark')
+    }
+    htmlTag.classList.add('dark')
+    sessionStorage.setItem("isLight","false")
+}
+
+  
   return (
-    <div className=" fixed w-full z-50 bg-gray-300/50 backdrop-blur-lg ">
+    <div className=" fixed w-full z-50 bg-gray-300/50 dark:bg-black/60 dark:border-b  border-b-slate-700  backdrop-blur-lg ">
       <div className="navbar px-4 md:px-6 py-2 max-w-7xl mx-auto rounded-md">
         <div className="navbar-start">
           <div className="dropdown">
@@ -44,7 +81,7 @@ export const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+              className="menu menu-sm dropdown-content bg-white dark:bg-black rounded-box z-[1] mt-3 w-52 p-2 shadow">
               {
                 navOptions
               }
@@ -57,7 +94,7 @@ export const Navbar = () => {
           <Link className="hidden md:block" to="/" >
             <div className="flex items-end">
               <img src={logo} className="w-16" alt="" />
-              <p className=" text-3xl font-fresh text-[#FFB116] "><span className="text-[#0F1325] text-2xl">Bangla</span>Quest</p>
+              <p className=" text-3xl font-fresh text-[#FFB116] "><span className="text-[#0F1325] dark:text-white text-2xl">Bangla</span>Quest</p>
             </div>
           </Link>
         </div>
@@ -66,7 +103,7 @@ export const Navbar = () => {
           <Link to="/" >
             <div className="flex items-end">
               <img src={logo} className="w-12" alt="" />
-              <p className=" text-3xl font-fresh text-[#FFB116] "><span className="text-[#0F1325] text-2xl">Bangla</span>Quest</p>
+              <p className=" text-3xl font-fresh text-[#FFB116] "><span className="text-[#0F1325] dark:text-white text-2xl">Bangla</span>Quest</p>
             </div>
           </Link>
         </div>
@@ -77,67 +114,90 @@ export const Navbar = () => {
               navOptions
             }
           </ul>
-          {
-            user ?
-              <div className="relative shrink-0 " >
-                <button
 
-                  onClick={() => toggleDropdown()}
-                  className="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full   md:me-0   dark:text-white"
-                  type="button"
-                >
 
-                  <img
-                    className="w-10 h-10  text-ThirdColor rounded-full   "
-                    src={user.photoURL}
-                    alt="user photo"
-                  />
+          <div className="flex  items-center shrink-0">
+            {
+              isLight ? <div><a className="tooltip"><CiLight onClick={handleDarkMode} className="text-lg sm:text-2xl shrink-0 mx-1 mr-2 sm:mr-6 hover:cursor-pointer" /></a>
+                <Tooltip className="z-50" anchorSelect=".tooltip" place="bottom" offset={20}>
+                  Light
+                </Tooltip>
+              </div> : <div>
+                <a className="tooltip2">
+                  <MdDarkMode onClick={handleDarkMode} className="text-lg hover:cursor-pointer sm:text-2xl shrink-0 mx-1 mr-2 sm:mr-6 " />
+                </a>
+                <Tooltip className="z-50" anchorSelect=".tooltip2" place="bottom" offset={20}>
+                  Dark
+                </Tooltip>
+              </div>
 
-                </button>
 
-                {/* Dropdown menu */}
-                <div
+            }
 
-                  className={`z-10 mt-2 absolute ${isDropdownOpen ? "block" : "hidden"} bg-ThirdColor divide-y divide-gray-100 rounded-lg shadow w-36 md:w-48  dark:divide-gray-600 right-2 `}
-                >
-                  <div className="px-4 py-3 text-sm text-gray-900 dark:text-white relative">
-                    <div className="font-medium truncate">{user.displayName}</div>
-                    <div className="truncate mt-1">{user.email}</div>
-                    <div onClick={toggleDropdown} className="absolute top-2 right-2 hover:cursor-pointer">
-                      <RxCross1 className="text-lg" />
+            {
+              user ?
+                <div className="relative shrink-0 " >
+
+                  <button
+
+                    onClick={() => toggleDropdown()}
+                    className="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full   md:me-0   dark:text-white"
+                    type="button"
+                  >
+
+                    <img
+                      className="w-10 h-10  text-ThirdColor rounded-full   "
+                      src={user.photoURL}
+                      alt="user photo"
+                    />
+
+                  </button>
+
+                  {/* Dropdown menu */}
+                  <div
+
+                    className={`z-10 mt-2 absolute ${isDropdownOpen ? "block" : "hidden"} bg-white dark:bg-ThirdColor divide-y divide-gray-100 rounded-lg shadow w-36 md:w-48  dark:divide-gray-600 right-2 `}
+                  >
+                    <div className="px-4 py-3 text-sm text-gray-900 dark:text-white relative">
+                      <div className="font-medium truncate">{user.displayName}</div>
+                      <div className="truncate mt-1">{user.email}</div>
+                      <div onClick={toggleDropdown} className="absolute top-2 right-2 hover:cursor-pointer">
+                        <RxCross1 className="text-lg" />
+                      </div>
+                    </div>
+                    <ul
+                      className="py-2 text-sm text-gray-700 dark:text-gray-200"
+
+                    >
+                      <li>
+                        <Link to={`/dashboard/${currentUser?.Role == "Admin" ? "statistics" : "profile"}`}
+                          href="#"
+
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Dashboard
+                        </Link>
+                      </li>
+
+                    </ul>
+                    <div className="py-2">
+                      <button
+
+                        onClick={() => {
+                          logOut()
+                          setIsDropdownOpen(false)
+
+                        }}
+                        className="block w-full text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Sign out
+                      </button>
                     </div>
                   </div>
-                  <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
-
-                  >
-                    <li>
-                      <Link to={`/dashboard/${currentUser?.Role == "Admin" ? "statistics" : "profile"}`}
-                        href="#"
-
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Dashboard
-                      </Link>
-                    </li>
-
-                  </ul>
-                  <div className="py-2">
-                    <button
-
-                      onClick={() => {
-                        logOut()
-                        setIsDropdownOpen(false)
-
-                      }}
-                      className="block w-full text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      Sign out
-                    </button>
-                  </div>
                 </div>
-              </div>
-              : <Link to="/login" className="btn bg-SecondaryColor px-3 h-10 min-h-10 text-white hover:bg-green-900">LogIn</Link>}
+                : <Link to="/login" className="btn bg-SecondaryColor px-3 h-10 min-h-10 text-white hover:bg-green-900">LogIn</Link>
+            }
+          </div>
 
         </div>
       </div>

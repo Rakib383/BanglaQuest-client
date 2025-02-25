@@ -33,8 +33,8 @@ export const Tourism = () => {
         }
     })
     return (
-        <div className="px-3 mx-auto text-center">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center">
+        <div className="px-3 mx-auto text-center  ">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white items-center">
                 <span className="text-PrimaryColor">
                     <Typewriter
                         words={['Explore', 'Discover', 'Experience']}
@@ -47,13 +47,13 @@ export const Tourism = () => {
                     />
                 </span>
                 Like Never Before</h2>
-            <div className="mt-4 text-gray-600 text-lg md:text-xl flex flex-col text-nowrap items-center">
+            <div className="mt-4 text-gray-600 dark:text-gray-300 text-lg md:text-xl flex flex-col text-nowrap items-center">
                 <div className='flex text-wrap'>
                     Choose from
                     <div className=" mx-3 rotate-6  z-20 relative py-2">
 
                         <span className="z-20 bg-transparent text-white   px-2 "> exclusive </span>
-                        <div className="w-full  h-full -z-10 bg-gradient-to-br from-white to-SecondaryColor  absolute top-0 left-0">
+                        <div className="w-full  h-full -z-10 bg-gradient-to-br from-gray-200 to-SecondaryColor  absolute top-0 left-0">
                         </div>
                     </div>
                 </div>
@@ -66,13 +66,13 @@ export const Tourism = () => {
                 </TabList>
 
                 <TabPanel className="mt-6">
-                    <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center">Explore Our Exclusive Travel Packages</h2>
-                    <p className='mt-2'>Choose from a variety of exciting travel packages designed for every type of explorer. Let us make your dream vacation a reality!</p>
-                    <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-8 md:mb-12 my-7'>
+                    <h2 className="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white  items-center">Explore Our Exclusive Travel Packages</h2>
+                    <p className='mt-2 dark:text-gray-300'>Choose from a variety of exciting travel packages designed for every type of explorer. Let us make your dream vacation a reality!</p>
+                    <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-12 md:mb-12 my-7 md:mt-14'>
                         {
                            packages?.map(pack => (
-                            <div key={pack._id} className="card bg-base-100 w-80 shadow-xl relative py-3">
-                                <figure className='relative h-[180px] w-full' >
+                            <div key={pack._id} className="card bg-gray-200 dark:bg-white w-80 shadow-lg  relative pb-3 ">
+                                <figure className='relative h-[190px] w-full' >
                                     <img
                                         src={pack.coverPhoto}
                                         alt="" className='h-full w-full' />
@@ -81,7 +81,7 @@ export const Tourism = () => {
                                         {pack.location}
                                     </div>
                                 </figure>
-                                <div className="card-body pb-3 text-start px-4 gap-1.5 text-gray-600">
+                                <div className="card-body bg-gray-200 dark:bg-white  pb-3 text-start px-4 gap-1.5 text-gray-600">
                                     <h2 className="card-title text-ThirdColor">
                                         {pack.tripTitle}
 
@@ -90,7 +90,7 @@ export const Tourism = () => {
                                     <p className=''>Duration:{pack.duration}</p>
                                     <p>Description:{pack.shortDescription}</p>
                                     <div className="bg-SecondaryColor text-white px-3 py-1.5 -rotate-[37deg] absolute -right-5 top-40">From   {pack.price}৳</div>
-                                    <Link to={`packages/${pack._id}`} className='btn mt-3 text-start hover:cursor-pointer text-lg bg-SecondaryColor text-white font-semibold hover:bg-green-900 '>View Details....</Link>
+                                    <Link to={`packages/${pack._id}`} className="btn mt-3 text-start hover:cursor-pointer text-lg bg-SecondaryColor text-white font-semibold hover:bg-green-900">View Details....</Link>
                                 </div>
                             </div>
 
@@ -99,8 +99,8 @@ export const Tourism = () => {
                     </div>
                 </TabPanel>
                 <TabPanel >
-                    <h2 className="text-2xl md:text-4xl font-bold text-gray-800 items-center">Meet Our Expert Tour Guides</h2>
-                    <p className='mt-2'>Meet the passionate and experienced guides who will lead you on an unforgettable adventure, ensuring you make the most of your journey.</p>
+                    <h2 className="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white items-center">Meet Our Expert Tour Guides</h2>
+                    <p className='mt-2 dark:text-gray-300'>Meet the passionate and experienced guides who will lead you on an unforgettable adventure, ensuring you make the most of your journey.</p>
 
                     <div className="my-10 w-80  sm:w-[560px] md:w-[760px] lg:w-[920px] xl:w-[1100px] mx-auto" >
                         <Swiper
@@ -135,7 +135,7 @@ export const Tourism = () => {
                         >
                             {
                               guides.map(guide => <SwiperSlide className='mb-8' key={guide._id}>
-                                <div className="card rounded-md bg-base-100 w-80 shadow-xl ">
+                                <div className="card rounded-md bg-gray-100 dark:bg-white w-80 shadow-xl ">
                                     <figure>
                                         <img
                                             src={guide.photoURL}

@@ -17,8 +17,8 @@ export const Story = ({ story, idx }) => {
             <div className="sm:flex-1 h-52 w-9/12 sm:w-auto  sm:h-auto md:h-64">
                 <img src={images[0]} className="h-full w-full" alt="" />
             </div>
-            <div className="flex-1 flex flex-col items-center justify-center">
-                <p className="font-bold text-lg  hover:bg-gradient-to-r from-yellow-600  to-yellow-300 bg-clip-text hover:text-transparent hover:cursor-pointer">{title}</p>
+            <div className="flex-1 flex flex-col items-center justify-center dark:text-gray-300">
+                <p className="font-bold text-lg  hover:bg-gradient-to-r from-yellow-600  to-yellow-300 bg-clip-text hover:text-transparent hover:cursor-pointer dark:text-white">{title}</p>
                 <div className="flex gap-1 items-center justify-center "> <FaPencilAlt />By {sharedBy} </div>
 
                 <div className="flex gap-1 items-center justify-center "><SlCalender />{moment(new Date(sharedOn)).format("MMMM D, YYYY")}</div>

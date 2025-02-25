@@ -62,13 +62,13 @@ export const Bookings = () => {
     }
 
     return (
-        <div>
-            <h2 className="text-xl md:text-2xl font-bold text-ThirdColor text-center mb-5">My Booking History</h2>
+        <div className="dark:text-gray-300">
+            <h2 className="text-xl md:text-2xl font-bold text-ThirdColor text-center mb-5 dark:text-white">My Booking History</h2>
 
             <div className="overflow-x-auto">
-                <table className="table table-zebra">
+                <table className="table dark:table-zebra  ">
                     {/* head */}
-                    <thead>
+                    <thead className="text-black dark:text-gray-200">
                         <tr>
                             <th>#</th>
                             <th>Package Name</th>
@@ -86,7 +86,9 @@ export const Bookings = () => {
                             bookings.map((booking, idx) => <tr key={idx}>
                                 <th>{idx + 1}</th>
                                 <td>{booking.package}</td>
-                                <td>{booking.tourGuide}</td>
+                                <td>
+                                    <img src={booking.photoURL} className="rounded-full w-12 h-12" alt="" />
+                                </td>
                                 <td>{booking.date}</td>
                                 <td>{booking.price}</td>
                                 <td>{booking.status}</td>
@@ -96,10 +98,10 @@ export const Bookings = () => {
                                             <Link to={`/dashboard/payment/${booking._id}`} className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Pay</Link>
                                         </td>
                                         <td>
-                                            <button onClick={() => handleDelete(booking._id)} className="btn bg-red-600 hover:bg-red-600 text-white">Cancel</button>
+                                            <button onClick={() => handleDelete(booking._id)} className="btn bg-red-600  hover:bg-red-600 text-white">Cancel</button>
                                         </td>
                                     </> : <td>
-                                        <button className="btn bg-PrimaryColor hover:bg-PrimaryColor">Paid</button>
+                                        <button className="btn bg-PrimaryColor text-black dark:text-white hover:bg-PrimaryColor">Paid</button>
                                     </td>
                                 }
 
@@ -113,7 +115,7 @@ export const Bookings = () => {
                 </table>
             </div>
 
-            <div className="pagination flex justify-center space-x-2 mt-12 md:mt-16">
+            <div className="pagination flex justify-center space-x-2 mt-12 md:mt-16 ">
 
                 <button disabled={currentPage == 0} onClick={() => { setCurrentPage(currentPage - 1) }} className="btn bg-PrimaryColor ">Prev</button>
                 <div className="join">

@@ -40,8 +40,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: "packages/:id",
-                element: <PrivateRoute><PackageDetails /></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/allPackages/${params.id}`)
+                element: <PackageDetails />,
+                loader: ({ params }) => fetch(`https://bangla-quest-server.vercel.app/allPackages/${params.id}`)
 
             },
             {
@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "allTrips",
-                element: <PrivateRoute><AllTrips /></PrivateRoute>,
+                element: <AllTrips />,
             },
             {
                 path: "guideProfiles/:id",
@@ -121,7 +121,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "statistics",
-                element: <AdminRoute><Statistics/></AdminRoute>
+                element: <AdminRoute><Statistics /></AdminRoute>
             },
             {
                 path: "addPackage",

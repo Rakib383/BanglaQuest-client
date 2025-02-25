@@ -65,7 +65,7 @@ export const Register = () => {
     const handleSignInWithGoogle = () => {
         signInWithGoogle()
             .then((res) => {
-                const { displaName: name, email, photoURL } = res.user
+                const { displayName: name, email, photoURL } = res.user
                 setUser(res.user)
                 const userInfo = { name, email, Role: "Tourist", photoURL }
                 axiosPublic.post('/users', userInfo)

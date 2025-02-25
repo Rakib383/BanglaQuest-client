@@ -33,7 +33,7 @@ export const GuideProfile = () => {
                     Expertise: {guide?.expertise}
                 </p>
 
-                <div className="bg-gray-700 text-left p-4 mt-3 rounded-md">
+                <div className="bg-gray-700 dark:bg-gray-800 text-left p-4 mt-3 rounded-md">
 
                     <h6 className="text-PrimaryColor text-sm underline underline-offset-4 mb-2">Description: </h6>
                     <div>

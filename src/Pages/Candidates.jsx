@@ -85,12 +85,12 @@ export const Candidates = () => {
     }
     return (
         <div>
-            <h2 className="text-xl md:text-2xl font-bold text-ThirdColor text-center mb-5">Tour Guide Applications</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-ThirdColor text-center mb-5 dark:text-white">Tour Guide Applications</h2>
 
             <div className="overflow-x-auto">
-                <table className="table table-zebra">
+                <table className="table dark:table-zebra">
                     {/* head */}
-                    <thead>
+                    <thead className="dark:text-white text-ThirdColor">
                         <tr>
                             <th>#</th>
 
@@ -130,7 +130,7 @@ export const Candidates = () => {
 
             <div className="pagination flex justify-center space-x-2 mt-7">
 
-                <button disabled={currentPage == 0} onClick={() => { setCurrentPage(currentPage - 1) }} className="btn bg-PrimaryColor ">Prev</button>
+                <button disabled={currentPage == 0} onClick={() => { setCurrentPage(currentPage - 1) }} className="btn bg-PrimaryColor disabled:text-gray-500">Prev</button>
                 <div className="join">
                     {
                         pages.map(page => <button onClick={() => {
@@ -139,7 +139,7 @@ export const Candidates = () => {
                     }
 
                 </div>
-                <button disabled={currentPage === pages.length-1 || pages.length === 0} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor ">Next</button>
+                <button disabled={currentPage === pages.length-1 || pages.length === 0} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor disabled:text-gray-500 ">Next</button>
             </div>
 
         </div>

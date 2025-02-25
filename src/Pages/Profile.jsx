@@ -66,7 +66,7 @@ export const Profile = () => {
 
 
     return (
-        <div>
+        <div className=" min-h-screen">
             <h2 className="text-xl text-center">
                 <span>Hi,welcome </span>
                 {

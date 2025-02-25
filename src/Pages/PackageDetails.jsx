@@ -15,6 +15,7 @@ import { useAxiosSecure } from "../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Confetti from 'react-confetti'
 import Swal from "sweetalert2";
+import { useAxiosPublic } from "../hooks/useAxiosPublic";
 // import { useWindowSize } from 'react-use'
 export const PackageDetails = () => {
 
@@ -26,6 +27,7 @@ export const PackageDetails = () => {
         formState: { errors }, reset, control
     } = useForm()
     const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const [bookedPackages, setBookedPackages] = useState(0)
     const [showConfetti, setShowConfetti] = useState(false);
     const { photoGallery, shortDescription, timeline, tripTitle, price } = pack
@@ -33,7 +35,7 @@ export const PackageDetails = () => {
     const { data: guides } = useQuery({
         queryKey: ['guides'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/allTourGuides')
+            const res = await axiosPublic.get('/allTourGuides')
             return res.data
         }
     })
@@ -85,7 +87,7 @@ export const PackageDetails = () => {
 
 
     return (
-        <div className=" pt-32   text-center text-gray-600 px-5">
+        <div className=" pt-32   text-center dark:text-gray-300 text-gray-600 px-5">
             {showConfetti && (
                 <Confetti
                     height={3000}
@@ -100,7 +102,7 @@ export const PackageDetails = () => {
                 />
             )}
             <div className="text-3xl md:text-5xl font-bold text-gray-800 justify-center flex flex-col sm:flex-row gap-2 items-center">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 " >A Glimpse of The </h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white" >A Glimpse of The </h2>
                 <div className="rotate-6  z-20 relative pb-2">
                     <span className="z-20 bg-transparent text-white   px-2 text-xl">Destinations </span>
                     <div className="w-full  h-full -z-10 bg-SecondaryColor  absolute top-0 left-0">
@@ -126,11 +128,11 @@ export const PackageDetails = () => {
                 </div>
             </div>
 
-            <h3 className="text-xl mt-5 underline font-bold text-ThirdColor text-start md:text-center md:text-2xl ">About This <span className=" bg-gradient-to-br from-white to-PrimaryColor text-xl md:text-3xl  ">Tour</span></h3>
+            <div className="text-xl flex justify-center items-center gap-2 mt-5  font-bold text-ThirdColor text-start md:text-center md:text-2xl dark:text-white">About This <div className=" bg-gradient-to-br rotate-6 from-white to-PrimaryColor w-fit dark:text-gray-700 text-xl md:text-3xl  ">Tour</div></div>
 
             <p className=" w-72 md:text-lg text-start mt-4 md:text-center md:mx-auto">{shortDescription}</p>
 
-            <h3 className="text-xl mt-5 md:mt-10 underline font-bold text-ThirdColor text-start sm:pl-10 max-w-4xl mx-auto md:mb-12 mb-8">Tour Plan :</h3>
+            <h3 className="text-xl mt-5 md:mt-10 underline font-bold text-ThirdColor dark:text-white text-start sm:pl-10 max-w-4xl mx-auto md:mb-12 mb-8">Tour Plan :</h3>
 
             {/* tour plan */}
             <ul className="timeline timeline-snap-icon max-md:timeline-compact   timeline-vertical mb-12 ">
@@ -168,8 +170,8 @@ export const PackageDetails = () => {
 
             {/* Tour guides */}
 
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 items-center mt-8">Meet Our Expert Tour Guides</h2>
-            <p className='mt-2 px-4'>Meet the passionate and experienced guides who will lead you on an unforgettable adventure, ensuring you make the most of your journey.</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white items-center mt-8">Meet Our Expert Tour Guides</h2>
+            <p className='mt-2 px-4 md:px-20'>Meet the passionate and experienced guides who will lead you on an unforgettable adventure, ensuring you make the most of your journey.</p>
 
             <div className="my-10 w-80  sm:w-[560px] md:w-[760px] lg:w-[920px] xl:w-[1100px] mx-auto" >
                 <Swiper
@@ -204,7 +206,7 @@ export const PackageDetails = () => {
                 >
                     {
                         guides?.map((guide, idx) => <SwiperSlide className='mb-8' key={idx}>
-                            <div className="card rounded-md bg-base-100 w-80 shadow-xl ">
+                            <div className="card dark:bg-white rounded-md  w-80 shadow-xl ">
                                 <figure>
                                     <img
                                         src={guide.photoURL}
@@ -227,7 +229,7 @@ export const PackageDetails = () => {
             <div>
 
                 <h2 className="font-black font-charm text-xl md:text-2xl text-primaryColor underline mb-3 sm:mb-6 text-center">Book Your Adventure</h2>
-                <p className="text-gray-600 font-semibold mb-5 md:text-[17px] px-3 w-80 sm:w-[420px] mx-auto text-center">Fill out the form below to confirm your booking and embark on an unforgettable journey.</p>
+                <p className="text-gray-600 dark:text-gray-300 font-semibold mb-5 md:text-[17px] px-3 w-80 sm:w-[420px] mx-auto text-center">Fill out the form below to confirm your booking and embark on an unforgettable journey.</p>
 
                 {/* Booking Form */}
                 <form onSubmit={handleSubmit(onSubmit)} className="sm:max-w-xl max-w-sm  mx-auto pt-10 shadow-lg  px-6 py-8 rounded-xl bg-gradient-to-tl from-white to-SecondaryColor mb-20 md:mb-24">
@@ -241,7 +243,7 @@ export const PackageDetails = () => {
                                 readOnly
                                 type="text"
                                 name="name"
-                                value={user.displayName}
+                                value={user?.displayName}
                                 {...register("name", { required: true })}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="name"
@@ -257,7 +259,7 @@ export const PackageDetails = () => {
                             <input
                                 {...register("email", { required: true })}
                                 type="email"
-                                value={user.email}
+                                value={user?.email}
                                 name="email"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm w-full rounded-lg focus:ring-blue-500 focus:border-blue-500 block   p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="email"
@@ -273,7 +275,7 @@ export const PackageDetails = () => {
                                 {...register("photoURL", { required: true })}
                                 type="text"
                                 name="photoURL"
-                                value={user.photoURL}
+                                value={user?.photoURL}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm w-full rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="ImageURL"
                                 required
@@ -314,7 +316,7 @@ export const PackageDetails = () => {
                                 )}
 
                             />
-                            {errors.date && <span className="text-red-400 text-sm">{errors.date.message}</span>}
+                            {errors.date && <span className="text-red-500  text-sm">{errors.date.message}</span>}
 
                         </div>
                         <div>
@@ -339,7 +341,7 @@ export const PackageDetails = () => {
                     <div className="sm:flex">
                         <button
                             type="submit"
-                            className="btn  bg-primaryColor   hover:text-white hover:bg-SecondaryColor sm:w-28 mx-auto w-full  mt-7 px-5 py-2.5 text-center"
+                            className="btn  bg-primaryColor   hover:text-white hover:bg-SecondaryColor sm:w-28 mx-auto w-full text-white mt-7 px-5 py-2.5 text-center"
                         >
                             Book Now
                         </button>

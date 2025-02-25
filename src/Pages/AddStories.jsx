@@ -103,7 +103,7 @@ export const AddStories = () => {
                 <div className="sm:flex">
                     <button
                         type="submit"
-                        className="btn  bg-primaryColor   hover:text-white hover:bg-SecondaryColor sm:w-28 mx-auto w-full  mt-7 px-5 py-2.5 text-center"
+                        className="btn text-white bg-primaryColor hover:bg-SecondaryColor sm:w-28 mx-auto w-full  mt-7 px-5 py-2.5 text-center"
                     >
                         Add Story
                     </button>

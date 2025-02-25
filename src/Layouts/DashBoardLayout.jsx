@@ -27,7 +27,7 @@ export const DashBoardLayout = () => {
     })
 
     if (isLoading || !user) {
-        return <Loading/>
+        return <Loading />
     }
 
     const navOptions = <>
@@ -80,36 +80,37 @@ export const DashBoardLayout = () => {
     </>
 
     return (
-        <div className="flex flex-col md:flex-row  mb-10 ">
+        <div className="flex flex-col md:flex-row  ">
             {/* dashboard side bar */}
-            
-                <div className="w-64 min-h-screen
+
+            <div className="w-64 min-h-screen 
                  h-full bg-ThirdColor dashboard hidden md:block text-white fixed left-0 top-0 ">
-                    <ul className="menu gap-2 pt-7">
-                        {
-                            navOptions
-                        }
-                    </ul>
+                <ul className="menu gap-2 pt-7">
+                    {
+                        navOptions
+                    }
+                </ul>
 
+            </div>
+            {/* dropdown */}
+            <div className="dropdown  mt-4 ml-1">
+                <div tabIndex={0} role="button" className="btn btn-ghost md:hidden ">
+                    <HiOutlineMenu className="text-2xl" />
                 </div>
-                <div className="dropdown  mt-4 ml-1">
-                    <div tabIndex={0} role="button" className="btn btn-ghost md:hidden ">
-                        <HiOutlineMenu className="text-2xl" />
-                    </div>
-                    <ul
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 gap-2 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        {
-                            navOptions
-                        }
+                <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-white dark:bg-black gap-2 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    {
+                        navOptions
+                    }
 
 
-                    </ul>
+                </ul>
 
-                </div>
-            
+            </div>
+
             {/* dashboard content */}
-            <div className=" flex-1 p-2 md:p-8 md:ml-64">
+            <div className=" flex-1  dark:bg-gray-800  p-2 md:p-8 md:ml-60 min-h-screen">
                 <Outlet />
             </div>
 
