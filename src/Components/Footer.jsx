@@ -2,10 +2,11 @@ import logo from "../assets/Images/BanglaQuest.png"
 import { FaTwitterSquare } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 export const Footer = () => {
+    const location = useLocation()
     return (
-        <div className="pb-5 bg-gradient-to-t dark:to-black from-SecondaryColor to-white text-center ">
+        <div className={`${location.pathname == "/about" ? "hidden" : "block"} pb-5 bg-gradient-to-t dark:to-black from-SecondaryColor to-white text-center `}>
             <footer className="gap-5 flex flex-col sm:flex-row  sm:justify-center sm:gap-12 footer-center 
               p-10 mt-20 max-w-7xl mx-auto dark:text-gray-300 ">
                 <aside>

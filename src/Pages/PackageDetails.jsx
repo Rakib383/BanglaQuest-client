@@ -297,7 +297,7 @@ export const PackageDetails = () => {
                                 required
                             />
                         </div>
-                        <div>
+                        <div className="w-full">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Tour Date
                             </label>
@@ -311,7 +311,7 @@ export const PackageDetails = () => {
                                         dateFormat="dd/MM/yyyy"
                                         selected={field.value}
                                         onChange={(date) => field.onChange(date)}
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-[270px] sm:w-[252px]"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-full   grow  sm:w-[252px]"
                                     />
                                 )}
 
@@ -341,7 +341,7 @@ export const PackageDetails = () => {
                     <div className="sm:flex">
                         <button
                             type="submit"
-                            className="btn  bg-primaryColor   hover:text-white hover:bg-SecondaryColor sm:w-28 mx-auto w-full text-white mt-7 px-5 py-2.5 text-center"
+                            className="btn   hover:text-white bg-SecondaryColor sm:w-28 mx-auto w-full text-white mt-7 px-5 py-2.5 text-center"
                         >
                             Book Now
                         </button>

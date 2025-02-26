@@ -1,0 +1,11 @@
+.primaryColor {
+    color: #4BFFA5;
+}
+.secondaryColor {
+    color: #0ea5e9 ;
+}
+.active {
+    color:#0ea5e9;
+    text-decoration: underline;
+    font-weight: 700;
+}

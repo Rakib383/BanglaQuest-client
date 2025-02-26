@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useLocation } from "react-router-dom"
 import { HiOutlineMenu } from "react-icons/hi";
 import logo from "../assets/Images/BanglaQuest.png"
 import { useContext, useEffect } from "react";
@@ -10,11 +10,14 @@ import { RxCross1 } from "react-icons/rx";
 import { Tooltip } from 'react-tooltip'
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
+import { Dropdown, Space } from 'antd';
 export const Navbar = () => {
   const { user, logOut } = useContext(AuthContext)
   const [isLight, setIsLight] = useState(true)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const axiosPublic = useAxiosPublic()
+  const location = useLocation();
   const { data: currentUser } = useQuery({
     queryKey: ["currentUser"],
     queryFn: async () => {
@@ -23,13 +26,12 @@ export const Navbar = () => {
     },
     enabled: !!user,
   })
-// console.log(isLight);
 
   const navOptions = <>
-    <li><NavLink to="/">Home</NavLink></li>
-    <li><NavLink to="/allTrips">Trips</NavLink></li>
-    <li><NavLink to="/community">Community</NavLink></li>
-    <li className="text-nowrap"><NavLink to="/hot-offers">Hot Offers</NavLink></li>
+    <li ><NavLink to="/">Home</NavLink></li>
+    <li ><NavLink to="/allTrips">Trips</NavLink></li>
+    <li ><NavLink to="/community">Community</NavLink></li>
+    <li className="text-nowrap "><NavLink to="/hot-offers">Hot Offers</NavLink></li>
     <li className="text-nowrap"><NavLink to="/about">About Us</NavLink></li>
   </>
 
@@ -39,57 +41,83 @@ export const Navbar = () => {
   };
 
   const htmlTag = document.documentElement
-  
+
   useEffect(() => {
-    let getIsLight =sessionStorage.getItem("isLight")
+    let getIsLight = sessionStorage.getItem("isLight")
     // console.log(isLight);
-    if(getIsLight) {
+    if (getIsLight) {
       getIsLight = JSON.parse(getIsLight)
-       setIsLight(getIsLight)
-       if (!getIsLight) {
-        sessionStorage.setItem("isLight","false")
-      return htmlTag.classList.add('dark')
-         
+      setIsLight(getIsLight)
+      if (!getIsLight) {
+        sessionStorage.setItem("isLight", "false")
+        return htmlTag.classList.add('dark')
+
       }
-      
-      sessionStorage.setItem("isLight","true")
+
+      sessionStorage.setItem("isLight", "true")
       return htmlTag.classList.remove('dark')
-       
+
     }
 
-  },[])
+  }, [])
+
 
   const handleDarkMode = () => {
     setIsLight(!isLight)
-    
+
     if (!isLight) {
-      sessionStorage.setItem("isLight","true")
-        return htmlTag.classList.remove('dark')
+      sessionStorage.setItem("isLight", "true")
+      return htmlTag.classList.remove('dark')
     }
     htmlTag.classList.add('dark')
-    sessionStorage.setItem("isLight","false")
-}
+    sessionStorage.setItem("isLight", "false")
+  }
 
-  
+  const items = [
+    {
+      label: <NavLink className={location.pathname === "/" ? "active" : ""} to="/">Home</NavLink>
+    },
+    {
+      label: <NavLink className={location.pathname === "/allTrips" ? "active" : ""} to="/allTrips">Trips</NavLink>
+    },
+    {
+      label: <NavLink className={location.pathname === "/community" ? "active" : ""} to="/community">Community</NavLink>
+    },
+    {
+      label: <NavLink className={location.pathname === "/hot-offers" ? "active" : ""} to="/hot-offers">Hot Offers</NavLink>
+    },
+    {
+      label: <NavLink className={location.pathname === "/about" ? "active" : ""} to="/about">About Us</NavLink>
+    },
+
+  ];
+
   return (
-    <div className=" fixed w-full z-50 bg-gray-300/50 dark:bg-black/60 dark:border-b  border-b-slate-700  backdrop-blur-lg ">
-      <div className="navbar px-4 md:px-6 py-2 max-w-7xl mx-auto rounded-md">
+    <div className=" fixed z-30 w-full  bg-gray-300/50 dark:bg-black/60 dark:border-b  border-b-slate-700  backdrop-blur-xl ">
+      <div className="navbar  px-4 md:px-6 py-2 max-w-7xl mx-auto rounded-md">
         <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost md:hidden ">
-              <HiOutlineMenu className="text-xl" />
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-white dark:bg-black rounded-box z-[1] mt-3 w-52 p-2 shadow">
-              {
-                navOptions
-              }
+          <div className="md:hidden">
+            <Dropdown
+              menu={{
+                items,
+              }}
+              trigger={['click']}
+              getPopupContainer={(triggerNode) => triggerNode.parentNode}
+              onOpenChange={(value) => setIsMenuOpen(value)}
+              overlayClassName="custom-dropdown"
 
-            </ul>
-
+            >
+              <a className="cursor-pointer" onClick={(e) => {
+                e.preventDefault()
+              }}>
+                <Space>
+                  {
+                    isMenuOpen ? <RxCross1 className="text-lg " /> : <HiOutlineMenu className="text-xl " />
+                  }
+                </Space>
+              </a>
+            </Dropdown>
           </div>
-
 
           <Link className="hidden md:block" to="/" >
             <div className="flex items-end">
@@ -109,7 +137,7 @@ export const Navbar = () => {
         </div>
 
         <div className="navbar-end   gap-16 lg:gap-32">
-          <ul className=" md:flex px-1 gap-5 hidden ">
+          <ul className=" md:flex lg:text-lg md:text-[17px] px-1 gap-5 hidden">
             {
               navOptions
             }
@@ -156,7 +184,7 @@ export const Navbar = () => {
                   {/* Dropdown menu */}
                   <div
 
-                    className={`z-10 mt-2 absolute ${isDropdownOpen ? "block" : "hidden"} bg-white dark:bg-ThirdColor divide-y divide-gray-100 rounded-lg shadow w-36 md:w-48  dark:divide-gray-600 right-2 `}
+                    className={`z-40 mt-2 absolute ${isDropdownOpen ? "block" : "hidden"} bg-white dark:bg-ThirdColor divide-y divide-gray-100 rounded-lg shadow w-36 md:w-48  dark:divide-gray-600 right-2 `}
                   >
                     <div className="px-4 py-3 text-sm text-gray-900 dark:text-white relative">
                       <div className="font-medium truncate">{user.displayName}</div>

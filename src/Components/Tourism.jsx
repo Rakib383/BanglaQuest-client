@@ -71,7 +71,7 @@ export const Tourism = () => {
                     <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-12 md:mb-12 my-7 md:mt-14'>
                         {
                            packages?.map(pack => (
-                            <div key={pack._id} className="card bg-gray-200 dark:bg-white w-80 shadow-lg  relative pb-3 ">
+                            <div key={pack._id} className="card  dark:bg-white w-80 shadow-lg  relative pb-3 ">
                                 <figure className='relative h-[190px] w-full' >
                                     <img
                                         src={pack.coverPhoto}
@@ -81,7 +81,7 @@ export const Tourism = () => {
                                         {pack.location}
                                     </div>
                                 </figure>
-                                <div className="card-body bg-gray-200 dark:bg-white  pb-3 text-start px-4 gap-1.5 text-gray-600">
+                                <div className="card-body  dark:bg-white  pb-3 text-start px-4 gap-1.5 text-gray-600">
                                     <h2 className="card-title text-ThirdColor">
                                         {pack.tripTitle}
 

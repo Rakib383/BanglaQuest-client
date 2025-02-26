@@ -2,8 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-// import { Rating } from 'react-simple-star-rating'
-// import required modules
+import { Rating } from 'react-simple-star-rating'
 import { Autoplay } from 'swiper/modules';
 
 const demoData = [
@@ -84,13 +83,15 @@ const Reviews = () => {
                                 <div className="card-body gap-0.5  text-gray-600 text-center shadow-lg mb-1">
 
                                     <p>{review.reviewText}</p>
-                                    {/* <Rating
+                                    <Rating
                                         initialValue={review.rating}
                                         readonly={true}
-                                       
+                                       className='flex'
                                         size={20}
                                         allowFraction={true}
-                                    /> */}
+                                        fillColor='#FFD700'
+                                        style={{ color: '#ccc' }}
+                                    />
                                     <h3 className='text-lg font-bold'>{review.userName}</h3>
                                     <p >Traveller</p>
 
