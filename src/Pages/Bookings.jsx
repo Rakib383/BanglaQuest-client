@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAxiosSecure } from "../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Loading } from "../Components/Loding";
 
 export const Bookings = () => {
 
@@ -32,7 +33,7 @@ export const Bookings = () => {
     });
 
     if (isLoading || !bookings) {
-        return <p>Loading...</p>;
+        return <Loading/>;
     }
 
     const handleDelete = (id) => {
@@ -62,17 +63,17 @@ export const Bookings = () => {
     }
 
     return (
-        <div className="dark:text-gray-300">
+        <div className="dark:text-gray-200 ">
             <h2 className="text-xl md:text-2xl font-bold text-ThirdColor text-center mb-5 dark:text-white">My Booking History</h2>
 
             <div className="overflow-x-auto">
-                <table className="table dark:table-zebra  ">
+                <table className="table ">
                     {/* head */}
-                    <thead className="text-black dark:text-gray-200">
+                    <thead className="text-black dark:text-white">
                         <tr>
                             <th>#</th>
                             <th>Package Name</th>
-                            <th>Tour Guide</th>
+                            <th>Tour Guide's Email</th>
                             <th>Date</th>
                             <th>Price</th>
                             <th>Status</th>
@@ -87,7 +88,7 @@ export const Bookings = () => {
                                 <th>{idx + 1}</th>
                                 <td>{booking.package}</td>
                                 <td>
-                                    <img src={booking.photoURL} className="rounded-full w-12 h-12" alt="" />
+                                    {booking.tourGuideEmail}
                                 </td>
                                 <td>{booking.date}</td>
                                 <td>{booking.price}</td>

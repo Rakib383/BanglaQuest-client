@@ -78,44 +78,52 @@ export const CheckoutForm = () => {
                 const paymentInfo = {
                     transactionId: paymentIntent.id,
                     status: "Success",
-                    bookingId:bookingItem._id,
-                    amount:bookingItem.price,
-                    timestamp:new Date().toISOString(),
-                    userEmail:bookingItem.email
+                    bookingId: bookingItem._id,
+                    amount: bookingItem.price,
+                    timestamp: new Date().toISOString(),
+                    userEmail: bookingItem.email
                 }
 
-                const res = await axiosSecure.patch(`/bookings/${id}`, {status:"In Review"})
-                const result = await axiosSecure.post('/payments',paymentInfo)
-                refetch()
                 Swal.fire({
-                    title: "Payment SuccessFull!",
+                    title: "Payment Successful!",
                     icon: "success",
                     showConfirmButton: false,
                     timer: 1000
                 })
+
+                const res = await axiosSecure.patch(`/bookings/${id}`, { status: "In Review" })
+                const result = await axiosSecure.post('/payments', paymentInfo)
+                refetch()
+
                 navigate("/dashboard/bookings")
 
             }
         }
     }
 
+    const isDarkMode = document.documentElement.classList.contains("dark");
+
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={`${isDarkMode ? "bg-black/70" : ""} mt-5 mx-5  border border-[#e0e0e0] rounded-md p-3`}>
             <CardElement options={{
                 style: {
                     base: {
                         fontSize: '16px',
-                        color: '#424770',
+                        color: isDarkMode ? '#ffffff' : '#424770',
                         '::placeholder': {
-                            color: '#aab7c4',
+                            color: isDarkMode ? '#cccccc' : '#aab7c4',
                         },
+                        iconColor: isDarkMode ? '#ffffff' : '#000'
+
                     },
                     invalid: {
                         color: '#9e2146',
+
                     },
                 },
             }} />
-            <button className="btn btn-md bg-SecondaryColor my-2 mt-3" type="submit" disabled={!stripe || !clientSecret}>Pay</button>
+            <button className="btn btn-md  bg-SecondaryColor/80 hover:bg-SecondaryColor text-white my-2 mt-5" type="submit" disabled={!stripe || !clientSecret}>Pay</button>
             <p className="text-red-500">
                 {
                     error

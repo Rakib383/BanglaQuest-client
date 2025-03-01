@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Rating } from 'react-simple-star-rating'
+import ReactStars from "react-rating-stars-component";
 import { Autoplay } from 'swiper/modules';
 
 const demoData = [
@@ -21,7 +21,7 @@ const demoData = [
     {
         "userName": "Sajid Hossain",
         "userPhoto": "https://i.ibb.co/TRgj9Q8/portrait-white-man-isolated.jpg",
-        "rating": 4,
+        "rating": 4.5,
         "reviewText": "Beautiful locations and friendly guides made this a memorable experience. I loved how well thought out the itinerary was, and the team ensured we got the most out of our trip. The only downside was that some of the food options could have been better, but it didn’t take away from the amazing time I had. Looking forward to another trip soon!"
     },
     {
@@ -80,23 +80,28 @@ const Reviews = () => {
                     {
                         demoData.map((review, idx) => <SwiperSlide className='mb-10' key={idx}>
                             <div className="card rounded-md bg-gray-200 w-80 dark:bg-gray-100 relative ">
-                                <div className="card-body gap-0.5  text-gray-600 text-center shadow-lg mb-1">
+                                <div className="card-body gap-0  text-gray-600 text-center shadow-lg mb-1 flex justify-center items-center">
 
                                     <p>{review.reviewText}</p>
-                                    <Rating
-                                        initialValue={review.rating}
-                                        readonly={true}
-                                       className='flex'
-                                        size={20}
-                                        allowFraction={true}
-                                        fillColor='#FFD700'
-                                        style={{ color: '#ccc' }}
+
+                                    <h3 className='text-lg font-bold mt-1'>{review.userName}</h3>
+                                    <ReactStars
+                                        count={review.rating}
+                                        value={review.rating}
+                                        edit={false}
+                                        size={24}
+                                        isHalf={true}
+                                        emptyIcon={<i className="far fa-star"></i>}
+                                        halfIcon={<i className="fa fa-star-half-alt"></i>}
+                                        fullIcon={<i className="fa fa-star"></i>}
+                                        activeColor="#FFB116"
+                                        
+                                        
                                     />
-                                    <h3 className='text-lg font-bold'>{review.userName}</h3>
-                                    <p >Traveller</p>
+                                    <p className=' mb-2'>Traveller</p>
 
                                 </div>
-                                
+
                                 <figure className='absolute w-16 h-16 rounded-full -bottom-9 left-1/2 -translate-x-1/2 outline '>
                                     <img
                                         className='w-full h-full '

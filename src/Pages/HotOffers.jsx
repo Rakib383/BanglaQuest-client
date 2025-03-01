@@ -30,7 +30,7 @@ const HotOffers = () => {
                 <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-12 md:mb-12 my-7 px-4'>
                     {
                         hotPackages?.map((pack, id) => (
-                            <div key={id} className="card  w-80 shadow-xl bg-white relative pb-3">
+                            <div key={id} className="card  w-[310px] sm:w-[340px] shadow-xl bg-white relative pb-3">
                                 <figure className='relative h-[190px] w-full' >
                                     <img
                                         src={pack.coverPhoto}
@@ -48,7 +48,7 @@ const HotOffers = () => {
                                     <p className=''>Tour-Type:{pack.tourType}</p>
                                     <p className=''>Duration:{pack.duration}</p>
                                     <div className="flex items-center justify-center">
-                                        <div className="absolute top-36 -right-8 w-20 h-20 bg-PrimaryColor text-white rounded-full flex flex-col items-center justify-center shadow-lg ">
+                                        <div className="absolute top-36 -right-5 sm:-right-8 w-20 h-20 bg-PrimaryColor text-white rounded-full flex flex-col items-center justify-center shadow-lg ">
                                             <span className="text-sm line-through decoration-white/70">৳{pack.price}</span>
                                             <span className="text-lg font-bold">৳{pack.finalPrice}</span>
                                             <span className="absolute -bottom-3 bg-SecondaryColor text-white text-xs px-2 py-1 rounded-full">

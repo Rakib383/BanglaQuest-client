@@ -41,9 +41,9 @@ export const AddPackage = () => {
     }
     return (
         <div>
-            <h2 className="font-black font-charm text-xl md:text-2xl text-primaryColor underline mb-3 sm:mb-6 text-center">Add New Package</h2>
+            <h2 className="font-black font-charm text-xl md:text-2xl text-primaryColor underline mb-5 sm:mb-7 text-center">Add New Package</h2>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="sm:max-w-xl max-w-sm mx-auto pt-5 shadow-lg  px-6 py-8 pb-5 rounded-xl bg-gradient-to-tl from-white to-SecondaryColor mb-20 md:mb-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="sm:max-w-xl max-w-sm mx-auto pt-5 shadow-lg  px-8 py-8 pb-5 rounded-xl bg-gradient-to-tl from-white to-SecondaryColor mb-20 md:mb-6">
 
                 <div className="grid gap-6 mb-6 sm:grid-cols-2">
                     <div>
@@ -173,7 +173,7 @@ export const AddPackage = () => {
                 <div className="sm:flex">
                     <button
                         type="submit"
-                        className="btn  bg-primaryColor   hover:text-white hover:bg-SecondaryColor sm:w-32 mx-auto w-full  mt-7 px-5 py-2.5 text-center"
+                        className="btn  bg-primaryColor   hover:text-white bg-SecondaryColor/90 hover:bg-SecondaryColor sm:w-32 mx-auto w-full dark:text-white  mt-7 px-5 py-2.5 text-center"
                     >
                         Add Package
                     </button>

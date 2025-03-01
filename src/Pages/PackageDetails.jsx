@@ -17,6 +17,7 @@ import Confetti from 'react-confetti'
 import Swal from "sweetalert2";
 import { useAxiosPublic } from "../hooks/useAxiosPublic";
 // import { useWindowSize } from 'react-use'
+
 export const PackageDetails = () => {
 
     const pack = useLoaderData()
@@ -44,7 +45,9 @@ export const PackageDetails = () => {
         setBookedPackages(savedBookedPackages)
     }, [])
 
+  
 
+   
     const onSubmit = (data) => {
 
         const formateDate = new Date(data.date).toLocaleDateString("en-GB")
@@ -233,22 +236,22 @@ export const PackageDetails = () => {
 
                 {/* Booking Form */}
                 <form onSubmit={handleSubmit(onSubmit)} className="sm:max-w-xl max-w-sm  mx-auto pt-10 shadow-lg  px-6 py-8 rounded-xl bg-gradient-to-tl from-white to-SecondaryColor mb-20 md:mb-24">
-                    <h3 className="text-ThirdColor font-bold text-lg">{tripTitle}</h3>
+                    <h3 className="dark:text-white text-black font-bold text-lg mb-3">{tripTitle}</h3>
                     <div className="grid gap-6 mb-6 sm:grid-cols-2">
                         <div >
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Tourist Name
                             </label>
                             <input
-                                readOnly
                                 type="text"
                                 name="name"
-                                value={user?.displayName}
+                                defaultValue={user?.displayName}
                                 {...register("name", { required: true })}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="name"
-                                required
+                                
                             />
+                            {errors.name && <span className="text-red-400 text-sm">This field is required</span>}
 
                         </div>
 
@@ -259,12 +262,13 @@ export const PackageDetails = () => {
                             <input
                                 {...register("email", { required: true })}
                                 type="email"
-                                value={user?.email}
+                                defaultValue={user?.email}
                                 name="email"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm w-full rounded-lg focus:ring-blue-500 focus:border-blue-500 block   p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="email"
-                                required
+                                
                             />
+                            {errors.email && <span className="text-red-400 text-sm">This field is required</span>}
 
                         </div>
                         <div>
@@ -275,10 +279,10 @@ export const PackageDetails = () => {
                                 {...register("photoURL", { required: true })}
                                 type="text"
                                 name="photoURL"
-                                value={user?.photoURL}
+                                defaultValue={user?.photoURL}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm w-full rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="ImageURL"
-                                required
+                                
                             />
                             {errors.photoURL && <span className="text-red-400 text-sm">This field is required</span>}
 
@@ -294,7 +298,7 @@ export const PackageDetails = () => {
                                 value={price}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm w-full rounded-lg focus:ring-blue-500 focus:border-blue-500 block   p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="price"
-                                required
+                                
                             />
                         </div>
                         <div className="w-full">
@@ -305,14 +309,18 @@ export const PackageDetails = () => {
                                 name="date"
                                 control={control}
                                 rules={{ required: "this field is required" }}
+                                defaultValue={null}
                                 render={({ field }) => (
                                     <DatePicker
                                         {...field}
                                         dateFormat="dd/MM/yyyy"
                                         selected={field.value}
                                         onChange={(date) => field.onChange(date)}
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-full   grow  sm:w-[252px]"
+                                        placeholderText="Select a tour date"
+                                        wrapperClassName="w-full"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-full  "
                                     />
+                                        
                                 )}
 
                             />
@@ -341,7 +349,7 @@ export const PackageDetails = () => {
                     <div className="sm:flex">
                         <button
                             type="submit"
-                            className="btn   hover:text-white bg-SecondaryColor sm:w-28 mx-auto w-full text-white mt-7 px-5 py-2.5 text-center"
+                            className="btn  bg-SecondaryColor hover:bg-SecondaryColor/90 sm:w-28 mx-auto w-full text-white mt-7 px-5 py-2.5 text-center"
                         >
                             Book Now
                         </button>

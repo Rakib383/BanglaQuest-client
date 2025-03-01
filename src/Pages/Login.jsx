@@ -91,7 +91,7 @@ export const Login = () => {
     }
 
     return (
-        <div className="relative w-full h-screen  flex items-center justify-center gap-10 pt-2 md:pt-8 md:px-16">
+        <div className="relative w-full h-screen  flex items-center justify-center md:gap-10 pt-2 md:pt-8 md:px-16">
             <ToastContainer
                 position="top-center"
                 autoClose={4000}
@@ -121,13 +121,13 @@ export const Login = () => {
                 {/* credientials modal */}
                 <dialog id="crediential_modal" className="modal">
                     <div className="modal-box w-[310px] sm:w-[360px] h-[260px] sm:h-[280px] items-center justify-center flex flex-col bg-gradient-to-tr from-SecondaryColor to-gray-300 gap-4 ">
-                        <button onClick={handleAdminCrediential} className="btn w-64 text-white">Admin Credientials</button>
-                        <button onClick={handleTourGuideCredentials} className="btn w-64 text-white">Tour Guide Credientials</button>
-                        <button onClick={handleUserCredentials} className="btn w-64 text-white">User Credientials</button>
+                        <button onClick={handleAdminCrediential} className="btn w-64 bg-ThirdColor text-white">Admin Credientials</button>
+                        <button onClick={handleTourGuideCredentials} className="btn w-64 bg-ThirdColor text-white">Tour Guide Credientials</button>
+                        <button onClick={handleUserCredentials} className="btn w-64 bg-ThirdColor text-white">User Credientials</button>
 
                     </div>
                 </dialog>
-                <div className="relative w-[340px] bg-ThirdColor/90 backdrop-blur-md rounded-lg  shadow-lg p-7 pt-5">
+                <div className="relative w-[340px] bg-ThirdColor dark:bg-gray-800 backdrop-blur-md rounded-lg  shadow-lg p-7 pt-5">
 
                     <h3 className="text-center text-PrimaryColor text-5xl font-thin font-fresh ">Login </h3>
 

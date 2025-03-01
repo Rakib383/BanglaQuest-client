@@ -96,7 +96,7 @@ export const AdminProfile = () => {
 
             {/* modal box */}
             <dialog id="my_modal_1" className="modal ">
-                <div className="modal-box w-10/12 pb-9 ">
+                <div className="modal-box  pb-5 ">
                     <div>
                         <h2 className="font-black font-charm text-xl md:text-2xl text-primaryColor underline mb-3 sm:mb-4 text-center">Update Profile</h2>
 
@@ -115,7 +115,7 @@ export const AdminProfile = () => {
                                         {...register("name", { required: true })}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="name"
-                                        required
+                                       
                                     />
 
                                 </div>
@@ -131,7 +131,7 @@ export const AdminProfile = () => {
                                         name="email"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="email"
-                                        required
+                                       
                                     />
 
                                 </div>
@@ -146,7 +146,7 @@ export const AdminProfile = () => {
                                         defaultValue={currentUser?.photoURL}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="ImageURL"
-                                        required
+                                        
                                     />
 
 
@@ -161,7 +161,7 @@ export const AdminProfile = () => {
                                         value={currentUser?.Role}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="Role"
-                                        required
+                                       
                                     />
                                 </div>
 
@@ -171,7 +171,7 @@ export const AdminProfile = () => {
                             <div className="sm:flex">
                                 <button
                                     type="submit"
-                                    className="btn  bg-primaryColor   hover:text-white hover:bg-SecondaryColor sm:w-28 mx-auto w-full  mt-7 px-5 py-2.5 text-center"
+                                    className="btn  bg-SecondaryColor text-white hover:bg-SecondaryColor/90  sm:w-28 mx-auto w-full  mt-7 px-5 py-2.5 text-center"
                                 >
                                     Update
                                 </button>

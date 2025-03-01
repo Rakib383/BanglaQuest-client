@@ -77,13 +77,13 @@ export const MyAssignedTours = () => {
     }
 
     return (
-        <div>
+        <div >
             <h2 className="text-xl md:text-2xl font-bold  text-center mb-5 text-PrimaryColor">Assigned Tours</h2>
 
-            <div className="overflow-x-auto">
-                <table className="table table-zebra">
+            <div className="overflow-x-scroll">
+                <table className="table ">
                     {/* head */}
-                    <thead>
+                    <thead className="text-black dark:text-white">
                         <tr>
                             <th>#</th>
                             <th>Package Name</th>
@@ -104,9 +104,9 @@ export const MyAssignedTours = () => {
                                 <td>{tours.name}</td>
                                 <td>{tours.date}</td>
                                 <td>{tours.price}</td>
-                                <td className={` font-bold ${tours.status == "In Review" && "bg-blue-400"} ${tours.status == "Rejected" && "bg-red-500"} ${tours.status == "pending" && "bg-PrimaryColor"} ${tours.status == "Accepted" && "bg-SecondaryColor"}`}>{tours.status}</td>
+                                <td className={` font-bold ${tours.status == "In Review" && "bg-blue-400"} ${tours.status == "Rejected" && "bg-red-500"} ${tours.status == "pending" && "bg-PrimaryColor text-black"} ${tours.status == "Accepted" && "bg-SecondaryColor"}`}>{tours.status}</td>
                                 {
-                                    tours.status == "pending" && <>
+                                    tours.status == "In Review" && <>
 
                                         <td>
                                             <button onClick={() => handleAccept(tours._id)} className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Accept</button>
@@ -117,7 +117,7 @@ export const MyAssignedTours = () => {
                                     </>
                                 }
                                 {
-                                    tours.status == "In Review" && <>
+                                    tours.status == "pending" && <>
                                         <td>
                                             <button disabled className="btn bg-SecondaryColor hover:bg-SecondaryColor text-white">Accept</button>
                                         </td>

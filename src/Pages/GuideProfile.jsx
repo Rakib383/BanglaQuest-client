@@ -18,9 +18,9 @@ export const GuideProfile = () => {
     }
 
     return (
-        <div className="pt-32 place-items-center">
+        <div className=" flex items-center justify-center min-h-screen">
 
-            <div className="bg-ThirdColor rounded-lg shadow-lg  p-6 w-80 max-w-full text-gray-400 text-center relative">
+            <div className="bg-ThirdColor dark:bg-gray-700  rounded-lg shadow-lg  p-6 w-80 max-w-full text-gray-300 text-center relative">
 
                 <img
                     className="w-24 h-24 mx-auto border-2 border-PrimaryColor   object-cover rounded-full p-1"
@@ -28,7 +28,7 @@ export const GuideProfile = () => {
                     alt="user"
                 />
                 <h3 className="text-lg text-white font-medium mt-4">{guide?.name}</h3>
-                <h6 className="text-sm text-gray-400 capitalize">Experience : {guide?.experience} years+</h6>
+                <h6 className="text-sm  capitalize">Experience : {guide?.experience} years+</h6>
                 <p className="text-sm mt-2 leading-2">
                     Expertise: {guide?.expertise}
                 </p>

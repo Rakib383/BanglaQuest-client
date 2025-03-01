@@ -25,20 +25,20 @@ export const Reset = () => {
         <div className="flex flex-col justify-center items-center h-screen">
 
             <h2 className="text-4xl  text-PrimaryColor  w-64 text-center italic font-bold mb-2">Don't worry</h2>
-            <h4 className="text-2xl font-bold text-ThirdColor mb-8 w-64 text-center">Reset your password</h4>
+            <h4 className="text-2xl font-bold text-ThirdColor dark:text-white mb-8 w-64 text-center">Reset your password</h4>
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
 
                 <form onSubmit={handleResetPassword} className="card-body pb-0">
 
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Email</span>
+                            <span className="label-text text-white">Email</span>
                         </label>
-                        <input name="email"  type="email" placeholder="your Email" className="input input-bordered" required />
+                        <input name="email"  type="email" placeholder="Enter Your Email" className="input text-gray-200 input-bordered" required />
                     </div>
 
                     <div className="form-control mt-2 pb-6">
-                        <button className="btn bg-SecondaryColor text-white hover:text-black hover:outline outline-4 ">Reset Password</button>
+                        <button className="btn bg-SecondaryColor text-white hover:bg-SecondaryColor/90  ">Reset Password</button>
 
                     </div>
                 </form>

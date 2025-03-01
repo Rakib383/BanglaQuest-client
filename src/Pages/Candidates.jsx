@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAxiosSecure } from "../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
+import emptyIcon from "../assets/Images/emptyContent.png"
 
 export const Candidates = () => {
 
@@ -127,6 +128,13 @@ export const Candidates = () => {
                     </tbody>
                 </table>
             </div>
+
+             {
+                            guideApplications.length === 0 && <div className="flex flex-col items-center justify-center my-10 md:my-20" >
+                                <img className="w-28 md:w-36" src={emptyIcon} alt="" />
+                                <h4 className="mt-4">No Results Found</h4>
+                            </div>
+                        }
 
             <div className="pagination flex justify-center space-x-2 mt-7">
 

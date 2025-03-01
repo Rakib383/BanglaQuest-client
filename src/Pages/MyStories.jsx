@@ -5,6 +5,7 @@ import { AuthContext } from "../provider/AuthProvider"
 import { SlCalender } from "react-icons/sl"
 import Swal from "sweetalert2"
 import { Link } from "react-router-dom"
+import emptyIcon from "../assets/Images/emptyContent.png"
 
 export const MyStories = () => {
     const axiosSecure = useAxiosSecure()
@@ -54,6 +55,13 @@ export const MyStories = () => {
         <div className=" px-5 mt-6 max-w-4xl mx-auto text-center">
 
             <h1 className="text-3xl md:text-4xl   items-center mb-10 underline text-PrimaryColor font-fresh">Your Stories</h1>
+            
+                                {
+                                    myStories.length === 0 && <div className="flex flex-col items-center justify-center" >
+                                        <img className="w-28 md:w-36" src={emptyIcon} alt="" />
+                                        <h4 className="mt-4">You haven't  added any stories yet.</h4>
+                                         </div>
+                                }
 
             {
                 myStories.map((story, idx) => <div className={`flex flex-col  my-4 gap-4 items-center justify-center ${idx % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"} `} key={idx}>

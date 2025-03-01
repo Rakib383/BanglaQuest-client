@@ -1,82 +1,85 @@
 
-import { useQuery } from "@tanstack/react-query";
 import { useAxiosSecure } from "../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import Select from 'react-select'
-
+import { FaArrowRight } from "react-icons/fa6";
+import { FaArrowLeft } from "react-icons/fa6";
+import emptyIcon from "../assets/Images/emptyContent.png"
 
 export const ManageUsers = () => {
 
     const axiosSecure = useAxiosSecure()
-    const [search, setSearch] = useState("")
+    const [searchByEmail, setSearchByEmail] = useState("")
+    const [role, setRole] = useState("")
     const [currentUsers, setCurrentUsers] = useState([])
-    const [allUsers, setAllUsers] = useState([])
-    const [count, setCount] = useState(0)
-    const [currentPage, setCurrentPage] = useState(0)
+    const [totalCount, setTotalCount] = useState(0)
+    const [currentPage, setCurrentPage] = useState(1)
 
 
-    const numberOfPages = Math.ceil(count / 10)
+    const numberOfPages = Math.ceil(totalCount / 10)
 
     const pages = [...Array(numberOfPages).keys()];
+    console.log(pages, currentPage);
+
+    const fetchUsers = async (currentPage = 1, searchByEmail = "", role = "") => {
+        const limit = 10;
+        const skip = (currentPage - 1) * limit;
+        const params = new URLSearchParams();
+        params.append("skip", skip);
+        params.append("limit", limit);
+        if (searchByEmail) {
+            params.append("email", searchByEmail);
+        }
+        if (role) {
+            params.append("role", role);
+        }
+
+        try {
+            const response = await axiosSecure(`/users?${params.toString()}`);
+
+            const data = await response.data;
+            return data
+
+        } catch (error) {
+            console.error("Error fetching users:", error);
+            return { totalCount: 0, items: [] };
+        }
+    };
 
     useEffect(() => {
-        axiosSecure.get("/usersCount")
-            .then(res => setCount(res.data.count))
-    }, [])
-
-    useEffect(() => {
-        axiosSecure.get(`/allUsers?page=${currentPage}`)
-            .then(res => {
-                setAllUsers(res.data)
-                setCurrentUsers(res.data)
-            })
-    }, [currentPage, !search])
-
-
-    const { data: users } = useQuery({
-        queryKey: ["users", search],
-        queryFn: async () => {
-            const url = `/users?email=${search}`
-            const res = await axiosSecure.get(url)
-            setCurrentUsers(res.data)
-            return res.data;
-        },
-        enabled: !!search
-
-    });
+        fetchUsers(currentPage, searchByEmail, role).then(data => {
+            setTotalCount(data.totalCount)
+            setCurrentUsers(data.users)
+        });
+    }, [currentPage, searchByEmail, role]);
 
 
     const options = [
+        { value: '', label: 'All' },
         { value: 'Tourist', label: 'Tourist' },
         { value: 'Tour Guide', label: 'Tour Guide' },
         { value: 'Admin', label: 'Admin' }
     ]
-    const handleRole = (e) => {
-        const value = e.value
-        if (users) {
-
-            const filteredUser = users.filter(user => user.Role == value)
-            setCurrentUsers(filteredUser)
-        }
-        else {
-            const filteredUser = allUsers.filter(user => user.Role == value)
-            setCurrentUsers(filteredUser)
-        }
-    }
 
     return (
         <div className="mx-5 dark:text-gray-300">
             <h2 className="text-xl md:text-2xl font-bold text-ThirdColor dark:text-white text-center mb-5">All Users</h2>
 
-            <div className="flex items-center gap-4  justify-center mb-5">
-                <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search By Email" className="input input-bordered sm:w-full h-10 bg-white dark:bg-gray-600 dark:text-white outline-1 outline  max-w-xs" />
-                <Select className=" dark:text-black " onChange={handleRole} placeholder="Search By Role" options={options} />
+            <div className="flex items-center  mx-auto gap-4  justify-center mb-5">
+                <input type="text" value={searchByEmail} onChange={(e) => {
+                    setSearchByEmail(e.target.value)
+                    setCurrentPage(1)
+                }} placeholder="Search By Email" className="input input-bordered w-32 sm:w-full h-[37px] bg-white dark:bg-gray-600 dark:text-white outline-1 outline outline-gray-400  max-w-xs" />
+                <Select className=" dark:text-black w-36 shrink-0  text-nowrap " onChange={(e) => {
+                    setRole(e.value)
+                    setCurrentPage(1)
+                }} placeholder="Search By Role" options={options} />
             </div>
 
             <div className="overflow-x-auto">
-                <table className="table dark:table-zebra">
+                <table className="table ">
                     {/* head */}
-                    <thead className="dark:text-white">
+                    <thead className="dark:text-white text-black">
                         <tr>
                             <th>#</th>
 
@@ -120,21 +123,28 @@ export const ManageUsers = () => {
                 </table>
             </div>
 
+            {
+                currentUsers.length === 0 && <div className="flex flex-col items-center justify-center my-10 md:my-20" >
+                    <img className="w-28 md:w-36" src={emptyIcon} alt="" />
+                    <h4 className="mt-4">No Results Found</h4>
+                </div>
+            }
 
 
-            <div className="pagination flex justify-center space-x-2 mt-7">
 
-                <button disabled={currentPage == 0} onClick={() => { setCurrentPage(currentPage - 1) }} className="btn bg-PrimaryColor dark:text-black text-white  disabled:text-gray-500 ">Prev</button>
+            <div className="pagination flex justify-center items-center space-x-2 mt-7">
+
+                <button disabled={currentPage == 1} onClick={() => { setCurrentPage(currentPage - 1) }} className="btn h-10 min-h-10 hover:text-white bg-transparent  dark:text-white dark:hover:border-white   text-black  disabled:text-gray-500 "><FaArrowLeft className="text-lg" /></button>
                 <div className="join">
                     {
                         pages.map(page => <button onClick={() => {
-                            setCurrentPage(page);
-                            setSearch("")
-                        }} key={page} className={`join-item btn hover:bg-ThirdColor hover:text-white ${currentPage == page && "selected"}`}>{page + 1}</button>)
+                            setCurrentPage(page + 1);
+
+                        }} key={page} className={`join-item btn bg-gray-500  text-white ${currentPage - 1 == page && "selected"}`}>{page + 1}</button>)
                     }
 
                 </div>
-                <button disabled={currentPage == pages.length - 1} onClick={() => setCurrentPage(currentPage + 1)} className="btn bg-PrimaryColor dark:hover:bg-white text-white  dark:text-black ">Next</button>
+                <button disabled={currentPage == pages.length || pages.length == 0} onClick={() => setCurrentPage(currentPage + 1)} className="btn  h-10 min-h-10 hover:text-white bg-transparent    dark:text-white disabled:text-gray-500 text-black  dark:hover:border-white "><FaArrowRight className="text-lg" /></button>
             </div>
 
 

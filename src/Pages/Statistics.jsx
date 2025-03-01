@@ -78,7 +78,7 @@ const Statistics = () => {
                
                 {/* stats container */}
                 <div className="flex justify-center col-span-6 gap-5 flex-col mt-5 text-center ">
-                    <div className="stats w-3/5 max-w-sm bg-base-100 border border-base-300 shadow-lg text-white  mx-auto">
+                    <div className="stats w-3/5 max-w-sm bg-ThirdColor dark:bg-gray-700  border border-base-300 shadow-lg text-white  mx-auto">
                         <div className="stat">
                             <div className="stat-title flex gap-2 items-center justify-center text-gray-300 "><RiSecurePaymentLine className="text-2xl text-SecondaryColor" />Total Payment</div>
                             <div className="stat-value text-center">{adminStats?.payment}$</div>
@@ -86,7 +86,7 @@ const Statistics = () => {
                         </div>
 
                     </div>
-                    <div className="stats w-3/5 max-w-sm bg-base-100 border border-base-300 shadow-lg mx-auto text-white">
+                    <div className="stats w-3/5 max-w-sm bg-ThirdColor dark:bg-gray-700  border border-base-300 shadow-lg mx-auto text-white">
                         <div className="stat">
                             <div className="stat-title  flex gap-2 items-center justify-center text-gray-300"><GiNurseMale className="text-2xl text-SecondaryColor" />Total Tour Guides</div>
                             <div className="stat-value">{adminStats?.totalTourGuides}</div>
@@ -94,7 +94,7 @@ const Statistics = () => {
                         </div>
 
                     </div>
-                    <div className="stats w-3/5 max-w-sm bg-base-100 border border-base-300 shadow-lg mx-auto text-white">
+                    <div className="stats w-3/5 max-w-sm bg-ThirdColor dark:bg-gray-700 border border-base-300 shadow-lg mx-auto text-white">
                         <div className="stat ">
                             <div className="stat-title flex gap-2 items-center justify-center text-gray-300"><GoPackage className="text-2xl text-SecondaryColor" />Total Packages</div>
                             <div className="stat-value">{adminStats?.totalPackages}</div>
@@ -102,7 +102,7 @@ const Statistics = () => {
                         </div>
 
                     </div>
-                    <div className="stats w-3/5 max-w-sm bg-base-100 border border-base-300 shadow-lg mx-auto text-white">
+                    <div className="stats w-3/5 max-w-sm bg-ThirdColor dark:bg-gray-700 border border-base-300 shadow-lg mx-auto text-white">
                         <div className="stat ">
                             <div className="stat-title flex gap-2 items-center justify-center text-gray-300"><FaUserCheck className="text-2xl text-SecondaryColor " /> Total Clients  </div>
                             <div className="stat-value">{adminStats?.totalClient}</div>
@@ -112,7 +112,7 @@ const Statistics = () => {
 
                     </div>
                 </div>
-                <div className="col-span-6 flex  flex-col items-center justify-center" >
+                <div className="col-span-6 flex  flex-col items-center justify-center overflow-x-scroll" >
 
                     <h3 className="text-center font-bold md:text-lg lg:text-xl my-7">Monthly Sales Analysis</h3>
 

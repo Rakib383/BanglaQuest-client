@@ -84,7 +84,7 @@ export const Register = () => {
 
     }
     return (
-        <div className="relative w-full   flex items-center justify-center gap-8 pt-28 md:pt-32 md:px-16">
+        <div className="relative w-full   flex items-center justify-center md:gap-8 pt-28 md:pt-32 md:px-16">
             <ToastContainer
                 position="top-center"
                 autoClose={4000}
@@ -101,7 +101,7 @@ export const Register = () => {
                 <img src={registerPic} alt="" />
             </div>
 
-            <div className="relative w-[340px] md:w-[360px] h-auto bg-ThirdColor/90 backdrop-blur-md rounded-lg  shadow-lg p-7 pt-5">
+            <div className="relative w-[340px] md:w-[360px] h-auto bg-ThirdColor dark:bg-gray-800 backdrop-blur-md rounded-lg  shadow-lg p-7 pt-5">
 
 
                 <h3 className="text-center text-PrimaryColor text-4xl font-thin font-fresh ">Sign Up </h3>

@@ -40,6 +40,25 @@
   background-color: #1e293b !important;
 }
 
+ /* Dark swiper-pagination-bullet styles */ 
+
 .dark .swiper-pagination-bullet {
   background-color: rgb(255, 255, 255) !important;
 }
+
+/* Dark mode dashboardDropdown styles */
+
+.dark .dashboardDropdown .ant-dropdown-menu {
+  background-color: black !important; 
+  
+}
+
+.dark .dashboardDropdown .ant-dropdown-menu-item {
+  color: white !important; 
+ 
+}
+.dark .dashboardDropdown .ant-dropdown-menu-item:hover {
+  background-color: #1e293b !important;
+}
+
+

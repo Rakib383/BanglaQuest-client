@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "packages/:id",
-                element: <PackageDetails />,
+                element: <PrivateRoute><PackageDetails /></PrivateRoute>,
                 loader: ({ params }) => fetch(`https://bangla-quest-server.vercel.app/allPackages/${params.id}`)
 
             },
@@ -79,10 +79,6 @@ export const router = createBrowserRouter([
             {
                 path: "hot-offers",
                 element: <HotOffers />
-            },
-            {
-                path: "*",
-                element: <Error />
             }
 
         ]
@@ -138,13 +134,11 @@ export const router = createBrowserRouter([
             {
                 path: "payment/:id",
                 element: <PrivateRoute><Payment /></PrivateRoute>
-            },
-            {
-                path: "*",
-                element: <Error />
             }
-
-
         ]
+    },
+    {
+        path: "*",
+        element: <Error />
     }
 ]);

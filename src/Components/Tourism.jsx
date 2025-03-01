@@ -8,7 +8,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { useQuery } from '@tanstack/react-query';
-
 // import required modules
 import { Autoplay, Pagination } from 'swiper/modules';
 import { useAxiosPublic } from './../hooks/useAxiosPublic';
@@ -33,7 +32,7 @@ export const Tourism = () => {
         }
     })
     return (
-        <div className="px-3 mx-auto text-center  ">
+        <div className="px-3 mx-auto text-center pt-3 ">
             <h2 className="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white items-center">
                 <span className="text-PrimaryColor">
                     <Typewriter
@@ -47,7 +46,7 @@ export const Tourism = () => {
                     />
                 </span>
                 Like Never Before</h2>
-            <div className="mt-4 text-gray-600 dark:text-gray-300 text-lg md:text-xl flex flex-col text-nowrap items-center">
+            <div className="mt-4 text-gray-600 dark:text-gray-300 text-lg md:text-xl flex flex-col items-center">
                 <div className='flex text-wrap'>
                     Choose from
                     <div className=" mx-3 rotate-6  z-20 relative py-2">
@@ -57,7 +56,7 @@ export const Tourism = () => {
                         </div>
                     </div>
                 </div>
-                <p className='px-2'>packages and meet expert guides to make your dream trip come true.</p>
+                <p className=''>packages and meet expert guides to make your dream trip come true.</p>
             </div>
             <Tabs className="mt-8" >
                 <TabList>
@@ -68,10 +67,10 @@ export const Tourism = () => {
                 <TabPanel className="mt-6">
                     <h2 className="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white  items-center">Explore Our Exclusive Travel Packages</h2>
                     <p className='mt-2 dark:text-gray-300'>Choose from a variety of exciting travel packages designed for every type of explorer. Let us make your dream vacation a reality!</p>
-                    <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-5 md:gap-12 md:mb-12 my-7 md:mt-14'>
+                    <div className='flex flex-col items-center md:flex-row flex-wrap justify-center gap-8 md:gap-12 md:mb-12 my-7 md:mt-14 '>
                         {
                            packages?.map(pack => (
-                            <div key={pack._id} className="card  dark:bg-white w-80 shadow-lg  relative pb-3 ">
+                            <div key={pack._id} className="card  dark:bg-white w-80 shadow-lg dark:shadow-[0_0_20px_rgba(255,255,255,0.6)]  relative pb-3 ">
                                 <figure className='relative h-[190px] w-full' >
                                     <img
                                         src={pack.coverPhoto}
@@ -90,7 +89,7 @@ export const Tourism = () => {
                                     <p className=''>Duration:{pack.duration}</p>
                                     <p>Description:{pack.shortDescription}</p>
                                     <div className="bg-SecondaryColor text-white px-3 py-1.5 -rotate-[37deg] absolute -right-5 top-40">From   {pack.price}৳</div>
-                                    <Link to={`packages/${pack._id}`} className="btn mt-3 text-start hover:cursor-pointer text-lg bg-SecondaryColor text-white font-semibold hover:bg-green-900">View Details....</Link>
+                                    <Link to={`packages/${pack._id}`} className="btn mt-3 text-start hover:cursor-pointer text-lg bg-SecondaryColor text-white font-semibold hover:bg-SecondaryColor/90">View Details....</Link>
                                 </div>
                             </div>
 

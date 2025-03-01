@@ -10,6 +10,7 @@ import moment from "moment"
 import { FaLocationDot } from "react-icons/fa6"
 import { SlCalender } from "react-icons/sl"
 import emptyIcon from "../assets/Images/emptyContent.png"
+import { Loading } from "../Components/Loding"
 
 
 export const Profile = () => {
@@ -42,7 +43,7 @@ export const Profile = () => {
 
 
     if (isLoading || !currentUser || !stories) {
-        return <p>Loading...</p>;
+        return <Loading/>;
     }
 
     const onSubmit = (data) => {
@@ -75,7 +76,7 @@ export const Profile = () => {
             </h2>
             <div className="pt-10 place-items-center">
 
-                <div className="bg-ThirdColor rounded-lg shadow-lg  p-6 w-80 max-w-full text-gray-400 text-center relative">
+                <div className="bg-ThirdColor rounded-lg shadow-lg  p-6 w-80 max-w-full text-gray-300 dark:text-gray-200 text-center relative">
 
                     <img
                         className="w-24 h-24 mx-auto border-2 border-PrimaryColor   object-cover rounded-full p-1"
@@ -83,7 +84,7 @@ export const Profile = () => {
                         alt="currentUser"
                     />
                     <h3 className="text-lg text-white font-medium mt-4">{currentUser.name}</h3>
-                    <h6 className="text-sm text-gray-400 capitalize">Email: {currentUser.email}</h6>
+                    <h6 className="text-sm  capitalize">Email: {currentUser.email}</h6>
                     <p className="text-sm mt-2 leading-2">
                         Role:{currentUser.Role}
                     </p>
@@ -108,7 +109,7 @@ export const Profile = () => {
             <dialog id="my_modal_1" className="modal ">
                 <div className="modal-box w-10/12 pb-9 ">
                     <div>
-                        <h2 className="font-black font-charm text-xl md:text-2xl text-primaryColor underline mb-3 sm:mb-4 text-center">Update Profile</h2>
+                        <h2 className="font-black  text-xl md:text-2xl text-white  mb-3 sm:mb-4 text-center">Update Profile</h2>
 
                         <form onSubmit={handleSubmit(onSubmit)} className=" mx-auto pt-6 shadow-lg  px-6 py-8 rounded-xl bg-gradient-to-tl from-white to-SecondaryColor">
 
@@ -181,7 +182,7 @@ export const Profile = () => {
                             <div className="sm:flex">
                                 <button
                                     type="submit"
-                                    className="btn  bg-primaryColor   hover:text-white hover:bg-SecondaryColor sm:w-28 mx-auto w-full  mt-7 px-5 py-2.5 text-center"
+                                    className="btn  bg-SecondaryColor   text-white hover:bg-SecondaryColor/90 sm:w-28 mx-auto w-full  mt-7 px-5 py-2.5 text-center"
                                 >
                                     Update
                                 </button>

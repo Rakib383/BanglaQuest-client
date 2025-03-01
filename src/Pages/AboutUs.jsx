@@ -120,8 +120,8 @@ export const AboutUs = () => {
                         <p >I have expertise in building <span className='bg-gradient-to-r dark:from-sky-500 dark:to-white from-sky-500 to-sky-300 font-bold bg-clip-text text-transparent text-xl md:text-2xl'><Typewriter words={["Modern", "Responsive", "User-Friendly"]} cursor cursorStyle='_' loop={0} /> </span>web applications. </p>
                         <p >I focus on delivering clean code and intuitive designs. With a strong desire to learn and grow.</p>
                         <div className='flex justify-center gap-4 mt-5 md:mt-7 pb-10 '>
-                            <button onClick={(e) => handleScroll(e, "contact")} className='btn rounded-full hover:bg-[#4BFFA5] hover:text-black transition duration-600 ease-in-out font-bold text-white text-lg border border-[#4BFFA5]'><BsTelephoneOutbound />Contact me</button>
-                            <a href='https://drive.google.com/file/d/1TQ-eIDpmfIX72UVAGPvIld--rqvSb_n3/view?usp=sharing' target='_blank' className='btn rounded-full hover:bg-[#4BFFA5] hover:text-black transition duration-600 ease-in-out font-bold text-lg border border-[#4BFFA5] text-white'><FaDownload />My Resume</a>
+                            <button onClick={(e) => handleScroll(e, "contact")} className='btn rounded-full hover:bg-[#4BFFA5] hover:text-black transition duration-600 ease-in-out font-bold text-white bg-black  text-lg border border-[#4BFFA5]'><BsTelephoneOutbound />Contact me</button>
+                            <a href='https://drive.google.com/file/d/1pO8yVkzE0KnR2rShQ_TFar2tGETBxZoD/view?usp=sharing' target='_blank' className='btn rounded-full hover:bg-[#4BFFA5] hover:text-black transition duration-600 ease-in-out font-bold text-lg border border-[#4BFFA5] text-white bg-black '><FaDownload />My Resume</a>
 
                         </div>
                     </motion.div>
@@ -147,7 +147,7 @@ export const AboutUs = () => {
             </div>
 
             {/* skills */}
-            <div className='text-center mt-5' id='skills'>
+            <div className='text-center mt-12' id='skills'>
                 <h1 className=' underline underline-offset-4  text-2xl md:text-3xl text-sky-400 font-semibold'>Technical Skills & Expertise</h1>
                 <p className='mt-3 md:text-lg px-9'>The technologies and tools I use to build modern, high-performance applications.</p>
 
@@ -194,7 +194,7 @@ export const AboutUs = () => {
 
 
             {/* My Projects */}
-            <div className='mt-7 text-center md:text-lg md:mt-20 ' id='projects'>
+            <div className='mt-12 text-center md:text-lg md:mt-20 ' id='projects'>
                 <h3 className='text-3xl font-bold mb-2 text-sky-500 '>Featured Projects</h3>
                 <p>A collection of my work showcasing skills in modern web development technologies.</p>
                 {/* container */}
@@ -205,7 +205,7 @@ export const AboutUs = () => {
                         <figure className="p-3 transition ease-in hover:scale-105 ">
                             <img
                                 src={projectImg2}
-                                alt="Shoes"
+                                alt="image"
                                 className="rounded-md h-[220px] sm:h-[260px]" />
                         </figure>
                         <div className="card-body pt-1 px-4 pb-6 items-center text-center">
@@ -224,7 +224,7 @@ export const AboutUs = () => {
                         <figure className="p-3 transition ease-in hover:scale-105 ">
                             <img
                                 src={projectImg3}
-                                alt="Shoes"
+                                alt="image"
                                 className="rounded-md sm:h-[260px]" />
                         </figure>
                         <div className="card-body pt-1 px-4 pb-6 items-center text-center">
@@ -245,7 +245,7 @@ export const AboutUs = () => {
 
             {/* contact */}
 
-            <div id='contact' className='text-center flex gap-5 dark:bg-white/5 bg-gray-100 justify-center items-center px-4 md:px-8'>
+            <div id='contact' className='text-center flex gap-5 dark:bg-gray-900 bg-gray-100 justify-center items-center px-4 mt-10 md:px-8'>
 
                 <div className='hidden md:block max-w-md'>
                     <img src={contact} alt="" />

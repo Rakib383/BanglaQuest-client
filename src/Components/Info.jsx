@@ -13,7 +13,7 @@ export const Info = () => {
                     <CiFaceSmile className="text-3xl text-ThirdColor dark:text-white" />
                     <div className="font-bold text-PrimaryColor md:text-xl">
                         <CountUp className="text-2xl md:text-3xl" end={37} enableScrollSpy={true} duration={7} delay={3} /><span className="">K+</span>
-                        <p className="text-SecondaryColor mr-10 dark:text-lime-600">Satisfied Client</p>
+                        <p className="text-SecondaryColor mr-10 dark:text-white">Satisfied Client</p>
                     </div>
 
                 </motion.div>
@@ -22,7 +22,7 @@ export const Info = () => {
                     <div className="font-bold text-PrimaryColor md:text-xl">
                         <CountUp className="text-2xl md:text-3xl" end={56} enableScrollSpy={true} duration={5} delay={1} />
                         <span className="">+</span>
-                        <p className="text-SecondaryColor mr-2 dark:text-lime-600 ">Destination Covered</p>
+                        <p className="text-SecondaryColor mr-2 dark:text-white ">Destination Covered</p>
                     </div>
 
                 </motion.div>
@@ -30,7 +30,7 @@ export const Info = () => {
                     <FaUserTie className="text-3xl text-ThirdColor dark:text-white" />
                     <div className="font-bold text-PrimaryColor md:text-xl">
                         <CountUp className="text-2xl md:text-3xl" end={35} enableScrollSpy={true} duration={5} delay={1} /><span className="">+</span>
-                        <p className="text-SecondaryColor mr-3 dark:text-lime-600">Professional Guides</p>
+                        <p className="text-SecondaryColor mr-3 dark:text-white">Professional Guides</p>
                     </div>
 
                 </motion.div>
@@ -38,7 +38,7 @@ export const Info = () => {
                     <FaMedal className="text-3xl text-ThirdColor dark:text-white" />
                     <div className="font-bold text-PrimaryColor md:text-xl">
                         <CountUp className="text-2xl md:text-3xl" end={12} enableScrollSpy={true} duration={5} delay={1} /><span className="">+</span>
-                        <p className="text-SecondaryColor mr-2 dark:text-lime-600">Years of Experience</p>
+                        <p className="text-SecondaryColor mr-2 dark:text-white">Years of Experience</p>
                     </div>
 
                 </motion.div>
