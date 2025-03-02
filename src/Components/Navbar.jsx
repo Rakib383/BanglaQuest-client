@@ -223,7 +223,7 @@ export const Navbar = () => {
                       </div>
                     </div>
                   </div>
-                  : <Link to="/login" className="btn bg-SecondaryColor px-3 h-10 min-h-10 text-white hover:bg-SecondaryColor/90 ">LogIn</Link>
+                  : <Link to="/login" className="btn bg-SecondaryColor px-3 h-10 mr-1  min-h-10 text-white hover:bg-SecondaryColor/90 ">LogIn</Link>
               }
             </div>
 
